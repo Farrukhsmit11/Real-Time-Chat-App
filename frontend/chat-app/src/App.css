@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=GFS+Didot&family=Gothic+A1&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+
 :root {
   --them-primary: #0059F7;
   --them-black: #000D1E;
@@ -19,42 +20,11 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
 }
 
-.auth-container {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-block: 70px;
-  width: 500px;
-}
-
-.auth-card {
-  width: 100%;
-  background: #F5F7FB;
-  border: 1px solid #F4F8FF;
-  padding: 30px;
-  width: 100%;
-  border-radius: 10px;
-  max-width: 440px;
-  border: 1px solid #DEEAFF;
-}
-
-.auth-title {
-  font-size: 25px;
-  font-family: 'Poppins';
-  font-weight: 600;
-  margin-bottom: 13px;
-}
-
-.form-input {
-  width: 100%;
-  height: 42px;
-  border-radius: 25px;
-  border: 1px solid #DEEAFF;
-  font-family: "Poppins", sans-serif;
-  font-weight: 500;
-  padding: 8.8px 16px;
+a {
+  color: #0059F7;
+  font-weight: 700;
+  font-family: 'Plus Jakarta Sans';
 }

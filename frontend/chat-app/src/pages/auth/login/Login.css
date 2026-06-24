@@ -1,0 +1,14 @@
+.auth-login-footer {
+    margin-top: 17px;
+}
+
+.auth-description {
+    font-family: 'Plus Jakarta Sans';
+    font-weight: 600;
+    color: #a29797;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+}
