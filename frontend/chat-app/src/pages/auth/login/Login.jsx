@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import AuthNav from '../../../components/authNav/AuthNav'
 import { Formik } from "formik"
-import { Button, Checkbox, Form, Input } from "antd"
+import { Button, Checkbox, Form, Input, message } from "antd"
 import "./Login.css"
+import axios from "axios"
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
 
@@ -12,6 +14,26 @@ const Login = () => {
   }
 
   const [form] = Form.useForm()
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const BASE_URL = "http://localhost:5000"
+
+  const navigate = useNavigate()
+
+  const handleLogin = async () => {
+    try {
+      const data = await axios.post(`${BASE_URL}/login`, {
+        email,
+        password
+      })
+      const res = data.data?.res
+      message.success("Login sucessfully")
+      navigate("/chatApp")
+    } catch (error) {
+      console.error("error login failed", error)
+    }
+  }
 
   return (
     <>
@@ -33,11 +55,18 @@ const Login = () => {
             }) => (
               <Form form={form} layout='vertical'>
                 <Form.Item label="Email">
-                  <Input className='form-input' placeholder='Email Address'></Input>
+                  <Input
+                    onChange={(e) => setEmail(e.target.value)}
+                    className='form-input'
+                    placeholder='Email Address'></Input>
                 </Form.Item>
 
                 <Form.Item label="Password">
-                  <Input.Password className='form-input' placeholder='Password'></Input.Password>
+                  <Input.Password
+                    onChange={(e) => setPassword(e.target.value)}
+                    className='form-input'
+                    placeholder='Password'
+                  ></Input.Password>
                 </Form.Item>
 
                 <div className='footer'>
@@ -46,7 +75,10 @@ const Login = () => {
                 </div>
 
                 <div className="auth-login-footer">
-                  <Button className='submit-btn'>Log in</Button>
+                  <Button
+                    onClick={() => handleLogin()}
+                    className='submit-btn'
+                  >Log in</Button>
                 </div>
 
               </Form>
