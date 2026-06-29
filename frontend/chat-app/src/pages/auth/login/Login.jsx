@@ -29,8 +29,11 @@ const Login = () => {
       })
       const res = data.data?.res
       message.success("Login sucessfully")
-      navigate("/chatApp")
+      navigate("/dashboard")
     } catch (error) {
+      if (error.response) {
+        message.error(error.response.data.message)
+      }
       console.error("error login failed", error)
     }
   }
@@ -41,8 +44,8 @@ const Login = () => {
       <div className='auth-container'>
         <div className="auth-card">
           <div className="auth-header">
-            <h1 className='auth-title'>Welcome Back 👋</h1>
-            <span className='auth-description'>Sign in to continue your conversations.</span>
+            <h1 className='auth-title'>Sign In 👋</h1>
+            <span className='auth-description'>Join to start Conversations</span>
           </div>
 
           <Formik

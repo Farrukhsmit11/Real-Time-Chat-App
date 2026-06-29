@@ -1,42 +1,10 @@
 import bcrypt from "bcrypt"
 import { User } from "../models/User.js"
-
+import jwt from "jsonwebtoken"
 
 export const getUsers = async (request, response) => {
     try {
         const res = await User.find();
-
-    } catch (error) {
-        console.error("error", error)
-    }
-}
-
-export const signupUser = async (request, response) => {
-
-    try {
-
-        const { name, email, password } = request.body
-
-        if (!request.body.name || !request.body.email || !request.body.password) {
-            response.status(400).send({ message: "Fill all the details" })
-            return
-        }
-
-        const user = await User.findOne({ email })
-        if (user) {
-            response.status(400).send({ message: "user exists" })
-            return
-        }
-
-        const encryptedPassword = await bcrypt.hash(request.body.password, 10)
-
-        const data = await User.create({
-            name: request.body.name,
-            email: request.body.email,
-            password: encryptedPassword
-        })
-
-        response.status(200).json({ message: "Signup cuessfully", data })
 
     } catch (error) {
         console.error("error", error)
@@ -60,13 +28,20 @@ export const login = async (request, response) => {
         const isMatch = await bcrypt.compare(request.body.password, res.password)
         if (!isMatch) {
             response.status(400).send({ message: "email and password does not match" })
+            return
         }
 
-        response.status(200).json({ message: "Login sucessfull", res })
+        const token = jwt.sign(
+            { id: res._id, role: res.role },
+            process.env.JWT_SECRET_KEY,
+            { expiresIn: "1h" }
+        )
+
+        response.status(200).json({ message: "Login sucessfull", res, token })
 
     } catch (error) {
         console.error("Login Failed", error)
     }
 }
 
-export default { signupUser, getUsers, login }
+export default { getUsers, login }
