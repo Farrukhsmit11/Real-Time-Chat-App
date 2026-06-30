@@ -1,0 +1,8 @@
+.sidebar-container {
+    display: flex;
+    height: 100vh;
+    background: linear-gradient(to bottom right,
+            #f8fafc 0%,
+            #ffffff 50%,
+            rgba(238, 242, 255, 0.3) 100%);
+}
