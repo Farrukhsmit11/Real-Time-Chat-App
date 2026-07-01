@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import "./CountCards.css"
-import { Card } from "antd"
-import { dummyAdminDashboardData } from '../../utils'
+import { Card, Col, Row, Statistic } from "antd"
 
 const CountCards = () => {
-
-    const [data, setData] = useState(null)
-
-    useEffect(() => {
-        setData(dummyAdminDashboardData)
-    }, [])
-
-
     return (
-        <Card></Card>
+        <div className="count-cards-main">
+            <div className="count-card">
+                <Card>
+                    <Statistic title="Active Users" value={112893} />
+                </Card>
+
+            </div>
+        </div>
+
     )
 }
 

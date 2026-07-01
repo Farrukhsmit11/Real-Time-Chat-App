@@ -16,6 +16,7 @@ const Login = () => {
   const [form] = Form.useForm()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false)
 
   const BASE_URL = "http://localhost:5000"
 
@@ -30,6 +31,7 @@ const Login = () => {
       const res = data.data?.res
       message.success("Login sucessfully")
       navigate("/dashboard")
+      setLoading(false)
     } catch (error) {
       if (error.response) {
         message.error(error.response.data.message)
@@ -73,12 +75,13 @@ const Login = () => {
                 </Form.Item>
 
                 <div className='footer'>
-                  <Checkbox>Remember me</Checkbox>
+                  <Checkbox className='checkbox-label'>Remember me</Checkbox>
                   <a href='#'>Forgot Password</a>
                 </div>
 
                 <div className="auth-login-footer">
                   <Button
+                    loading={loading}
                     onClick={() => handleLogin()}
                     className='submit-btn'
                   >Log in</Button>

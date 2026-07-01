@@ -16,7 +16,7 @@ const seedUsers = async () => {
         const users = [
             {
                 name: "Ali",
-                email: "ali200@gmail.com",
+                email: "admin200@gmail.com",
                 password: await bcrypt.hashSync("Admin123", 10),
                 isAdmin: false
             }

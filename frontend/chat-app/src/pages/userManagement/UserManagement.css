@@ -1,0 +1,9 @@
+.dashboard-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dashboard-header Button {
+    margin-left: auto;
+}

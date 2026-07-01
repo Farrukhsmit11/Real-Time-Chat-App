@@ -6,7 +6,7 @@ import { sidebarLinks } from './helper';
 import { IoLogOutOutline } from "react-icons/io5";
 import { Button } from 'antd';
 import { LuLogOut } from "react-icons/lu";
-import { NavLink, useNavigate } from "react-router-dom"
+import { Link, NavLink, useNavigate } from "react-router-dom"
 import { LuChevronRight } from "react-icons/lu";
 
 const SideBar = () => {
@@ -38,22 +38,18 @@ const SideBar = () => {
 
                 <div className='sidebar-content'>
                     {sidebarLinks.map((item) => {
+                        console.log(sidebarLinks);
                         return (
-                            <NavLink
+                            <Link
                                 to={item.path}
-                                className={({ isActive }) =>
-                                    isActive ? "sidebar-links active" : "sidebar-link"
-                                }
                                 key={item.id}
-
                             >
-
                                 <div className='link-left'>
                                     {item.icon}
                                     <span>{item.title}</span>
                                 </div>
                                 <LuChevronRight />
-                            </NavLink>
+                            </Link>
                         )
                     })}
                 </div>
@@ -65,7 +61,6 @@ const SideBar = () => {
                     <h1 className='logout-title'>Log out</h1>
                 </a>
             </div>
-
         </>
     )
 

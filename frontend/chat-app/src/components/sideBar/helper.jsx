@@ -5,25 +5,25 @@ import { FiUsers } from "react-icons/fi";
 export const sidebarLinks = [
     {
         id: 1,
-        path: "*",
-        title: "Dashboard",
+        path: "/dashboard",
+        title: "Dashbaord",
         icon: <RxDashboard />,
     },
     {
         id: 2,
-        path: "/users",
-        title: "Users",
+        path: "user-management",
+        title: "User Management",
         icon: <FiUsers />,
     },
     {
         id: 3,
-        path: "/roles",
-        title: "Roles % Permissons",
+        path: "roles",
+        title: "Roles",
         icon: <TeamOutlined />,
     },
     {
         id: 4,
-        path: "/chats",
+        path: "/dashboard/chats",
         title: "Chats",
         icon: <MessageOutlined />,
     },

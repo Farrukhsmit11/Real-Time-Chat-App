@@ -1,9 +1,8 @@
 import './App.css'
-import { Routes, Route } from "react-router-dom"
 import { Login } from './pages/auth'
-import { Dashboard } from "./pages"
 import { useEffect, useState } from 'react'
 import Loader from './components/loader/Loader'
+import AppRoutes from './routes/AppRoutes'
 
 function App() {
 
@@ -24,11 +23,7 @@ function App() {
 
   return (
     <>
-      <Routes>
-        <Route path='/' element={<Login />}></Route>
-        <Route path='/dashboard' element={<Dashboard />}></Route>
-        
-      </Routes>
+      <AppRoutes />
     </>
   )
 }

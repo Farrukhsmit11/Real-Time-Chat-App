@@ -1,20 +1,24 @@
-import React, { useEffect, useState } from 'react'
-import "./Dashboard.css"
-import SideBar from '../../components/sideBar/SideBar'
+import React from 'react'
+import Sidebar from '../../components/sideBar/Sidebar'
 import { Outlet } from 'react-router-dom'
+import { Layout } from 'antd'
+import { Content } from 'antd/es/layout/layout'
+import "./Dashboard.css"
 
 const Dashboard = () => {
-
     return (
-        <div className='dashboard-layout'>
+        <>
             <div className='sidebar-container'>
-                <SideBar />
+                <Layout hasSider>
+                    <Sidebar />
+                    <main className='content-area'>
+                        <Outlet />
+                    </main>
+                </Layout>
             </div>
-            <main className='content-area'>
-                <Outlet />
-            </main>
-        </div>
 
+
+        </>
     )
 }
 
