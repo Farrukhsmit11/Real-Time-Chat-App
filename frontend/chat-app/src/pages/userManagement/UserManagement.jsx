@@ -1,14 +1,17 @@
 import React from 'react'
-import { Button, Table } from "antd"
-import { Header } from 'antd/es/layout/layout'
 import "./UserManagement.css"
+import { Button } from 'antd'
+import { PlusOutlined } from '@ant-design/icons'
 
 const UserManagement = () => {
     return (
-        <div className='container'>
-            <div className="dashboard-header">
-                <h1 className='dashboard-home-title'>User Management</h1>
-                <Button type='primary'>Add User</Button>
+        <div className="user-management-main">
+            <div className="header">
+                <div className="header-left">
+                </div>
+
+                <div className="header-right">
+                </div>
             </div>
         </div>
     )

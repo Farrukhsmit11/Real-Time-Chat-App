@@ -1,0 +1,19 @@
+.dashboard-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+.ant-layout-header{
+    padding: 0px 37px !important;
+}
+
+.dashboard-content-layout {
+    flex: 1;
+    min-width: 0;
+}
+
+.dashboard-title {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 16px;
+}

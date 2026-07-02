@@ -4,11 +4,12 @@ import { FiUsers } from "react-icons/fi";
 
 export const sidebarLinks = [
     {
-        id: 1,
-        path: "/dashboard",
-        title: "Dashbaord",
+        id: 2,
+        path: "",
+        title: "Dashboard",
         icon: <RxDashboard />,
     },
+
     {
         id: 2,
         path: "user-management",
@@ -23,7 +24,7 @@ export const sidebarLinks = [
     },
     {
         id: 4,
-        path: "/dashboard/chats",
+        path: "chats",
         title: "Chats",
         icon: <MessageOutlined />,
     },

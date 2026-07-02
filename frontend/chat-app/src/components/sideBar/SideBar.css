@@ -2,10 +2,10 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
-    width: 290px;
+    width: 300px;
     background: linear-gradient(to bottom,
-            #2b3f6c,
-            #0f1625,
+            #0f172a,
+            #0f172a,
             #020617);
 
     color: white;
@@ -65,12 +65,11 @@
     flex: 1;
 }
 
-section-label {
+.section-label {
     padding-left: 17px;
     padding-top: 20px;
     padding-bottom: 8px;
 }
-
 
 .sidebar-label {
     font-size: 15px;
@@ -79,7 +78,6 @@ section-label {
     font-family: "Outfit", sans-serif !important;
     color: gray;
     margin-top: 16px;
-    padding-left: 17px;
     margin-bottom: 16px;
 }
 
@@ -97,37 +95,14 @@ section-label {
     gap: 12px;
     padding: 14px 16px;
     border-radius: 10px;
-    color: #94a3b8;
     text-decoration: none;
-    transition: all 0.2s ease;
     cursor: pointer;
     font-size: 18px;
     line-height: 1.7;
-    color: white !important;
+    color: white;
     font-weight: 500;
 }
 
-.sidebar-link:hover {
-    background: rgba(255, 255, 255, 0.05) !important;
-    color: white !important;
-}
-
-.sidebar-link.active {
-    background: rgba(99, 102, 241, 0.1) !important;
-    color: white !important;
-}
-
-.sidebar-link.active::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 3px;
-    color: white !important;
-    height: 20px;
-    border-radius: 0 999px 999px 0;
-}
 
 .sidebar-bottom {
     padding: 20px;
@@ -146,6 +121,7 @@ section-label {
 
 .dashboard-link {
     color: white;
+    font-weight: 500;
 }
 
 .logout-title {
@@ -156,4 +132,13 @@ section-label {
     display: flex;
     align-items: center;
     gap: 12px;
+}
+
+.sidebar-link.active {
+    background-color: rgba(0, 123, 255, 0.1);
+    color: #4983cf;
+}
+
+.sidebar-link.active svg {
+    color: #fff !important;
 }

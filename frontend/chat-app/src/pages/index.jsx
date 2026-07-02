@@ -1,10 +1,9 @@
-import UserManagement from "./userManagement/UserManagement"
-import Roles from "./roles/Roles"
-import Chats from "./chats/Chats"
+import { lazy } from "react";
+
+const Dashboard = lazy(() => import("../pages/dashboard/Dashboard"))
+const UserManagement = lazy(() => import("../pages/userManagement/UserManagement"))
 
 export {
-    
-    UserManagement,
-    Roles,
-    Chats
+    Dashboard,
+    UserManagement
 }

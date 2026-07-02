@@ -1,22 +1,19 @@
 import React, { useState } from 'react'
 import "./SideBar.css"
 import { LuUsers } from "react-icons/lu";
-import UserProfileCard from '../userProfileCard/UserProfileCard';
 import { sidebarLinks } from './helper';
-import { IoLogOutOutline } from "react-icons/io5";
-import { Button } from 'antd';
 import { LuLogOut } from "react-icons/lu";
-import { Link, NavLink, useNavigate } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import { LuChevronRight } from "react-icons/lu";
+import Sider from 'antd/es/layout/Sider';
 
 const SideBar = () => {
 
     const navigate = useNavigate()
 
-    const [isActive, setIsActive] = useState(true)
+    return (
 
-    const sideBarContent = (
-        <>
+        <aside className='sidebar' theme='dark'>
             <div className='sidebar-main'>
                 <div className='sidebar-header'>
                     <LuUsers className='users-icon' />
@@ -27,10 +24,6 @@ const SideBar = () => {
                 </div>
             </div>
 
-            <div className="user-profile">
-                <UserProfileCard />
-            </div>
-
             <div className='sidebar-body'>
                 <div className="section-label">
                     <p className='sidebar-label'>Navigation </p>
@@ -38,18 +31,18 @@ const SideBar = () => {
 
                 <div className='sidebar-content'>
                     {sidebarLinks.map((item) => {
-                        console.log(sidebarLinks);
                         return (
-                            <Link
-                                to={item.path}
+                            <NavLink
                                 key={item.id}
+                                to={item.path}
+                                className={({ isActive }) => isActive ? "sidebar-link active" : "sidebar-link"}
                             >
-                                <div className='link-left'>
+                                <div className="link-left">
                                     {item.icon}
                                     <span>{item.title}</span>
                                 </div>
                                 <LuChevronRight />
-                            </Link>
+                            </NavLink>
                         )
                     })}
                 </div>
@@ -61,11 +54,7 @@ const SideBar = () => {
                     <h1 className='logout-title'>Log out</h1>
                 </a>
             </div>
-        </>
-    )
-
-    return (
-        <aside className='sidebar'>{sideBarContent}</aside>
+        </aside >
     )
 }
 
