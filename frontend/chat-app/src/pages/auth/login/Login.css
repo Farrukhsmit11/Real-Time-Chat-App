@@ -93,6 +93,11 @@
     border-radius: 40px;
 }
 
+.submit-btn-black {
+    background: black !important;
+    color: white !important;
+}
+
 .auth-footer {
     display: flex;
     flex-direction: column;
@@ -112,4 +117,17 @@
 
 .checkbox-label {
     font-family: "Outfit", sans-serif !important;
+}
+
+.signup-footer {
+    margin-top: 18px;
+}
+
+.signup-footer span {
+    text-align: center;
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+    font-family: 'Inter';
+    font-weight: 500;
 }

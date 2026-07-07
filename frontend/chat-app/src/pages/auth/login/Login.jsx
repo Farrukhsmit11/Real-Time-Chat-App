@@ -84,6 +84,12 @@ const Login = () => {
                   >Log in</Button>
                 </div>
 
+                <div className='signup-footer'>
+                  <span >Don,t have an account
+                    <a href='#' onClick={() => navigate("/")}>Sign Up</a>
+                  </span>
+                </div>
+
               </Form>
             )
             }
