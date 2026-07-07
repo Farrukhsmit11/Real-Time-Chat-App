@@ -43,8 +43,7 @@ a {
 }
 
 body {
-  background-image: url("./assets/bg-image.svg");
-  background-size: contain;
+  background: linear-gradient(135deg, #0A0D18 0%, #141C30 100%);
 }
 
 .ant-checkbox-label {

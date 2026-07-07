@@ -1,5 +1,5 @@
 .sidebar {
-    background: rgba(129, 133, 178, 0.1);
+    background: #171E2F;
     height: 100%;
     padding: 20px;
     padding-bottom: 20px;
@@ -82,19 +82,20 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    margin-bottom: 33px;
+    margin-bottom: 10px;
 }
 
 .search-users-input {
     background: #282142;
     border: navajowhite;
-    height: 41px;
-    color: black;
+    height: 46px;
+    color: white !important;
     font-family: 'Inter', sans-serif !important;
     font-weight: 600;
-    border-radius: 34px;
+    border-radius: 11px;
     padding: 8.8px 16px;
 }
+
 
 
 .ant-input {
@@ -131,4 +132,13 @@
     font-family: "Inter", sans-serif;
     font-weight: 500;
     font-size: 19px;
+}
+
+.compose-btn {
+    width: 40px !important;
+    height: 40px;
+    background: linear-gradient(135deg, #7C4DFF, #A855F7);
+    color: white;
+    border: 1px solid #7C4DFF;
+    border-radius: 50%;
 }

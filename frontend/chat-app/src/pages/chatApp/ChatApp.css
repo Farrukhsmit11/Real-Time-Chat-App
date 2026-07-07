@@ -4,8 +4,8 @@
     border: 1px solid #ddd;
     padding: 0;
     box-sizing: border-box;
-      background-image: url("./assets/bg-image.svg");
-  background-size: contain;
+    background-image: url("./assets/bg-image.svg");
+    background-size: contain;
 }
 
 @media (min-width: 640px) {
@@ -21,8 +21,6 @@
     display: grid;
     grid-template-columns: 1fr 1.5fr;
     overflow: hidden;
-    border: 2px solid #4b5563;
+    border: 2px solid #2E3650;
     border-radius: 20px;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
 }

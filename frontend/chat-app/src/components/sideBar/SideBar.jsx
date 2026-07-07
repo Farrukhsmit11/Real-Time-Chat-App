@@ -2,12 +2,14 @@ import React from 'react'
 import "./SideBar.css"
 import sidebarLogo from "../../assets/right-sidebar-logo.png"
 import { SlOptionsVertical } from "react-icons/sl";
-import { Input } from "antd"
+import { Button, Input } from "antd"
 import { SearchOutlined } from "@ant-design/icons"
 import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from "axios"
 import avatarImg from "../../assets/avatar-img.jfif"
+import {FiEdit2} from "react-icons/fi"
+
 
 const SideBar = () => {
 
@@ -32,7 +34,7 @@ const SideBar = () => {
                 <div className="sidebar-logo-section">
                     <img src={sidebarLogo} className='sidebar-logo' />
                     <div className="icon-right">
-                        <SlOptionsVertical className='options-icon' />
+                        <Button icon={<FiEdit2/>} className='compose-btn'></Button>
                     </div>
                 </div>
 
@@ -45,9 +47,7 @@ const SideBar = () => {
                 </div>
             </div>
 
-
             <div className="input-section">
-                <Input className='search-users-input' placeholder='Search Users' suffix={<SearchOutlined />}></Input>
 
                 <ul className='users-list'>
                     {users.map((item) => {

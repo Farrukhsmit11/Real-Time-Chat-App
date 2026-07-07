@@ -6,7 +6,7 @@ const EmptyChat = () => {
     return (
         <div className='empty-chat-main'>
             <img src={emptyChatLogog} className='empty-chat-img' />
-            <h1 className='empty-chat-title'>Chat anyime , anywhere</h1>
+            <h1 className='empty-chat-title'>Chat anytime , anywhere</h1>
         </div>
     )
 }
