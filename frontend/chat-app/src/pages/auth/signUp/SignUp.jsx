@@ -82,7 +82,7 @@ const SignUp = () => {
                                 ></Input>
                             </AntForm.Item>
 
-                            <AntForm.Item label="Name">
+                            <AntForm.Item label="Password">
                                 <Input.Password
                                     onChange={(e) => setPassword(e.target.value)}
                                     className='form-input'
