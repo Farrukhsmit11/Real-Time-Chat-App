@@ -2,7 +2,7 @@ import './App.css'
 import { Login } from './pages/auth'
 import { useEffect, useState } from 'react'
 import Loader from './components/loader/Loader'
-import AppRoutes from './routes/AppRoutes'
+import Auth from "./routes/Auth"
 
 function App() {
 
@@ -23,7 +23,7 @@ function App() {
 
   return (
     <>
-      <AppRoutes />
+      <Auth />
     </>
   )
 }
