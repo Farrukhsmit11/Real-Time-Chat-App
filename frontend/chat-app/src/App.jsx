@@ -3,6 +3,7 @@ import { Login } from './pages/auth'
 import { useEffect, useState } from 'react'
 import Loader from './components/loader/Loader'
 import Auth from "./routes/Auth"
+import AppRoutes from  "./routes/AppRoutes"
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
   return (
     <>
       <Auth />
+      <AppRoutes />
     </>
   )
 }

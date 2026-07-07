@@ -29,7 +29,7 @@ const Login = () => {
       })
       const res = data.data?.res
       message.success("Login sucessfully")
-      navigate("/dashboard")
+      navigate("/chatApp")
       setLoading(false)
     } catch (error) {
       if (error.response) {
@@ -74,7 +74,6 @@ const Login = () => {
 
                 <div className='footer'>
                   <Checkbox className='checkbox-label'>Remember me</Checkbox>
-                  <a href='#'>Forgot Password</a>
                 </div>
 
                 <div className="auth-login-footer">

@@ -1,18 +1,47 @@
 import bcrypt from "bcrypt"
 import { User } from "../models/User.js"
 import jwt from "jsonwebtoken"
+import { loginSchema } from "../validations/auth.validations.js"
 
-export const getUsers = async (request, response) => {
+export const registerUser = async (request, response) => {
+
+    const { name, email, password } = request.body
+
     try {
-        const res = await User.find();
+        if (!request.body.name || !request.body.email || !request.body.password) {
+            response.status(400).send({ message: "Please fill all the details" })
+            return
+        }
+
+        const user = await User.findOne({ email })
+        if (user) {
+            response.status(400).send({ message: "Sorry a user already exist with this email" })
+            return
+        }
+
+        const hashedPassword = await bcrypt.hash(request.body.password, 10)
+        if (!hashedPassword) {
+            response.status(400).send({ message: "Password does not match" })
+            return
+        }
+
+        const data = await User.create({
+            name: request.body.name,
+            email: request.body.email,
+            password: hashedPassword
+        })
+
+        response.status(200).json({ message: "SignUp Sucessfull", data })
 
     } catch (error) {
-        console.error("error", error)
+        console.error("Error Signup User", error)
     }
 }
 
 export const login = async (request, response) => {
+
     const { email, password } = request.body
+
     try {
         if (!request.body.email || !request.body.password) {
             response.status(400).send({ message: "Please Fill all details" })
@@ -44,4 +73,4 @@ export const login = async (request, response) => {
     }
 }
 
-export default { getUsers, login }
+export default { login, registerUser }
