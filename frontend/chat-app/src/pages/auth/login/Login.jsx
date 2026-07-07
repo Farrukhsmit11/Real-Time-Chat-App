@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import AuthNav from '../../../components/authNav/AuthNav'
 import { Formik } from "formik"
 import { Button, Checkbox, Form, Input, message } from "antd"
 import "./Login.css"
@@ -42,7 +41,6 @@ const Login = () => {
 
   return (
     <>
-      <AuthNav />
       <div className='auth-container'>
         <div className="auth-card">
           <div className="auth-header">
