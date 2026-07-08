@@ -7,19 +7,25 @@ import EmptyChat from '../../components/emptyChat/EmptyChat'
 const ChatApp = () => {
 
     const [selectedUser, setSelectedUser] = useState(null)
+    const [isChatOpen, setIsChatOpen] = useState(false);
+
+    const handleSelectedUser = (user) => {
+        setSelectedUser(user)
+    }
 
     return (
         <>
             <div className="home-page">
                 <div className="chat-layout">
-                    <SideBar />
+                    <SideBar onSelectUser={handleSelectedUser} />
 
                     <div className="chat-content">
                         {selectedUser ? (
-                            <ChatContainer />
+                            <ChatContainer user={selectedUser} />
                         ) : (
                             <EmptyChat />
                         )}
+
                     </div>
                 </div>
             </div>

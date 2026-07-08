@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    width: 100%;
 }
 
 .chat-header {
@@ -11,6 +12,7 @@
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid #e5e7eb;
+    flex-shrink: 0;
 }
 
 .chat-user {
@@ -56,4 +58,100 @@
 .chat-footer {
     padding: 16px 20px;
     border-top: 1px solid #e5e7eb;
+}
+
+.chat-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: white;
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    gap: 24px;
+    align-items: center;
+}
+
+.header-icons {
+    font-size: 24px;
+}
+
+.chat-icons {
+    display: flex;
+    align-items: center;
+    gap: 23px;
+    cursor: pointer;
+}
+
+.user-name {
+    line-height: 1.6;
+    font-size: 20px;
+}
+
+.send-message-section {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    padding: 15px 20px;
+    margin-top: auto;
+}
+
+.send-message-input {
+    flex: 1;
+    height: 49px;
+    border-radius: 31px;
+    font-family: 'Inter';
+    font-weight: 600;
+    background: #171E2F;
+    color: white;
+}
+
+.send-message-input,
+.ant-input {
+    background: transparent !important;
+    color: #fff !important;
+}
+
+.send-message-input:hover,
+.send-message-input:focus,
+.send-message-input.ant-input-focused {
+    background: transparent !important;
+    border-color: #6C63FF !important;
+    box-shadow: none !important;
+}
+
+.send-message-input .ant-input-prefix {
+    color: #9ca3af !important;
+}
+
+.send-message-input,
+.ant-input-affix-wrapper {
+    display: flex;
+    gap: 5px;
+}
+
+.send-message-input input::placeholder {
+    color: #9ca3af !important;
+}
+
+.send-icon {
+    font-size: 21px;
+    margin: 6px;
+    cursor: pointer;
+}
+
+.attach-files-icon {
+    font-size: 17px;
+    color: white;
+    cursor: pointer;
+}
+
+.upload-btn {
+    background: none !important;
+    border: none;
+    color: white !important;
+}
+
+.upload-btn:hover {
+    background: none !important;
+    border: none !important;
 }
