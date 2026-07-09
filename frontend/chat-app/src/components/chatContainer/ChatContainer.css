@@ -105,10 +105,8 @@
     color: white;
 }
 
-.send-message-input,
-.ant-input {
-    background: transparent !important;
-    color: #fff !important;
+.send-message-input {
+    background: white;
 }
 
 .send-message-input:hover,

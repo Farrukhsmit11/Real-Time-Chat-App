@@ -5,7 +5,7 @@ import { loginSchema } from "../validations/auth.validations.js"
 
 export const registerUser = async (request, response) => {
 
-    const { name, email, password } = request.body
+    const { name, email, password, avatar } = request.body
 
     try {
         if (!request.body.name || !request.body.email || !request.body.password) {
@@ -25,10 +25,13 @@ export const registerUser = async (request, response) => {
             return
         }
 
+        const avatar = request.file ? "request.file.filename" : null
+
         const data = await User.create({
             name: request.body.name,
             email: request.body.email,
-            password: hashedPassword
+            password: hashedPassword,
+            avatar
         })
 
         response.status(200).json({ message: "SignUp Sucessfull", data })
@@ -61,7 +64,7 @@ export const login = async (request, response) => {
         }
 
         const token = jwt.sign(
-            { id: res._id, role: res.role },
+            { id: res._id, role: res.role, email: res.email },
             process.env.JWT_SECRET_KEY,
             { expiresIn: "1h" }
         )

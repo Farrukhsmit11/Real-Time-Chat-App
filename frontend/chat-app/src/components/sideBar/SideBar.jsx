@@ -2,7 +2,7 @@ import React from 'react'
 import "./SideBar.css"
 import sidebarLogo from "../../assets/right-sidebar-logo.png"
 import { SlOptionsVertical } from "react-icons/sl";
-import { Button, Form, Input, Spin } from "antd"
+import { Avatar, Button, Form, Input, Spin } from "antd"
 import { SearchOutlined } from "@ant-design/icons"
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -59,7 +59,7 @@ const SideBar = ({ onSelectUser }) => {
                                     <>
                                         <li key={item.id} className='user-item' onClick={() => onSelectUser(item)}>
                                             <div className='image-main'>
-                                                <img className='avatar-img' src={avatarImg} />
+                                                <Avatar className='avatar-img' src={`http://localhost:5000  ${item.avatar}`} />
                                             </div>
                                             <h2 className='users-name'>{item.name}</h2>
                                         </li>

@@ -24,14 +24,13 @@ const ChatContainer = ({ selectedUser, user }) => {
         headers: {
             authorization: 'authorization-text',
         },
-             
+
     };
 
     return (
         <div className='chat-container'>
             <div className="chat-header">
                 <div className='chat-content'>
-                    <img className='avatar-img' src={avatarImg} />
                     <div>
                         <h2 className='user-name'>{user.name}</h2>
                         <span className='online-status'>
@@ -56,7 +55,6 @@ const ChatContainer = ({ selectedUser, user }) => {
                 <Input
                     className='send-message-input'
                     placeholder='Type a message'
-
                     suffix={<LuSend className='send-icon' />}
                     prefix={
                         <Upload {...props} name='attachment'>
