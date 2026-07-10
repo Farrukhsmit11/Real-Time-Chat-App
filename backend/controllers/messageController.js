@@ -11,9 +11,25 @@ export const getMessages = async (req, res) => {
     }
 }
 
-export const sendMessage = (request, response) => {
-    
+export const sendMessage = async (request, response) => {
+
+    const { text, receiverId } = request.body
+    const senderId = request.user?.id
+
+    console.log(request.user)
+
+    try {
+        const data = await Message.create({
+            text,
+            senderId,
+            receiverId
+        })
+
+        response.status(200).json({ message: "Message send sucessfully", data })
+
+    } catch (error) {
+        console.error("error sending message", error)
+    }
 }
 
-
-export default {  getMessages , sendMessage }
+export default { getMessages, sendMessage }
