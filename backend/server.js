@@ -11,13 +11,16 @@ import upload from "./config/multer.js"
 import pusher from "./config/pusher.js";
 import messageRoutes from "./routes/messageRoutes.js"
 
+app.use(cors({
+    credentials: true,
+    origin: "http://localhost:5173"
+}))
+
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-app.use(cors())
-
 connectDB()
-
 
 const fileupload = multer({ dest: "uploads/" })
 

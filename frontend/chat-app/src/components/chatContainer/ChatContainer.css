@@ -101,13 +101,10 @@
     border-radius: 31px;
     font-family: 'Inter';
     font-weight: 600;
-    background: #171E2F;
+    background: #171E2F !important;
     color: white;
 }
 
-.send-message-input {
-    background: white;
-}
 
 .send-message-input:hover,
 .send-message-input:focus,

@@ -5,7 +5,6 @@ import upload from "../config/multer.js"
 const router = express.Router()
 
 router.route("/login").post(login)
-router.route("/registerUser", upload.single("attachment"))
-.post(registerUser)
+router.route("/registerUser").post(upload.single("attachment"), registerUser)
 
 export default router

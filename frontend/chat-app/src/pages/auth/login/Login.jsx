@@ -26,7 +26,9 @@ const Login = () => {
       const data = await axios.post(`${BASE_URL}/login`, {
         email,
         password
-      })
+      },
+        { withCredentials: true }
+      )
       const res = data.data?.res
       message.success("Login sucessfully")
       navigate("/chatApp")

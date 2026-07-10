@@ -3,6 +3,7 @@ import SideBar from '../../components/sideBar/SideBar'
 import "./ChatApp.css"
 import ChatContainer from '../../components/chatContainer/ChatContainer'
 import EmptyChat from '../../components/emptyChat/EmptyChat'
+import UserAvatar from '../../components/userAvatar/UserAvatar'
 
 const ChatApp = () => {
 
@@ -29,6 +30,10 @@ const ChatApp = () => {
                     </div>
                 </div>
             </div>
+
+
+
+            <UserAvatar />
         </>
     )
 }
