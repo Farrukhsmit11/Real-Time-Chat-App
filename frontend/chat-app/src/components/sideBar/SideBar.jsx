@@ -2,13 +2,15 @@ import React from 'react'
 import "./SideBar.css"
 import sidebarLogo from "../../assets/right-sidebar-logo.png"
 import { SlOptionsVertical } from "react-icons/sl";
-import { Avatar, Button, Form, Input, Spin } from "antd"
+import { Avatar, Button, Form, Input, Popover, Spin } from "antd"
 import { SearchOutlined } from "@ant-design/icons"
 import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from "axios"
 import avatarImg from "../../assets/avatar-img.jfif"
 import { FiEdit2 } from "react-icons/fi"
+import UserAvatar from '../userAvatar/UserAvatar';
+import { TbTrash } from "react-icons/tb";
 
 
 const SideBar = ({ onSelectUser }) => {
@@ -31,13 +33,24 @@ const SideBar = ({ onSelectUser }) => {
             })
     }, [])
 
+
+    const content = (
+        <div>
+            <p>My Profile</p>
+            <p>Settings</p>
+            <Button icon={<TbTrash />} danger>Logout</Button>
+        </div>
+    );
+
     return (
         <div className="sidebar">
             <div className="sidebar-header">
                 <div className="sidebar-logo-section">
                     <img src={sidebarLogo} className='sidebar-logo' />
                     <div className="icon-right">
-                        <Button icon={<FiEdit2 />} className='compose-btn'></Button>
+                        <Popover content={content} trigger="click">
+                            <UserAvatar />
+                        </Popover>
                     </div>
                 </div>
             </div>
@@ -59,7 +72,7 @@ const SideBar = ({ onSelectUser }) => {
                                     <>
                                         <li key={item.id} className='user-item' onClick={() => onSelectUser(item)}>
                                             <div className='image-main'>
-                                                <Avatar className='avatar-img' src={`http://localhost:5000  ${item.avatar}`} />
+                                                <Avatar className='avatar-img' />
                                             </div>
                                             <h2 className='users-name'>{item.name}</h2>
                                         </li>

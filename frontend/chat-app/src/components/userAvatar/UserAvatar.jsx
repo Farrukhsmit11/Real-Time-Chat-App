@@ -4,7 +4,9 @@ import { Avatar } from "antd"
 
 const UserAvatar = () => {
     return (
-        <Avatar ></Avatar>
+        <Avatar size="large" className='user-avatar'>
+            FM
+        </Avatar>
     )
 }
 

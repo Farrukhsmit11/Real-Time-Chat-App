@@ -150,3 +150,47 @@
     background: none !important;
     border: none !important;
 }
+
+.chat-main {
+    background-color: white;
+    padding: 25px;
+    border: none;
+    height: 45px;
+    color: white;
+}
+
+.message-submit-btn {
+    background: none;
+    border: none;
+    color: white;
+}
+
+.message-submit-btn:hover {
+    background: none !important;
+    border: none !important;
+}
+
+.message-submit-btn,
+.ant-btn-icon {
+    color: cornflowerblue;
+}
+
+.content-item {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    cursor: pointer;
+    margin-bottom: 12px;
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+
+}
+
+.custom-popover .ant-popover-inner {
+    background: #171E2F;
+
+}
+
+.delete-icon {
+    font-size: 16px;
+}

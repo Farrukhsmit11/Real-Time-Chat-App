@@ -10,14 +10,15 @@ import multer from "multer";
 import upload from "./config/multer.js"
 import pusher from "./config/pusher.js";
 import messageRoutes from "./routes/messageRoutes.js"
+import cookieParser from "cookie-parser";
 
 app.use(cors({
-    credentials: true,
-    origin: "http://localhost:5173"
+    origin: "http://localhost:5173",
+    credentials: true
 }))
 
-
 app.use(express.json())
+app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }))
 
 connectDB()
@@ -27,6 +28,7 @@ const fileupload = multer({ dest: "uploads/" })
 app.get("/", (request, response) => {
     response.send("Hello world backend working")
 })
+
 
 app.use(authRoutes)
 app.use(userRoutes)

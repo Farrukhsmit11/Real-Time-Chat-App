@@ -5,6 +5,7 @@ import { Form as AntForm, Button, Input, message } from "antd"
 import { useNavigate } from 'react-router-dom'
 import axios from "axios"
 import { useState } from 'react'
+import "./SignUp.css"
 
 const SignUp = () => {
 
@@ -47,7 +48,7 @@ const SignUp = () => {
     }
 
     return (
-        <div className='auth-container'>
+        <div className='signup-container'>
             <div className="auth-card">
                 <div className="auth-header">
                     <h1 className='auth-title'>Register User</h1>

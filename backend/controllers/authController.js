@@ -66,12 +66,15 @@ export const login = async (request, response) => {
         const token = jwt.sign(
             { id: res._id, email: res.email },
             process.env.JWT_SECRET_KEY,
-            { expiresIn: "1h" }
+            { expiresIn: "5d" }
         )
 
         response.cookie("token", token, {
+            expires:
+                new Date(Date.now() + 86400000),
             httpOnly: true,
-            secure: true
+            secure: false,
+            sameSite: "lax"
         })
 
         response.status(200).json({ message: "Login sucessfull", res, token })

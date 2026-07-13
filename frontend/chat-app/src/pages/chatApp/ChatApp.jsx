@@ -4,6 +4,7 @@ import "./ChatApp.css"
 import ChatContainer from '../../components/chatContainer/ChatContainer'
 import EmptyChat from '../../components/emptyChat/EmptyChat'
 import UserAvatar from '../../components/userAvatar/UserAvatar'
+import pusher from '../../utils/pusher'
 
 const ChatApp = () => {
 
@@ -14,6 +15,8 @@ const ChatApp = () => {
         setSelectedUser(user)
     }
 
+    const channel = pusher.subscribe("chat-app")
+
     return (
         <>
             <div className="home-page">
@@ -22,7 +25,7 @@ const ChatApp = () => {
 
                     <div className="chat-content">
                         {selectedUser ? (
-                            <ChatContainer user={selectedUser} />
+                            <ChatContainer selectedUser={selectedUser} />
                         ) : (
                             <EmptyChat />
                         )}
@@ -34,6 +37,7 @@ const ChatApp = () => {
 
 
             <UserAvatar />
+      
         </>
     )
 }
