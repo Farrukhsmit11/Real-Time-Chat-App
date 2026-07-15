@@ -1,11 +1,12 @@
 import React from 'react'
 import "./UserAvatar.css"
 import { Avatar } from "antd"
+import { getFirstTwoLetters } from '../../utils/helper.js'
 
-const UserAvatar = () => {
+const UserAvatar = ({ selectedUser }) => {
     return (
         <Avatar size="large" className='user-avatar'>
-            FM
+            {selectedUser?.user}
         </Avatar>
     )
 }

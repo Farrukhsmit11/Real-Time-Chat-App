@@ -3,7 +3,7 @@
     height: 100%;
     padding: 20px;
     padding-bottom: 20px;
-    border-radius: 0 12px 12px 0;
+    border-radius: 0;
     overflow-y: auto;
     width: 100% !important;
     color: #fff;
@@ -184,4 +184,16 @@
 .input-section {
     display: flex;
     align-items: center;
+}
+
+.chat-filter {
+    width: 100%;
+    display: inline-flex;
+    width: fit-content;
+}
+
+
+.chat-filter .ant-radio-button-wrapper {
+    width: auto;
+    flex: unset;
 }

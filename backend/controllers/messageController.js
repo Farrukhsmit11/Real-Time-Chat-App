@@ -1,14 +1,36 @@
 import { Message } from "../models/Message.js"
 import pusher from "../config/pusher.js"
+import { request } from "express"
 
-export const getMessages = async (req, res) => {
+export const getMessages = async (request, response) => {
+
+    const senderId = request.user?._id
+    const receiverId = request.params.receiverId
+
     try {
-        const data = await Message.find()
 
-        res.status(200).json({ message: "messages fetch sucessfully", data })
+        //    Is line ka matlab ha messages find kro using filter . 
+        //    pheli condition ka matlab woh messages dekhao jo logged in user aur selected user ke beeche mai message hue hain 
+        // 2nd condition
+        // woh messages dekhao jo selected user ne logged in user ko message kia ha woh dekhao
+        const data = await Message.find({
+            $or: [
+                {
+                    senderId: request.user?.id,
+                    receiverId: request.params.id
+                },
+
+                {
+                    senderId: request.params.id,
+                    receiverId: request.user?.id
+                }
+            ]
+        })
+
+        response.status(200).json({ message: "messages fetch sucessfully", data })
 
     } catch (error) {
-        console.error("error fetching message")
+        console.error("error fetching message", error)
     }
 }
 
@@ -34,7 +56,7 @@ export const sendMessage = async (request, response) => {
             senderId,
         })
 
-        await pusher.trigger("chat-app", "new-message", {
+        const result = await pusher.trigger("chat-app", "new-message", {
             data
         })
 

@@ -36,6 +36,8 @@ const ChatContainer = ({ selectedUser }) => {
 
     const receiverId = selectedUser?._id
 
+
+
     const handleSendMessage = async () => {
         try {
             const data = await axios.post(`${BASE_URL}/send-message`, {
@@ -44,9 +46,12 @@ const ChatContainer = ({ selectedUser }) => {
             },
                 { withCredentials: true }
             );
+            const newMessage = data?.data.data
+            console.log(data.data)
+            setMessages((prev) => [...prev, newMessage])
 
             setText("")
-            const res = data?.data.data
+
             message.success("Message send sucessfully")
         } catch (error) {
             if (error.response) {
@@ -72,18 +77,23 @@ const ChatContainer = ({ selectedUser }) => {
                 <div className="chat-icons">
                     <PhoneOutlined className='header-icons' />
                     <IoVideocamOutline className='header-icons' />
-                    {/* <Popover content={content} trigger="hover" overlayClassName='custom-popover' color="171E2F"> */}
                     <SlOptionsVertical className='header-icons' />
-                    {/* </Popover> */}
                 </div>
             </div>
 
+
             <div className="messages-section">
-                {messages.map((item) => {
+                {messages.map((message) => {
                     return (
-                        <div className="chat-main">
-                            <h1 style={{ color: 'white' }}>{item.text}</h1>
+                        <div className='conversation-list'>
+                            <div className='sender-chat'>
+                                <span className='conversation-item'>{message.text}</span>
+                            </div>
+                            <div className="receiver-chat">
+
+                            </div>
                         </div>
+
                     )
                 })}
             </div>
