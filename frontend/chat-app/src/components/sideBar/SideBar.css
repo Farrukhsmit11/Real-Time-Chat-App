@@ -224,6 +224,10 @@
     font-size: 16px;
 }
 
+.logout-title:hover {
+    color: white !important;
+}
+
 .sidebar-link {
     text-decoration: none !important;
     color: white;
@@ -235,4 +239,8 @@
     color: white;
     display: flex;
     align-items: center;
+}
+
+.logout-icon {
+    font-size: 19px;
 }

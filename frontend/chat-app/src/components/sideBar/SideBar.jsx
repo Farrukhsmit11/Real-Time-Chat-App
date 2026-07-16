@@ -105,7 +105,7 @@ const SideBar = ({ onSelectUser }) => {
                             onClick={() => handleLogout()}
                             className='logout-btn'
                             icon={
-                                <LuLogOut />
+                                <LuLogOut className='logout-icon'/>
                             }>
                             <h1 className='logout-title'>Logout</h1>
                         </Button>

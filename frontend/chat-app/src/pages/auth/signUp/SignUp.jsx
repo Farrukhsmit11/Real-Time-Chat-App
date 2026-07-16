@@ -51,7 +51,7 @@ const SignUp = () => {
         <div className='signup-container'>
             <div className="auth-card">
                 <div className="auth-header">
-                    <h1 className='auth-title'>Register User</h1>
+                    <h1 className='auth-title'>Sign Up</h1>
                 </div>
 
                 <Formik
