@@ -84,4 +84,18 @@ export const login = async (request, response) => {
     }
 }
 
-export default { login, registerUser }
+
+export const logoutUser = async (request, response) => {
+    try {
+        response.clearCookie("token", {
+            httpOnly: true,
+            secure: false,
+            sameSite: "lax"
+        })
+        response.status(200).json({ message: "User Logout sucessfully" })
+    } catch (error) {
+        console.error("error logging out user", error)
+    }
+}
+
+export default { login, registerUser, logoutUser }

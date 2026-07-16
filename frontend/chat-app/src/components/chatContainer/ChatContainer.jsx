@@ -48,11 +48,8 @@ const ChatContainer = ({ selectedUser }) => {
             const newMessage = data?.data.data
             console.log(data.data)
             setMessages((prev) => [...prev, newMessage])
-
             fetchMessages()
             setText("")
-
-
             message.success("Message send sucessfully")
         } catch (error) {
             if (error.response) {
@@ -62,6 +59,22 @@ const ChatContainer = ({ selectedUser }) => {
         }
     }
 
+    const handleMessages = async () => {
+        try {
+            const res = await axios.get(`${BASE_URL}/messages/${receiverId}`, {
+                withCredentials: true
+            })
+        } catch (error) {
+            console.error("Error fetching messages")
+        }
+    }
+
+    useEffect(() => {
+        if (receiverId) {
+            setMessages([])
+            handleMessages()
+        }
+    }, [receiverId])
 
     return (
         <div className='chat-container'>
@@ -90,12 +103,6 @@ const ChatContainer = ({ selectedUser }) => {
                         <div className='conversation-list'>
                             <div className='sender-chat'>
                                 <span className='conversation-item'>{item.text}</span>
-                            </div>
-
-                            <div className='receiver-chat'>
-                                <span className='conversation-item'>
-                                    {item.text}
-                                </span>
                             </div>
                         </div>
                     )

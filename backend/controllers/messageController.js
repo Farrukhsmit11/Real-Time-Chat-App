@@ -3,6 +3,38 @@ import pusher from "../config/pusher.js"
 import { request } from "express"
 
 
+export const getMessages = async (request, response) => {
+    try {
+
+        const senderId = request.user._id
+        const receiverId = request.params.receiverId
+
+        console.log("Sender id", senderId)
+        console.log("receiver id", receiverId)
+
+
+        const message = await Message.find({
+            $or: [
+                {
+                    senderId: senderId,
+                    receiverId: receiverId
+                },
+
+                {
+                    senderId: receiverId,
+                    receiverId: senderId
+                }
+            ]
+        })
+
+        response.status(200).json({ message: "messages fetch properly", data: message })
+
+    } catch (error) {
+        console.error("Failed to Fetch Messages", error)
+    }
+}
+
+
 export const sendMessage = async (request, response) => {
 
     const { text, receiverId } = request.body

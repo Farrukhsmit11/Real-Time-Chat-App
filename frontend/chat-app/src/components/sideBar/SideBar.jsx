@@ -2,7 +2,7 @@ import React from 'react'
 import "./SideBar.css"
 import sidebarLogo from "../../assets/right-sidebar-logo.png"
 import { SlOptionsVertical } from "react-icons/sl";
-import { Avatar, Button, Form, Input, Popover, Radio, Spin } from "antd"
+import { Avatar, Button, Divider, Form, Input, Popover, Radio, Spin } from "antd"
 import { SearchOutlined } from "@ant-design/icons"
 import { useState } from 'react';
 import { useRef } from 'react';
@@ -12,7 +12,8 @@ import avatarImg from "../../assets/avatar-img.jfif"
 import { FiEdit2 } from "react-icons/fi"
 import UserAvatar from '../userAvatar/UserAvatar';
 import { TbTrash } from "react-icons/tb";
-
+import { LuLogOut } from "react-icons/lu";
+import { useNavigate } from "react-router-dom"
 
 const SideBar = ({ onSelectUser }) => {
 
@@ -21,6 +22,8 @@ const SideBar = ({ onSelectUser }) => {
     const [size, setSize] = useState()
 
     const BASE_URL = "http://localhost:5000"
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         const response = axios.get(`${BASE_URL}/getUsers`)
@@ -35,52 +38,19 @@ const SideBar = ({ onSelectUser }) => {
             })
     }, [])
 
+    const handleLogout = async () => {
+        try {
+            const isLogout = await axios.post(`${BASE_URL}/logoutUser`, {
 
-    const content = (
-        <div>
-            <p>My Profile</p>
-            <p>Settings</p>
-            <Button icon={<TbTrash />} danger>Logout</Button>
-        </div>
-    );
-
-
-    const newTabIndex = useRef(0);
-    const add = () => {
-        const newActiveKey = `newTab${newTabIndex.current++}`;
-        setItems([
-            ...(items || []),
-            {
-                label: 'New Tab',
-                key: newActiveKey,
-                children: 'Content of new Tab',
             },
-        ]);
-        setActiveKey(newActiveKey);
-    };
-    const remove = targetKey => {
-        if (!items) {
-            return;
+                { withCredentials: true }
+            )
+
+            navigate("/login")
+        } catch (error) {
+            console.error("user logout failed", error)
         }
-        const targetIndex = items.findIndex(item => item.key === targetKey);
-        const newItems = items.filter(item => item.key !== targetKey);
-        if (newItems.length && targetKey === activeKey) {
-            const newActiveKey =
-                newItems[targetIndex === newItems.length ? targetIndex - 1 : targetIndex].key;
-            setActiveKey(newActiveKey);
-        }
-        setItems(newItems);
-    };
-    const onEdit = (targetKey, action) => {
-        if (action === 'add') {
-            add();
-        } else {
-            remove(targetKey);
-        }
-    };
-    const onChange = e => {
-        setSize(e.target.value);
-    };
+    }
 
     return (
         <div className="sidebar">
@@ -88,9 +58,6 @@ const SideBar = ({ onSelectUser }) => {
                 <div className="sidebar-logo-section">
                     <img src={sidebarLogo} className='sidebar-logo' />
                     <div className="icon-right">
-                        <Popover content={content} trigger="click">
-                            <UserAvatar />
-                        </Popover>
                     </div>
                 </div>
             </div>
@@ -98,8 +65,6 @@ const SideBar = ({ onSelectUser }) => {
             <div className="input-main">
                 <Form enctype="multipart/form-data">
                     <Input placeholder='Search Conversations' prefix={<SearchOutlined className='search-icon' />} className='conversation-input'></Input>
-
-
                 </Form>
             </div>
 
@@ -113,7 +78,6 @@ const SideBar = ({ onSelectUser }) => {
                                 return (
                                     <>
                                         <li key={item.id} className='user-item' onClick={() => {
-                                            
                                             onSelectUser(item)
                                         }
                                         }
@@ -131,6 +95,25 @@ const SideBar = ({ onSelectUser }) => {
                 )}
             </div>
 
+            <div className="logout-section">
+                <Divider />
+
+
+                <a href='#' className='sidebar-link'>
+                    <div className="sidebar-inner-content">
+                        <Button
+                            onClick={() => handleLogout()}
+                            className='logout-btn'
+                            icon={
+                                <LuLogOut />
+                            }>
+                            <h1 className='logout-title'>Logout</h1>
+                        </Button>
+
+
+                    </div>
+                </a>
+            </div>
         </div>
     )
 }

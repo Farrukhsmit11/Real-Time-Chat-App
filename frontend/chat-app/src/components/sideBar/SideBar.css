@@ -7,6 +7,8 @@
     overflow-y: auto;
     width: 100% !important;
     color: #fff;
+    display: flex;
+    flex-direction: column;
 }
 
 .sidebar-header {
@@ -196,4 +198,41 @@
 .chat-filter .ant-radio-button-wrapper {
     width: auto;
     flex: unset;
+}
+
+.logout-section {
+    display: grid;
+    margin-top: auto;
+    flex-direction: row;
+}
+
+.ant-divider {
+    color: white;
+    background: white;
+}
+
+.sidebar-inner-content {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.logout-title {
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.sidebar-link {
+    text-decoration: none !important;
+    color: white;
+}
+
+.logout-btn {
+    background: none !important;
+    border: none !important;
+    color: white;
+    display: flex;
+    align-items: center;
 }
