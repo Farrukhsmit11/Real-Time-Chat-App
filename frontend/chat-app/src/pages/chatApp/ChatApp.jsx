@@ -31,7 +31,6 @@ const ChatApp = () => {
 
 
         channel.bind('new-message', function (data) {
-            // console.log(data)
         });
 
         return () => {
@@ -39,36 +38,6 @@ const ChatApp = () => {
             pusher.unsubscribe("chat-app")
         }
     }, [])
-
-    const BASE_URL = "http://localhost:5000"
-
-
-    const fetchMessages = async () => {
-
-        console.log("Selected User:", selectedUser);
-        console.log("Selected User ID:", selectedUser?._id);
-        try {
-            const res = await axios.get(`${BASE_URL}/get-messages/${selectedUser._id}`, {
-
-            },
-                { withCredentials: true }
-            )
-            const data = res?.data.data
-            console.log(data)
-        } catch (error) {
-            if (error.response) {
-                message.error(error.response.data.message)
-            }
-            console.error("Messages failed to fetch")
-        }
-    }
-
-    useEffect(() => {
-        if (selectedUser) {
-            fetchMessages();
-        }
-    }, [selectedUser])
-
 
     return (
         <>

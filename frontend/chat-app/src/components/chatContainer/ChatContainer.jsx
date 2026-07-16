@@ -14,6 +14,7 @@ import { ImAttachment } from "react-icons/im";
 import axios from "axios"
 import UserAvatar from '../userAvatar/UserAvatar';
 import { TbTrash } from 'react-icons/tb';
+import { useEffect } from 'react';
 
 
 const ChatContainer = ({ selectedUser }) => {
@@ -36,8 +37,6 @@ const ChatContainer = ({ selectedUser }) => {
 
     const receiverId = selectedUser?._id
 
-
-
     const handleSendMessage = async () => {
         try {
             const data = await axios.post(`${BASE_URL}/send-message`, {
@@ -50,7 +49,9 @@ const ChatContainer = ({ selectedUser }) => {
             console.log(data.data)
             setMessages((prev) => [...prev, newMessage])
 
+            fetchMessages()
             setText("")
+
 
             message.success("Message send sucessfully")
         } catch (error) {
@@ -60,6 +61,7 @@ const ChatContainer = ({ selectedUser }) => {
             console.error("error")
         }
     }
+
 
     return (
         <div className='chat-container'>
@@ -83,17 +85,19 @@ const ChatContainer = ({ selectedUser }) => {
 
 
             <div className="messages-section">
-                {messages.map((message) => {
+                {messages.map((item) => {
                     return (
                         <div className='conversation-list'>
                             <div className='sender-chat'>
-                                <span className='conversation-item'>{message.text}</span>
+                                <span className='conversation-item'>{item.text}</span>
                             </div>
-                            <div className="receiver-chat">
 
+                            <div className='receiver-chat'>
+                                <span className='conversation-item'>
+                                    {item.text}
+                                </span>
                             </div>
                         </div>
-
                     )
                 })}
             </div>
