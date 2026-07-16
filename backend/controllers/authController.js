@@ -22,11 +22,7 @@ export const registerUser = async (request, response) => {
         }
 
         const hashedPassword = await bcrypt.hash(request.body.password, 10)
-        if (!hashedPassword) {
-            response.status(400).send({ message: "Password does not match" })
-            return
-        }
-
+    
         const data = await User.create({
             name: request.body.name,
             email: request.body.email,
@@ -59,7 +55,7 @@ export const login = async (request, response) => {
 
         const isMatch = await bcrypt.compare(request.body.password, res.password)
         if (!isMatch) {
-            response.status(400).send({ message: "email and password does not match" })
+            response.status(400).send({ message: "password does not match" })
             return
         }
 
