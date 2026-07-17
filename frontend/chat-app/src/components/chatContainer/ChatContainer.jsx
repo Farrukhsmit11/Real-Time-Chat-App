@@ -48,7 +48,7 @@ const ChatContainer = ({ selectedUser }) => {
             const newMessage = data?.data.data
             console.log(data.data)
             setMessages((prev) => [...prev, newMessage])
-            fetchMessages()
+            handleMessages()
             setText("")
             message.success("Message send sucessfully")
         } catch (error) {
