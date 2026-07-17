@@ -3,7 +3,6 @@ import SideBar from '../../components/sideBar/SideBar'
 import "./ChatApp.css"
 import ChatContainer from '../../components/chatContainer/ChatContainer'
 import EmptyChat from '../../components/emptyChat/EmptyChat'
-import UserAvatar from '../../components/userAvatar/UserAvatar'
 import pusher from '../../utils/pusher'
 import { useEffect } from 'react'
 import { useParams } from "react-router-dom"
@@ -31,6 +30,8 @@ const ChatApp = () => {
 
 
         channel.bind('new-message', function (data) {
+            const newMessage = data.data
+
         });
 
         return () => {
@@ -55,6 +56,9 @@ const ChatApp = () => {
                     </div>
 
                 </div>
+
+
+               
             </div>
         </>
     )

@@ -244,3 +244,10 @@
 .logout-icon {
     font-size: 19px;
 }
+
+.search-users-btn {
+    background: none !important;
+    border: none !important;
+    color: white !important;
+}
+

@@ -51,6 +51,12 @@ export const sendMessage = async (request, response) => {
             response.status(400).send({ message: "User not authenticated" })
             return
         }
+
+        if (senderId.equals(receiverId)) {
+            response.status(400).send({ message: "Cannot send message to yourself" })
+            return
+        }
+        
         const data = await Message.create({
             text,
             receiverId,
@@ -68,4 +74,4 @@ export const sendMessage = async (request, response) => {
     }
 }
 
-export default { sendMessage }
+export default { sendMessage, getMessages }

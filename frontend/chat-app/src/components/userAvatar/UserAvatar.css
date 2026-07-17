@@ -1,6 +1,8 @@
 .user-avatar {
-    background: linear-gradient(135deg, #8B5CF6 0%, #7C4DFF 50%, #6C3EF0 100%);
-    ;
-    color: white;
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
+    padding: 24px;
+    background: darkslateblue;
     cursor: pointer;
 }

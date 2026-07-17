@@ -10,10 +10,12 @@ import { useEffect } from 'react';
 import axios from "axios"
 import avatarImg from "../../assets/avatar-img.jfif"
 import { FiEdit2 } from "react-icons/fi"
-import UserAvatar from '../userAvatar/UserAvatar';
 import { TbTrash } from "react-icons/tb";
 import { LuLogOut } from "react-icons/lu";
 import { useNavigate } from "react-router-dom"
+import { message } from "antd"
+import { getInitials } from "../../utils/helper.js"
+import UserAvatar from '../userAvatar/UserAvatar.jsx';
 
 const SideBar = ({ onSelectUser }) => {
 
@@ -21,9 +23,13 @@ const SideBar = ({ onSelectUser }) => {
     const [isLoading, setIsLoading] = useState(true)
     const [size, setSize] = useState()
 
+    const [searchText, setSearchText] = useState("");
+
     const BASE_URL = "http://localhost:5000"
 
     const navigate = useNavigate()
+    console.log(users);
+
 
     useEffect(() => {
         const response = axios.get(`${BASE_URL}/getUsers`)
@@ -52,6 +58,25 @@ const SideBar = ({ onSelectUser }) => {
         }
     }
 
+    const handleSearch = async (e) => {
+        try {
+            const data = await axios.get(`${BASE_URL}/search-users`, {
+                params: {
+                    query: searchText
+                },
+                withCredentials: true
+            })
+            const isSearch = data?.data.data
+            setUsers(data.data.data)
+            message.success("Users Search Sucessfully")
+        } catch (error) {
+            if (error.response) {
+                message.error(error.response.data.message)
+            }
+            console.error("Something went wrong in search", error)
+        }
+    }
+
     return (
         <div className="sidebar">
             <div className="sidebar-header">
@@ -64,7 +89,21 @@ const SideBar = ({ onSelectUser }) => {
 
             <div className="input-main">
                 <Form enctype="multipart/form-data">
-                    <Input placeholder='Search Conversations' prefix={<SearchOutlined className='search-icon' />} className='conversation-input'></Input>
+                    <Input
+                        placeholder='Search Conversations'
+                        value={searchText}
+                        onChange={(e) => setSearchText(e.target.value)}
+                        suffix={
+                            <Button
+                                onClick={() => handleSearch()}
+                                className='search-users-btn'
+                                icon={
+                                    <SearchOutlined className='search-icon' />
+                                }>
+                            </Button>
+                        }
+                        className='conversation-input'
+                    ></Input>
                 </Form>
             </div>
 
@@ -82,10 +121,10 @@ const SideBar = ({ onSelectUser }) => {
                                         }
                                         }
                                         >
-                                            <div className='image-main'>
-                                                <Avatar className='avatar-img' />
-                                            </div>
+                                            <UserAvatar name={item.name} />
+
                                             <h2 className='users-name'>{item.name}</h2>
+
                                         </li>
                                     </>
                                 )
@@ -97,20 +136,16 @@ const SideBar = ({ onSelectUser }) => {
 
             <div className="logout-section">
                 <Divider />
-
-
                 <a href='#' className='sidebar-link'>
                     <div className="sidebar-inner-content">
                         <Button
                             onClick={() => handleLogout()}
                             className='logout-btn'
                             icon={
-                                <LuLogOut className='logout-icon'/>
+                                <LuLogOut className='logout-icon' />
                             }>
                             <h1 className='logout-title'>Logout</h1>
                         </Button>
-
-
                     </div>
                 </a>
             </div>

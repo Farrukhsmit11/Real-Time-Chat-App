@@ -12,9 +12,9 @@ import { UploadOutlined } from '@ant-design/icons';
 import { message } from 'antd';
 import { ImAttachment } from "react-icons/im";
 import axios from "axios"
-import UserAvatar from '../userAvatar/UserAvatar';
 import { TbTrash } from 'react-icons/tb';
 import { useEffect } from 'react';
+import UserAvatar from '../userAvatar/UserAvatar';
 
 
 const ChatContainer = ({ selectedUser }) => {
@@ -55,7 +55,7 @@ const ChatContainer = ({ selectedUser }) => {
             if (error.response) {
                 message.error(error.response.data.message)
             }
-            console.error("error")
+            console.error("error", error)
         }
     }
 
@@ -80,12 +80,14 @@ const ChatContainer = ({ selectedUser }) => {
         <div className='chat-container'>
             <div className="chat-header">
                 <div className='chat-content'>
-                    <UserAvatar />
-                    <div>
-                        <h2 className='user-name'>{selectedUser.name}</h2>
-                        <span className='online-status'>
-                            Online
-                        </span>
+                    <div className='chat-header-section'>
+                        <UserAvatar />
+                        <div>
+                            <h2 className='user-name'>{selectedUser.name}</h2>
+                            <span className='online-status'>
+                                Online
+                            </span>
+                        </div>
                     </div>
                 </div>
 
@@ -100,9 +102,23 @@ const ChatContainer = ({ selectedUser }) => {
             <div className="messages-section">
                 {messages.map((item) => {
                     return (
-                        <div className='conversation-list'>
-                            <div className='sender-chat'>
-                                <span className='conversation-item'>{item.text}</span>
+                        <div className="conversation-list sender">
+                            <div className="message-bubble">
+                                <span className="message-text">{item.text}</span>
+
+                                <Button
+
+                                    icon={
+                                        <SlOptionsVertical />
+                                    }
+                                    className='message-menu'></Button>
+
+                                <div className="message-footer">
+                                    <span className="message-time">
+                                    </span>
+
+                                    <span className="message-status">✓</span>
+                                </div>
                             </div>
                         </div>
                     )
@@ -116,9 +132,12 @@ const ChatContainer = ({ selectedUser }) => {
                     onChange={(e) => seText(e.target.value)}
                     placeholder='Type a message'
                     suffix={
-                        <Button className='message-submit-btn' icon={
-                            <LuSend className='send-icon' />
-                        }
+                        <Button
+                            htmlType='submit'
+                            className='message-submit-btn'
+                            icon={
+                                <LuSend className='send-icon' />
+                            }
                             onClick={() => handleSendMessage()}
                         >
                         </Button>
