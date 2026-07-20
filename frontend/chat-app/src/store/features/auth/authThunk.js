@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom"
 
 const BASE_URL = "http://localhost:5000"
 
-const navigate = useNavigate()
 
 export const handleSignup = createAsyncThunk(
     "auth/signup",
@@ -43,7 +42,6 @@ export const handleLogout = createAsyncThunk(
     async (navigate) => {
         try {
             const data = await axios.post(`${BASE_URL}/logoutUser`)
-            navigate("/login")
         } catch (error) {
             console.error("Error logout user")
         }
