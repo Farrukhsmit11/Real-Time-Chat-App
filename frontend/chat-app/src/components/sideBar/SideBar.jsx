@@ -28,8 +28,6 @@ const SideBar = ({ onSelectUser }) => {
     const BASE_URL = "http://localhost:5000"
 
     const navigate = useNavigate()
-    console.log(users);
-
 
     useEffect(() => {
         const response = axios.get(`${BASE_URL}/getUsers`)

@@ -4,6 +4,8 @@ import { Button, Checkbox, Form, Input, message } from "antd"
 import "./Login.css"
 import axios from "axios"
 import { useNavigate } from 'react-router-dom'
+import { handleLogin } from '../../../store/features/auth/authThunk'
+import { useDispatch } from "react-redux"
 
 const Login = () => {
 
@@ -17,29 +19,17 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false)
 
-  const BASE_URL = "http://localhost:5000"
+  const dispatch = useDispatch()
+
+  const onSubmit = async () => {
+    dispatch(handleLogin({
+      email,
+      password
+    }))
+  }
+
 
   const navigate = useNavigate()
-
-  const handleLogin = async () => {
-    try {
-      const data = await axios.post(`${BASE_URL}/login`, {
-        email,
-        password
-      },
-        { withCredentials: true }
-      )
-      const res = data.data?.res
-      message.success("Login sucessfully")
-      navigate("/chatApp")
-      setLoading(false)
-    } catch (error) {
-      if (error.response) {
-        message.error(error.response.data.message)
-      }
-      console.error("error login failed", error)
-    }
-  }
 
   return (
     <>
@@ -81,7 +71,7 @@ const Login = () => {
                 <div className="auth-login-footer">
                   <Button
                     loading={loading}
-                    onClick={() => handleLogin()}
+                    onClick={() => onSubmit()}
                     className='submit-btn'
                   >Log in</Button>
                 </div>

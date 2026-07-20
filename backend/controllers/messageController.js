@@ -1,17 +1,11 @@
 import { Message } from "../models/Message.js"
-import pusher from "../config/pusher.js"
 import { request } from "express"
-
 
 export const getMessages = async (request, response) => {
     try {
 
         const senderId = request.user._id
         const receiverId = request.params.receiverId
-
-        console.log("Sender id", senderId)
-        console.log("receiver id", receiverId)
-
 
         const message = await Message.find({
             $or: [
@@ -56,15 +50,11 @@ export const sendMessage = async (request, response) => {
             response.status(400).send({ message: "Cannot send message to yourself" })
             return
         }
-        
+
         const data = await Message.create({
             text,
             receiverId,
             senderId,
-        })
-
-        const result = await pusher.trigger("chat-app", "new-message", {
-            data
         })
 
         response.status(200).json({ message: "Message send sucessfully", data })

@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom'
 import axios from "axios"
 import { useState } from 'react'
 import "./SignUp.css"
+import { useDispatch } from 'react-redux'
+import { handleSignup } from '../../../store/features/auth/authThunk'
 
 const SignUp = () => {
 
@@ -24,27 +26,14 @@ const SignUp = () => {
 
     const navigate = useNavigate()
 
-    const BASE_URL = "http://localhost:5000"
+    const dispatch = useDispatch();
 
-    const handleSignUp = async () => {
-        setLoading(true)
-
-        try {
-            const data = await axios.post(`${BASE_URL}/registerUser`, {
-                name,
-                email,
-                password
-            })
-            const res = data.data.user
-            message.success("SignUp sucessfull")
-            navigate("/login")
-        } catch (error) {
-            if (error.response) {
-                message.error(error.response.data.message)
-            }
-        } finally {
-            setLoading(false)
-        }
+    const handleSubmit = async () => {
+        dispatch(handleSignup({
+            name,
+            email,
+            password
+        }))
     }
 
     return (
@@ -61,7 +50,6 @@ const SignUp = () => {
                         handleBlur,
                         handleChange,
                         handleReset,
-                        handleSubmit,
                         errors,
                         values,
                         touched
@@ -96,7 +84,7 @@ const SignUp = () => {
                                 <Button
                                     className='submit-btn'
                                     loading={loading}
-                                    onClick={() => handleSignUp()}
+                                    onClick={() => handleSubmit()}
                                 >Sign Up</Button>
                                 <Button className='submit-btn-black' onClick={() => navigate("/login")}>Login</Button>
                             </div>

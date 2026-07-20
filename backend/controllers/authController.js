@@ -2,7 +2,6 @@ import bcrypt from "bcrypt"
 import { User } from "../models/User.js"
 import jwt from "jsonwebtoken"
 import { loginSchema } from "../validations/auth.validations.js"
-import upload from "../config/multer.js"
 
 
 export const registerUser = async (request, response) => {

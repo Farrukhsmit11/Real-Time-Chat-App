@@ -3,7 +3,6 @@ import SideBar from '../../components/sideBar/SideBar'
 import "./ChatApp.css"
 import ChatContainer from '../../components/chatContainer/ChatContainer'
 import EmptyChat from '../../components/emptyChat/EmptyChat'
-import pusher from '../../utils/pusher'
 import { useEffect } from 'react'
 import { useParams } from "react-router-dom"
 import axios from 'axios'
@@ -13,32 +12,9 @@ const ChatApp = () => {
     const [selectedUser, setSelectedUser] = useState(null)
     const [isChatOpen, setIsChatOpen] = useState(false);
 
-    const { receiverId } = useParams()
-
     const handleSelectedUser = (user) => {
         setSelectedUser(user)
     }
-
-    useEffect(() => {
-        Pusher.logToConsole = true;
-
-        var pusher = new Pusher('88f82a48f32821b4a8db', {
-            cluster: 'us2'
-        });
-
-        const channel = pusher.subscribe('chat-app');
-
-
-        channel.bind('new-message', function (data) {
-            const newMessage = data.data
-
-        });
-
-        return () => {
-            channel.unbind_all();
-            pusher.unsubscribe("chat-app")
-        }
-    }, [])
 
     return (
         <>
@@ -52,13 +28,8 @@ const ChatApp = () => {
                         ) : (
                             <EmptyChat />
                         )}
-
                     </div>
-
                 </div>
-
-
-               
             </div>
         </>
     )
