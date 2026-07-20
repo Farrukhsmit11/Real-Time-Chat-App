@@ -5,9 +5,7 @@ import { SlOptionsVertical } from "react-icons/sl";
 import { Avatar, Button, Divider, Form, Input, Popover, Radio, Spin } from "antd"
 import { SearchOutlined } from "@ant-design/icons"
 import { useState } from 'react';
-import { useRef } from 'react';
 import { useEffect } from 'react';
-import axios from "axios"
 import avatarImg from "../../assets/avatar-img.jfif"
 import { FiEdit2 } from "react-icons/fi"
 import { TbTrash } from "react-icons/tb";
@@ -16,6 +14,9 @@ import { useNavigate } from "react-router-dom"
 import { message } from "antd"
 import { getInitials } from "../../utils/helper.js"
 import UserAvatar from '../userAvatar/UserAvatar.jsx';
+import { useDispatch } from "react-redux"
+import { getUsers, handleSearch } from '../../store/features/users/userThunk.js';
+import { handleLogout } from '../../store/features/auth/authThunk.js';
 
 const SideBar = ({ onSelectUser }) => {
 
@@ -29,50 +30,18 @@ const SideBar = ({ onSelectUser }) => {
 
     const navigate = useNavigate()
 
+    const dispatch = useDispatch()
+
     useEffect(() => {
-        const response = axios.get(`${BASE_URL}/getUsers`)
-            .then(response => {
-                setUsers(response.data.res)
-            })
-            .catch(error => {
-                console.error("error fetching users", error)
-            })
-            .finally(() => {
-                setIsLoading(false)
-            })
-    }, [])
+        dispatch(getUsers())
+    }, [dispatch])
 
-    const handleLogout = async () => {
-        try {
-            const isLogout = await axios.post(`${BASE_URL}/logoutUser`, {
-
-            },
-                { withCredentials: true }
-            )
-
-            navigate("/login")
-        } catch (error) {
-            console.error("user logout failed", error)
-        }
+    const onSearch = async () => {
+        dispatch(handleSearch(searchText))
     }
 
-    const handleSearch = async (e) => {
-        try {
-            const data = await axios.get(`${BASE_URL}/search-users`, {
-                params: {
-                    query: searchText
-                },
-                withCredentials: true
-            })
-            const isSearch = data?.data.data
-            setUsers(data.data.data)
-            message.success("Users Search Sucessfully")
-        } catch (error) {
-            if (error.response) {
-                message.error(error.response.data.message)
-            }
-            console.error("Something went wrong in search", error)
-        }
+    const onCancel = () => {
+        dispatch(handleLogout())
     }
 
     return (
@@ -89,11 +58,12 @@ const SideBar = ({ onSelectUser }) => {
                 <Form enctype="multipart/form-data">
                     <Input
                         placeholder='Search Conversations'
+                        autoComplete='true'
                         value={searchText}
                         onChange={(e) => setSearchText(e.target.value)}
                         suffix={
                             <Button
-                                onClick={() => handleSearch()}
+                                onClick={() => onSearch()}
                                 className='search-users-btn'
                                 icon={
                                     <SearchOutlined className='search-icon' />
@@ -137,7 +107,7 @@ const SideBar = ({ onSelectUser }) => {
                 <a href='#' className='sidebar-link'>
                     <div className="sidebar-inner-content">
                         <Button
-                            onClick={() => handleLogout()}
+                            onClick={() => onCancel()}
                             className='logout-btn'
                             icon={
                                 <LuLogOut className='logout-icon' />
