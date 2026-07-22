@@ -46,11 +46,6 @@ export const sendMessage = async (request, response) => {
             return
         }
 
-        if (senderId.equals(receiverId)) {
-            response.status(400).send({ message: "Cannot send message to yourself" })
-            return
-        }
-
         const data = await Message.create({
             text,
             receiverId,

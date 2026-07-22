@@ -21,7 +21,7 @@ export const registerUser = async (request, response) => {
         }
 
         const hashedPassword = await bcrypt.hash(request.body.password, 10)
-    
+
         const data = await User.create({
             name: request.body.name,
             email: request.body.email,
@@ -93,4 +93,18 @@ export const logoutUser = async (request, response) => {
     }
 }
 
-export default { login, registerUser, logoutUser }
+
+export const getProfile = async (request, response) => {
+    try {
+        const user = await User.findById(request.user.id).select("-password")
+        if (!user) {
+            response.status(400).send({ message: "user not found" })
+            return
+        }
+        response.status(200).json({ message: "get profile sucessfully", user })
+    } catch (error) {
+        console.error("get profile failed", error)
+    }
+}
+
+export default { login, registerUser, logoutUser, getProfile }

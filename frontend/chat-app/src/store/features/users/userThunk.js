@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import axios from "axios"
 import { message } from "antd"
+import { get } from "../../../utils/apiMethod"
 
 const BASE_URL = "http://localhost:5000"
 
@@ -8,7 +9,7 @@ export const getUsers = createAsyncThunk(
     "get-users",
     async (data) => {
         try {
-            const res = await axios.get(`${BASE_URL}/getUsers`)
+            const res = await get(`${BASE_URL}/getUsers`)
         } catch (error) {
             if (error.response) {
                 message.error(error.response.data.message)

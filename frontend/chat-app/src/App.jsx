@@ -3,11 +3,14 @@ import { Login } from './pages/auth'
 import { useEffect, useState } from 'react'
 import Loader from './components/loader/Loader'
 import Auth from "./routes/Auth"
-import AppRoutes from  "./routes/AppRoutes"
+import AppRoutes from "./routes/AppRoutes"
+import { useDispatch, useSelector } from 'react-redux'
+import { getProfile } from './store/features/auth/authThunk'
 
 function App() {
 
-  const [loading, setLoading] = useState(true)
+  const [Isloading, setLoading] = useState(true)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -18,7 +21,11 @@ function App() {
     }
   }, [])
 
-  if (loading) {
+  useEffect(() => {
+    dispatch(getProfile())
+  })
+
+  if (Isloading) {
     return <Loader />
   }
 

@@ -11,10 +11,12 @@ import { LuChartNoAxesColumnIncreasing, LuSend } from "react-icons/lu";
 import { UploadOutlined } from '@ant-design/icons';
 import { message } from 'antd';
 import { ImAttachment } from "react-icons/im";
-import axios from "axios"
 import { TbTrash } from 'react-icons/tb';
 import { useEffect } from 'react';
 import UserAvatar from '../userAvatar/UserAvatar';
+import { useDispatch } from "react-redux"
+import { handleSendMessage } from '../../store/features/messages/messageThunk';
+import { get } from '../../utils/apiMethod';
 
 
 const ChatContainer = ({ selectedUser }) => {
@@ -35,33 +37,20 @@ const ChatContainer = ({ selectedUser }) => {
 
     };
 
+    const dispatch = useDispatch()
+
     const receiverId = selectedUser?._id
 
-    const handleSendMessage = async () => {
-        try {
-            const data = await axios.post(`${BASE_URL}/send-message`, {
-                text,
-                receiverId
-            },
-                { withCredentials: true }
-            );
-            const newMessage = data?.data.data
-            console.log(data.data)
-            setMessages((prev) => [...prev, newMessage])
-            handleMessages()
-            setText("")
-            message.success("Message send sucessfully")
-        } catch (error) {
-            if (error.response) {
-                message.error(error.response.data.message)
-            }
-            console.error("error", error)
-        }
+    const sendMessage = async () => {
+        dispatch(handleSendMessage({
+            text,
+            receiverId
+        }))
     }
 
     const handleMessages = async () => {
         try {
-            const res = await axios.get(`${BASE_URL}/messages/${receiverId}`, {
+            const res = await get(`${BASE_URL}/messages/${receiverId}`, {
                 withCredentials: true
             })
         } catch (error) {
@@ -138,7 +127,7 @@ const ChatContainer = ({ selectedUser }) => {
                             icon={
                                 <LuSend className='send-icon' />
                             }
-                            onClick={() => handleSendMessage()}
+                            onClick={() => sendMessage()}
                         >
                         </Button>
                     }

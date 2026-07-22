@@ -5,7 +5,7 @@ import "./Login.css"
 import axios from "axios"
 import { useNavigate } from 'react-router-dom'
 import { handleLogin } from '../../../store/features/auth/authThunk'
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 const Login = () => {
 
@@ -17,9 +17,18 @@ const Login = () => {
   const [form] = Form.useForm()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false)
+  // const [loading, setLoading] = useState(false)
 
   const dispatch = useDispatch()
+
+  const reducer = useSelector(({ auth }) => ({
+    user  : auth?.user,
+    loading : auth?.loading,
+  }))
+
+  const {user , loading} = reducer
+
+  // console.log(reducer)
 
   const onSubmit = async () => {
     dispatch(handleLogin({
@@ -27,7 +36,6 @@ const Login = () => {
       password
     }))
   }
-
 
   const navigate = useNavigate()
 
