@@ -17,7 +17,7 @@ const initializeInterceptor = () => {
             if (token) {
                 config.headers.Authorization = `Bearer ${token}`
             } else {
-                store.dispatch(handleLogout())
+                // store.dispatch(handleLogout())
             }
             return config
         },

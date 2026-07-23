@@ -5,7 +5,8 @@ import ChatApp from '../pages/chatApp/ChatApp'
 const AppRoutes = () => {
     return (
         <Routes>
-            <Route path='/chatApp' element={<ChatApp />}></Route>
+            <Route path='/chatApp' element={<ChatApp />}></Route> 
+            <Route path='*' element={<ChatApp />}></Route>
         </Routes>
     )
 }

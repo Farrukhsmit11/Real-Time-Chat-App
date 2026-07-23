@@ -8,6 +8,7 @@ const Auth = () => {
         <Routes>
             <Route path='/' element={<SignUp />}></Route>
             <Route path='/login' element={<Login />}></Route>
+             <Route path='*' element={<Login />}></Route>
         </Routes>
     )
 }

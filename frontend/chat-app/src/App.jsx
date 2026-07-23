@@ -6,11 +6,18 @@ import Auth from "./routes/Auth"
 import AppRoutes from "./routes/AppRoutes"
 import { useDispatch, useSelector } from 'react-redux'
 import { getProfile } from './store/features/auth/authThunk'
+import { useNavigate } from 'react-router-dom'
 
 function App() {
 
   const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
+
+  const navigate = useNavigate()
+
+    const {isAuthenticate} = useSelector(({ auth }) => ({
+      isAuthenticate: auth?.isAuthenticate,
+    }))
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -31,8 +38,7 @@ function App() {
 
   return (
     <>
-      <Auth />
-      <AppRoutes />
+    {isAuthenticate ? <AppRoutes /> :    <Auth /> }
     </>
   )
 }
