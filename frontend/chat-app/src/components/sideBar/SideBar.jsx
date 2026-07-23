@@ -32,7 +32,7 @@ const SideBar = ({ onSelectUser }) => {
 
     useEffect(() => {
         dispatch(getUsers())
-    }, [dispatch])
+    }, [])
 
     const onSearch = async () => {
         dispatch(handleSearch(searchText))
@@ -40,6 +40,8 @@ const SideBar = ({ onSelectUser }) => {
 
     const onCancel = () => {
         dispatch(handleLogout())
+
+        navigate("/login")
     }
 
     return (

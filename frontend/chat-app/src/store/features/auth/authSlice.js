@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { handleLogin, handleSignup } from "./authThunk.js";
+import { getProfile, handleLogin, handleSignup } from "./authThunk.js";
 
 const initialState = {
     user: {},
@@ -12,7 +12,7 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         reset: (state) => {
-                state.isAuthenticate = false,
+            state.isAuthenticate = false,
                 state.loading = false
         }
     },
@@ -20,13 +20,13 @@ const authSlice = createSlice({
         builder
             .addCase(handleSignup.pending, (state) => {
                 state.loading = true
-                    state.isAuthenticate = null
+                state.isAuthenticate = null
             })
 
             .addCase(handleSignup.fulfilled, (state, action) => {
                 state.user = action.payload.user
                 state.loading = false
-                    state.isAuthenticate = true
+                state.isAuthenticate = true
             })
 
             .addCase(handleSignup.rejected, (state, action) => {
@@ -41,12 +41,28 @@ const authSlice = createSlice({
             })
 
             .addCase(handleLogin.fulfilled, (state, action) => {
-                    state.isAuthenticate = true,
+                state.isAuthenticate = true,
                     state.loading = false
             })
 
             .addCase(handleLogin.rejected, (state, action) => {
-                    state.isAuthenticate = false
+                state.isAuthenticate = false
+            })
+
+        builder
+            .addCase(getProfile.pending, (state) => {
+                state.isAuthenticate = false
+                state.loading = true
+            })
+
+            .addCase(getProfile.fulfilled, (state) => {
+                state.isAuthenticate = true,
+                    state.loading = false
+            })
+
+            .addCase(getProfile.rejected, (state) => {
+                state.isAuthenticate = false
+                state.loading = false
             })
     }
 })
