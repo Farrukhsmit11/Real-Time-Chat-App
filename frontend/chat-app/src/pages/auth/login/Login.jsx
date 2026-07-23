@@ -17,18 +17,19 @@ const Login = () => {
   const [form] = Form.useForm()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [loading, setLoading] = useState(false)
 
   const dispatch = useDispatch()
 
   const reducer = useSelector(({ auth }) => ({
-    user  : auth?.user,
-    loading : auth?.loading,
+    user: auth?.user,
+    loading: auth?.loading,
   }))
 
-  const {user , loading} = reducer
+  const { user, loading } = reducer
 
-  // console.log(reducer)
+  const formSubmit = (values, { resetForm }) => {
+    resetForm()
+  }
 
   const onSubmit = async () => {
     dispatch(handleLogin({
@@ -50,13 +51,14 @@ const Login = () => {
 
           <Formik
             initialValues={initialValues}
+            onSubmit={formSubmit}
           >
             {({
               handleBlur,
               handleSubmit,
               handleChange
             }) => (
-              <Form form={form} layout='vertical'>
+              <Form form={form} layout='vertical' onFinish={handleSubmit}>
                 <Form.Item label="Email">
                   <Input
                     onChange={(e) => setEmail(e.target.value)}
@@ -78,7 +80,6 @@ const Login = () => {
 
                 <div className="auth-login-footer">
                   <Button
-                    loading={loading}
                     onClick={() => onSubmit()}
                     className='submit-btn'
                   >Log in</Button>

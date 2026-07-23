@@ -17,13 +17,12 @@ import UserAvatar from '../userAvatar/UserAvatar';
 import { useDispatch } from "react-redux"
 import { handleSendMessage } from '../../store/features/messages/messageThunk';
 import { get } from '../../utils/apiMethod';
+import { handleMessages } from '../../store/features/messages/messageThunk';
 
 
 const ChatContainer = ({ selectedUser }) => {
 
     const [messageApi, contextHolder] = message.useMessage();
-
-    const BASE_URL = "http://localhost:5000"
 
     const [messages, setMessages] = useState([])
     const [text, seText] = useState([])
@@ -48,22 +47,15 @@ const ChatContainer = ({ selectedUser }) => {
         }))
     }
 
-    const handleMessages = async () => {
-        try {
-            const res = await get(`${BASE_URL}/messages/${receiverId}`, {
-                withCredentials: true
-            })
-        } catch (error) {
-            console.error("Error fetching messages")
-        }
+    const fetchMessages = async () => {
+        dispatch(handleMessages())
     }
 
     useEffect(() => {
         if (receiverId) {
-            setMessages([])
-            handleMessages()
+            fetchMessages()
         }
-    }, [receiverId])
+    }, [])
 
     return (
         <div className='chat-container'>

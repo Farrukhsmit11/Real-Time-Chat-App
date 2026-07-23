@@ -4,8 +4,8 @@ export const get = (url, config) => {
     axios.get(url, config)
 }
 
-export const post = (data, url, config) => {
-    axios.post(data, url, config)
+export const post = (url, data, config) => {
+    return axios.post(url, data, config)
 }
 
 export const del = (url, config) => {

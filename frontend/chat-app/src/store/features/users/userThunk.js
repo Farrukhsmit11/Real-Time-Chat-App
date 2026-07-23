@@ -3,13 +3,12 @@ import axios from "axios"
 import { message } from "antd"
 import { get } from "../../../utils/apiMethod"
 
-const BASE_URL = "http://localhost:5000"
 
 export const getUsers = createAsyncThunk(
     "get-users",
     async (data) => {
         try {
-            const res = await get(`${BASE_URL}/getUsers`)
+            const res = get("/getUsers")
         } catch (error) {
             if (error.response) {
                 message.error(error.response.data.message)
@@ -22,7 +21,7 @@ export const handleSearch = createAsyncThunk(
     "search-users",
     async (query) => {
         try {
-            const response = await axios.get(`${BASE_URL}/search-users`, {
+            const response = get("/search-users", {
                 params: { query }
             })
         } catch (error) {

@@ -26,8 +26,6 @@ const SideBar = ({ onSelectUser }) => {
 
     const [searchText, setSearchText] = useState("");
 
-    const BASE_URL = "http://localhost:5000"
-
     const navigate = useNavigate()
 
     const dispatch = useDispatch()

@@ -9,7 +9,7 @@ import { getProfile } from './store/features/auth/authThunk'
 
 function App() {
 
-  const [Isloading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -23,9 +23,9 @@ function App() {
 
   useEffect(() => {
     dispatch(getProfile())
-  })
+  }, [])
 
-  if (Isloading) {
+  if (loading) {
     return <Loader />
   }
 
