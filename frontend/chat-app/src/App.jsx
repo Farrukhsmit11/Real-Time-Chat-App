@@ -7,30 +7,34 @@ import AppRoutes from "./routes/AppRoutes"
 import { useDispatch, useSelector } from 'react-redux'
 import { getProfile } from './store/features/auth/authThunk'
 import { useNavigate } from 'react-router-dom'
+import { TOKEN } from './utils/constant'
 
 function App() {
 
-  const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
 
   const navigate = useNavigate()
 
-    const {isAuthenticate} = useSelector(({ auth }) => ({
-      isAuthenticate: auth?.isAuthenticate,
-    }))
+  const { loading, isAuthenticate } = useSelector((state) => state.auth)
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false)
-    }, 1000)
-    return () => {
-      clearTimeout(timer)
+    const token = localStorage.getItem(TOKEN)
+
+    if (token) {
+      dispatch(getProfile())
     }
+
   }, [])
 
-  useEffect(() => {
-    dispatch(getProfile())
-  }, [])
+  if (isAuthenticate) {
+    return <AppRoutes />
+  }
+
+
+  if (!isAuthenticate) {
+    return <Auth />
+  }
+
 
   if (loading) {
     return <Loader />
@@ -38,7 +42,7 @@ function App() {
 
   return (
     <>
-    {isAuthenticate ? <AppRoutes /> :    <Auth /> }
+
     </>
   )
 }

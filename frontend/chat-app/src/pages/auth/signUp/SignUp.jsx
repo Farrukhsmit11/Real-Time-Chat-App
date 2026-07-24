@@ -14,7 +14,6 @@ const SignUp = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [name, setName] = useState("")
-    const [loading, setLoading] = useState(false)
 
     const initialValues = {
         name: "",
@@ -83,7 +82,6 @@ const SignUp = () => {
                             <div className="auth-footer">
                                 <Button
                                     className='submit-btn'
-                                    loading={loading}
                                     onClick={() => handleSubmit()}
                                 >Sign Up</Button>
                                 <Button className='submit-btn-black' onClick={() => navigate("/login")}>Login</Button>

@@ -22,7 +22,7 @@ export const handleMessages = createAsyncThunk(
     "get-messages",
     async (receiverId) => {
         try {
-            const messages = get(`/messages${receiverId}`)
+            const messages = await get(`/messages${receiverId}`)
         } catch (error) {
             console.error("error while fetching messages", error)
         }

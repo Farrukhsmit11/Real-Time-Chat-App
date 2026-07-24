@@ -6,28 +6,28 @@ import { get } from "../../../utils/apiMethod"
 
 export const getUsers = createAsyncThunk(
     "get-users",
-    async (data) => {
+    async (data, { rejectWithValue }) => {
         try {
-            const res = get("/getUsers")
+            const res = await get("/getUsers")
         } catch (error) {
-            if (error.response) {
-                message.error(error.response.data.message)
-            }
+            return rejectWithValue(
+                message.error(error.response?.data?.message)
+            )
         }
     }
 )
 
 export const handleSearch = createAsyncThunk(
     "search-users",
-    async (query) => {
+    async (query, { rejectWithValue }) => {
         try {
-            const response = get("/search-users", {
+            const response = await get("/search-users", {
                 params: { query }
             })
         } catch (error) {
-            if (error.response) {
-                message.error(error.response.data.message)
-            }
+            return rejectWithValue(
+                message.error(error.response?.data?.message)
+            )
             console.error("error Searching user", error)
         }
     }

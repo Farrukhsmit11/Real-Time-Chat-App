@@ -1,15 +1,22 @@
 import bcrypt from "bcrypt"
 import { User } from "../models/User.js"
 import jwt from "jsonwebtoken"
-import { loginSchema } from "../validations/auth.validations.js"
+import { loginSchema, signupSchema } from "../validations/auth.validations.js"
 
 
 export const registerUser = async (request, response) => {
 
-    const { name, email, password, attachment } = request.body
+    const { error, value } = signupSchema.validate(request.body)
+
+    if (error) {
+        response.status(400).json(error.details[0].message)
+    }
 
     try {
-        if (!request.body.name || !request.body.email || !request.body.password) {
+
+        const { name, email, password } = value
+
+        if (!name || !email || !password) {
             response.status(400).send({ message: "Please fill all the details" })
             return
         }
@@ -20,13 +27,12 @@ export const registerUser = async (request, response) => {
             return
         }
 
-        const hashedPassword = await bcrypt.hash(request.body.password, 10)
+        const hashedPassword = await bcrypt.hash(password, 10)
 
         const data = await User.create({
             name: request.body.name,
             email: request.body.email,
             password: hashedPassword,
-            attachment
         })
 
         response.status(200).json({ message: "SignUp Sucessfull", data })
@@ -38,10 +44,18 @@ export const registerUser = async (request, response) => {
 
 export const login = async (request, response) => {
 
-    const { email, password } = request.body
+    const { error, value } = loginSchema.validate(request.body)
+
+    if (error) {
+        response.status(400).json(error.details[0].message)
+        return
+    }
 
     try {
-        if (!request.body.email || !request.body.password) {
+
+        const { email, password } = value
+
+        if (!email || !password) {
             response.status(400).send({ message: "Please Fill all details" })
             return
         }
@@ -52,7 +66,7 @@ export const login = async (request, response) => {
             return
         }
 
-        const isMatch = await bcrypt.compare(request.body.password, res.password)
+        const isMatch = await bcrypt.compare(password, res.password)
         if (!isMatch) {
             response.status(400).send({ message: "password does not match" })
             return
@@ -64,14 +78,6 @@ export const login = async (request, response) => {
             { expiresIn: "5d" }
         )
 
-        response.cookie("token", token, {
-            expires:
-                new Date(Date.now() + 86400000),
-            httpOnly: true,
-            secure: false,
-            sameSite: "lax"
-        })
-
         response.status(200).json({ message: "Login sucessfull", res, token })
 
     } catch (error) {
@@ -80,13 +86,9 @@ export const login = async (request, response) => {
 }
 
 
-export const logoutUser = async (request, response) => {
+export const logout = async (request, response) => {
     try {
-        response.clearCookie("token", {
-            httpOnly: true,
-            secure: false,
-            sameSite: "lax"
-        })
+
         response.status(200).json({ message: "User Logout sucessfully" })
     } catch (error) {
         console.error("error logging out user", error)
@@ -107,4 +109,4 @@ export const getProfile = async (request, response) => {
     }
 }
 
-export default { login, registerUser, logoutUser, getProfile }
+export default { login, registerUser, logout, getProfile }

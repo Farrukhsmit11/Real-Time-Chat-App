@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getProfile, handleLogin, handleSignup } from "./authThunk.js";
+import { getProfile, handleLogin, handleLogout, handleSignup } from "./authThunk.js";
 
 const initialState = {
     user: {},
@@ -24,14 +24,12 @@ const authSlice = createSlice({
             })
 
             .addCase(handleSignup.fulfilled, (state, action) => {
-                state.user = action.payload.user
                 state.loading = false
-                state.isAuthenticate = true
             })
 
             .addCase(handleSignup.rejected, (state, action) => {
-                // state.user = null
                 state.isAuthenticate = false
+                state.loading = false
             })
 
         builder
@@ -51,17 +49,34 @@ const authSlice = createSlice({
 
         builder
             .addCase(getProfile.pending, (state) => {
-                state.isAuthenticate = false
                 state.loading = true
+                state.isAuthenticate = false
             })
 
-            .addCase(getProfile.fulfilled, (state) => {
+            .addCase(getProfile.fulfilled, (state, action) => {
+                state.loading = false
                 state.isAuthenticate = true,
-                    state.loading = false
+                    state.user = action.payload
             })
 
             .addCase(getProfile.rejected, (state) => {
                 state.isAuthenticate = false
+                state.loading = false
+                state.user = null
+            })
+
+
+        builder
+            .addCase(handleLogout.pending, (state) => {
+                state.loading = true
+            })
+
+            .addCase(handleLogout.fulfilled, (state) => {
+                state.loading = false
+                state.isAuthenticate = false
+            })
+
+            .addCase(handleLogout.rejected, (state) => {
                 state.loading = false
             })
     }

@@ -23,23 +23,17 @@ export const handleLogin = createAsyncThunk(
     "auth/login",
     async (data, { rejectWithValue, dispatch }) => {
         if (!data.email || !data.password) {
-            rejectWithValue("Email and password not match")
+            return rejectWithValue("Email and password are required")
         }
         try {
             const response = await post("/login", data)
-            console.log("Token before save:", response.data.token);
             localStorage.setItem(TOKEN, response?.data?.token)
-
-            console.log("Token after save:", localStorage.getItem(TOKEN));
-            console.log(response.data);
-            console.log(response.data.token);
             dispatch(getProfile())
             return response.data
         } catch (error) {
-            if (error.response) {
-                message.error(error.response.data.message)
-            }
-            console.error("Login failed", error)
+            return rejectWithValue(
+                message.error(error.response?.data?.message)
+            )
         }
     }
 )
@@ -58,12 +52,13 @@ export const getProfile = createAsyncThunk(
 
 
 export const handleLogout = createAsyncThunk(
-    "auth/logoutUser",
-    async () => {
+    "auth/logout",
+    async (_, rejectWithValue) => {
         try {
-            const data = post(`/logoutUser`)
+            const data = await post("/logoutUser")
+            localStorage.removeItem(TOKEN)
         } catch (error) {
-            console.error("Error logout user")
+            console.error("Error logging out", error)
         }
     }
 )

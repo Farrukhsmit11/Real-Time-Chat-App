@@ -14,14 +14,12 @@ import { useNavigate } from "react-router-dom"
 import { message } from "antd"
 import { getInitials } from "../../utils/helper.js"
 import UserAvatar from '../userAvatar/UserAvatar.jsx';
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { getUsers, handleSearch } from '../../store/features/users/userThunk.js';
 import { handleLogout } from '../../store/features/auth/authThunk.js';
 
 const SideBar = ({ onSelectUser }) => {
 
-    const [users, setUsers] = useState([])
-    const [isLoading, setIsLoading] = useState(true)
     const [size, setSize] = useState()
 
     const [searchText, setSearchText] = useState("");
@@ -29,6 +27,8 @@ const SideBar = ({ onSelectUser }) => {
     const navigate = useNavigate()
 
     const dispatch = useDispatch()
+
+    const { users, selectedUser, loading } = useSelector((state) => state.users)
 
     useEffect(() => {
         dispatch(getUsers())
@@ -40,8 +40,6 @@ const SideBar = ({ onSelectUser }) => {
 
     const onCancel = () => {
         dispatch(handleLogout())
-
-        navigate("/login")
     }
 
     return (
@@ -76,12 +74,13 @@ const SideBar = ({ onSelectUser }) => {
             </div>
 
             <div className="input-section">
-                {isLoading ? (
+
+                {loading ? (
                     <Spin size='large'></Spin>
                 ) : (
                     <ul className='users-list'>
                         {
-                            users.map((item) => {
+                            users?.map((item) => {
                                 return (
                                     <>
                                         <li key={item.id} className='user-item' onClick={() => {
@@ -92,7 +91,6 @@ const SideBar = ({ onSelectUser }) => {
                                             <UserAvatar name={item.name} />
 
                                             <h2 className='users-name'>{item.name}</h2>
-
                                         </li>
                                     </>
                                 )

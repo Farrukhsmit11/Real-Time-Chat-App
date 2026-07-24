@@ -19,6 +19,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const reducer = useSelector(({ auth }) => ({
     user: auth?.user,
@@ -32,14 +33,11 @@ const Login = () => {
   }
 
   const onSubmit = async () => {
-    dispatch(handleLogin({
+    await dispatch(handleLogin({
       email,
       password
-    }))
-    navigate()
+    })).unwrap()
   }
-
-  const navigate = useNavigate()
 
   return (
     <>
@@ -81,6 +79,7 @@ const Login = () => {
 
                 <div className="auth-login-footer">
                   <Button
+                    htmlType='submit'
                     onClick={() => onSubmit()}
                     className='submit-btn'
                   >Log in</Button>
