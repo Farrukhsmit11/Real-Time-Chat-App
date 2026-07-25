@@ -4,7 +4,9 @@ import { getProfile, handleLogin, handleLogout, handleSignup } from "./authThunk
 const initialState = {
     user: {},
     isAuthenticate: false,
-    loading: false
+    loginLoading: false,
+    signUpLoading: false,
+    error: null
 }
 
 const authSlice = createSlice({
@@ -19,32 +21,33 @@ const authSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(handleSignup.pending, (state) => {
-                state.loading = true
-                state.isAuthenticate = null
+                state.signUpLoading = true
+                state.isAuthenticate = false
             })
 
             .addCase(handleSignup.fulfilled, (state, action) => {
-                state.loading = false
+                state.signUpLoading = false
             })
 
             .addCase(handleSignup.rejected, (state, action) => {
-                state.isAuthenticate = false
-                state.loading = false
+                state.signUpLoading = false
             })
 
         builder
             .addCase(handleLogin.pending, (state) => {
                 state.isAuthenticate = false,
-                    state.loading = true
+                    state.loginLoading = true
             })
 
             .addCase(handleLogin.fulfilled, (state, action) => {
                 state.isAuthenticate = true,
-                    state.loading = false
+                    state.loginLoading = false
             })
 
             .addCase(handleLogin.rejected, (state, action) => {
+                state.loginLoading = false
                 state.isAuthenticate = false
+                state.error = action.payload
             })
 
         builder

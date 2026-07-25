@@ -23,20 +23,26 @@ const Login = () => {
 
   const reducer = useSelector(({ auth }) => ({
     user: auth?.user,
-    loading: auth?.loading,
+    loading: auth?.loginLoading,
+    error: auth?.error
   }))
 
-  const { user, loading } = reducer
+  const { user, loading, error } = reducer
 
   const formSubmit = (values, { resetForm }) => {
     resetForm()
   }
 
   const onSubmit = async () => {
-    await dispatch(handleLogin({
-      email,
-      password
-    })).unwrap()
+    try {
+      await dispatch(handleLogin({
+        email,
+        password
+      })
+    ).unwrap()
+    }catch(error){
+      message.error(error)
+    }
   }
 
   return (
@@ -80,6 +86,7 @@ const Login = () => {
                 <div className="auth-login-footer">
                   <Button
                     htmlType='submit'
+                    loading={loading}
                     onClick={() => onSubmit()}
                     className='submit-btn'
                   >Log in</Button>

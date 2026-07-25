@@ -7,13 +7,17 @@ import { get, post } from "../../../utils/apiMethod"
 
 export const handleSignup = createAsyncThunk(
     "auth/signup",
-    async (credentials, thunkAPI, dispatch) => {
+    async (credentials, { rejectWithValue }) => {
+        if (!credentials.name || !credentials.email || !credentials.password) {
+            return rejectWithValue("Email and password are required")
+        }
         try {
             const res = await post("/registerUser", credentials)
+            return res.data
         } catch (error) {
-            if (error.response) {
-                message.error(error.response.data.message)
-            }
+            return rejectWithValue(
+                error.response?.data?.message
+            )
             console.error("error Creating User", error)
         }
     }

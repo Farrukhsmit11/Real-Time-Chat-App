@@ -25,16 +25,6 @@ const ChatContainer = ({ selectedUser }) => {
     const [messageApi, contextHolder] = message.useMessage();
 
     const [messages, setMessages] = useState([])
-    const [text, seText] = useState([])
-
-    const props = {
-        name: 'attachment',
-        action: 'http://localhost:5000/upload',
-        headers: {
-            authorization: 'authorization-text',
-        },
-
-    };
 
     const dispatch = useDispatch()
 

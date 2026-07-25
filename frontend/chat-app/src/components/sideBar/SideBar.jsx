@@ -32,7 +32,7 @@ const SideBar = ({ onSelectUser }) => {
 
     useEffect(() => {
         dispatch(getUsers())
-    }, [])
+    }, [dispatch])
 
     const onSearch = async () => {
         dispatch(handleSearch(searchText))
@@ -82,17 +82,15 @@ const SideBar = ({ onSelectUser }) => {
                         {
                             users?.map((item) => {
                                 return (
-                                    <>
-                                        <li key={item.id} className='user-item' onClick={() => {
-                                            onSelectUser(item)
-                                        }
-                                        }
-                                        >
-                                            <UserAvatar name={item.name} />
+                                    <li key={item._id} className='user-item' onClick={() => {
+                                        onSelectUser(item)
+                                    }
+                                    }
+                                    >
+                                        <UserAvatar name={item.name} />
 
-                                            <h2 className='users-name'>{item.name}</h2>
-                                        </li>
-                                    </>
+                                        <h2 className='users-name'>{item.name}</h2>
+                                    </li>
                                 )
                             })
                         }

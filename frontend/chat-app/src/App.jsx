@@ -26,20 +26,19 @@ function App() {
 
   }, [])
 
-  if (isAuthenticate) {
-    return <AppRoutes />
-  }
-
-
-  if (!isAuthenticate) {
-    return <Auth />
-  }
-
 
   if (loading) {
     return <Loader />
   }
 
+  if (!isAuthenticate) {
+    return <Auth />
+  }
+
+  if (isAuthenticate) {
+    return <AppRoutes />
+  }
+  
   return (
     <>
 

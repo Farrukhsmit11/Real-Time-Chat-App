@@ -6,12 +6,13 @@ import { get } from "../../../utils/apiMethod"
 
 export const getUsers = createAsyncThunk(
     "get-users",
-    async (data, { rejectWithValue }) => {
+    async (res, { rejectWithValue }) => {
         try {
             const res = await get("/getUsers")
+            return res.data.res
         } catch (error) {
             return rejectWithValue(
-                message.error(error.response?.data?.message)
+                error.response?.data?.message
             )
         }
     }

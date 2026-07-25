@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from "axios"
 import { useState } from 'react'
 import "./SignUp.css"
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { handleSignup } from '../../../store/features/auth/authThunk'
 
 const SignUp = () => {
@@ -14,6 +14,13 @@ const SignUp = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [name, setName] = useState("")
+
+    const reducer = useSelector(({ auth }) => ({
+        loading: auth?.signUpLoading,
+        error: auth?.error
+    }))
+
+    const { loading, error } = reducer
 
     const initialValues = {
         name: "",
@@ -28,11 +35,17 @@ const SignUp = () => {
     const dispatch = useDispatch();
 
     const handleSubmit = async () => {
-        dispatch(handleSignup({
-            name,
-            email,
-            password
-        }))
+        try {
+            dispatch(handleSignup({
+                name,
+                email,
+                password
+            })
+            ).unwrap()
+        } catch (error) {
+            message.error(error)
+        }
+
     }
 
     return (
@@ -83,6 +96,8 @@ const SignUp = () => {
                                 <Button
                                     className='submit-btn'
                                     onClick={() => handleSubmit()}
+                                    loading={loading}
+                                    htmlType='submit'
                                 >Sign Up</Button>
                                 <Button className='submit-btn-black' onClick={() => navigate("/login")}>Login</Button>
                             </div>

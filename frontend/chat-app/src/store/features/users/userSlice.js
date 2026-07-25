@@ -3,7 +3,6 @@ import { getUsers } from "./userThunk"
 
 const initialState = {
     users: [],
-    selectedUser: null,
     loading: false,
 }
 
@@ -23,7 +22,6 @@ const userSlice = createSlice({
 
             .addCase(getUsers.rejected, (state) => {
                 state.loading = false
-                state.users = null
             })
     }
 })
