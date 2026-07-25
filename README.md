@@ -2,7 +2,7 @@ A modern real-time chat application built with the MERN Stack that enables users
 
 🚀 Features
 
-- 🔐 JWT Authentication with HTTP-only cookies
+- 🔐 JWT Authentication
 - 💬 Real-time one-to-one messaging using Socket.io
 - 👥 User list and private conversations
 - 📩 Message history stored in MongoDB
