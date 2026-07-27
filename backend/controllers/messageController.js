@@ -32,7 +32,7 @@ export const getMessages = async (request, response) => {
 export const sendMessage = async (request, response) => {
 
     const { text, receiverId } = request.body
-    const senderId = request.user?._id
+    const senderId = request.user._id
 
     try {
 

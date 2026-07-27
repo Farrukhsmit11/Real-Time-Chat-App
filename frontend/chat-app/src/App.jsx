@@ -8,11 +8,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getProfile } from './store/features/auth/authThunk'
 import { useNavigate } from 'react-router-dom'
 import { TOKEN } from './utils/constant'
+import { socket } from './utils/socket'
 
 function App() {
 
   const dispatch = useDispatch()
-
   const navigate = useNavigate()
 
   const { loading, isAuthenticate } = useSelector((state) => state.auth)
@@ -27,6 +27,19 @@ function App() {
   }, [])
 
 
+  useEffect(() => {
+    if (isAuthenticate) {
+      socket.connect()
+    } else {
+      socket.disconnect()
+    }
+
+    return () => {
+      socket.disconnect()
+    }
+  }, [isAuthenticate])
+
+
   if (loading) {
     return <Loader />
   }
@@ -38,7 +51,7 @@ function App() {
   if (isAuthenticate) {
     return <AppRoutes />
   }
-  
+
   return (
     <>
 

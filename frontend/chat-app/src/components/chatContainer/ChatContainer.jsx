@@ -37,11 +37,23 @@ const ChatContainer = ({ selectedUser }) => {
             text,
             receiverId
         }))
+
+        fetchMesages()
+    }
+
+    const fetchMesages = async () => {
+        try {
+            const data = await dispatch(handleMessages(receiverId))
+        } catch (error) {
+            if (error.response) {
+                message.error(error.response.data.message)
+            }
+        }
     }
 
     useEffect(() => {
         if (receiverId) {
-            dispatch(handleMessages())
+            fetchMesages()
         }
     }, [])
 

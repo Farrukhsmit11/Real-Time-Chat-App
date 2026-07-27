@@ -3,9 +3,9 @@ import { get, post } from "../../../utils/apiMethod"
 
 export const handleSendMessage = createAsyncThunk(
     "send-message",
-    async (senderId, receiverId) => {
+    async ({ receiverId, text }) => {
         try {
-            const data = post("/send-message", {
+            const data = await post("/send-message", {
                 text,
                 receiverId
             })

@@ -27,17 +27,19 @@ const server = http.createServer(app)
 const io = new Server(server, {
     cors: {
         origin: "http://localhost:5173",
-        credentials: true
+        credentials: true,
+        methods: ["GET, POST"]
     }
 })
 
 io.on("connection", (socket) => {
     console.log("User a connected", socket.id)
+
+    socket.on("disconnect", () => {
+        console.log("user disconnected")
+    })
 })
 
-io.on("send_message", (data) => {
-    console.log("message handler", data)
-})
 
 app.get("/", (request, response) => {
     response.send("Hello world backend working")
