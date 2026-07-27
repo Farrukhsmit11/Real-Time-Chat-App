@@ -5,8 +5,8 @@ import { get } from "../../../utils/apiMethod"
 
 
 export const getUsers = createAsyncThunk(
-    "get-users",
-    async (res, { rejectWithValue }) => {
+    "users/getUsers",
+    async (data, { rejectWithValue }) => {
         try {
             const res = await get("/getUsers")
             console.log(res.data);

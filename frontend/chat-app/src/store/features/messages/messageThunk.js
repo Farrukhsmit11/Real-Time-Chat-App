@@ -1,14 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import axios from "axios"
-import { post } from "../../../utils/apiMethod"
-
+import { get, post } from "../../../utils/apiMethod"
 
 export const handleSendMessage = createAsyncThunk(
     "send-message",
     async (senderId, receiverId) => {
         try {
             const data = post("/send-message", {
-                senderId,
+                text,
                 receiverId
             })
         } catch (error) {
@@ -17,12 +15,11 @@ export const handleSendMessage = createAsyncThunk(
     }
 )
 
-
 export const handleMessages = createAsyncThunk(
-    "get-messages",
+    "messages/getMessages",
     async (receiverId) => {
         try {
-            const messages = await get(`/messages${receiverId}`)
+            const messages = await get(`/messages/${receiverId}`)
         } catch (error) {
             console.error("error while fetching messages", error)
         }

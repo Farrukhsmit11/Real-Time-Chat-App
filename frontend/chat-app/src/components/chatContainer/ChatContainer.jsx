@@ -26,12 +26,14 @@ const ChatContainer = ({ selectedUser }) => {
 
     const [messages, setMessages] = useState([])
 
+    const [text, setText] = useState("");
+
     const dispatch = useDispatch()
 
     const receiverId = selectedUser?._id
 
     const sendMessage = async () => {
-       await dispatch(handleSendMessage({
+        await dispatch(handleSendMessage({
             text,
             receiverId
         }))
@@ -39,12 +41,12 @@ const ChatContainer = ({ selectedUser }) => {
 
     useEffect(() => {
         if (receiverId) {
-            dispatch(fetchMessages())
+            dispatch(handleMessages())
         }
     }, [])
 
     return (
-        <div className='chat-container'>
+        <div className='chat-container' key={selectedUser._id}>
             <div className="chat-header">
                 <div className='chat-content'>
                     <div className='chat-header-section'>
@@ -64,7 +66,6 @@ const ChatContainer = ({ selectedUser }) => {
                     <SlOptionsVertical className='header-icons' />
                 </div>
             </div>
-
 
             <div className="messages-section">
                 {messages.map((item) => {
@@ -96,7 +97,7 @@ const ChatContainer = ({ selectedUser }) => {
                 <Input
                     className='send-message-input'
                     value={text}
-                    onChange={(e) => seText(e.target.value)}
+                    onChange={(e) => setText(e.target.value)}
                     placeholder='Type a message'
                     suffix={
                         <Button
@@ -110,9 +111,9 @@ const ChatContainer = ({ selectedUser }) => {
                         </Button>
                     }
                     prefix={
-                        <Upload {...props} name='attachment'>
-                            <Button icon={<ImAttachment />} className='upload-btn'></Button>
-                        </Upload>
+                        // <Upload {...props} name='attachment'>
+                        <Button icon={<ImAttachment />} className='upload-btn'></Button>
+                        // </Upload>
                     }
                 >
                 </Input>

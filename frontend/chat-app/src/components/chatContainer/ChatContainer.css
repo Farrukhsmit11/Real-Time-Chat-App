@@ -3,6 +3,7 @@
     flex-direction: column;
     height: 100%;
     width: 100%;
+    animation: slideInChat 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
 .chat-header {

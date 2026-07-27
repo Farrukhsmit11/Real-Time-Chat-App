@@ -4,10 +4,11 @@ import { getUsers } from "./userThunk"
 const initialState = {
     users: [],
     loading: false,
+    error: null
 }
 
 const userSlice = createSlice({
-    name: "users",
+    name: "user",
     initialState,
     extraReducers: (builder) => {
         builder
@@ -20,8 +21,10 @@ const userSlice = createSlice({
                 state.users = action.payload
             })
 
-            .addCase(getUsers.rejected, (state) => {
+            .addCase(getUsers.rejected, (state, action) => {
                 state.loading = false
+                state.error = action.payload
+                
             })
     }
 })

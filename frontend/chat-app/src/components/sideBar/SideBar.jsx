@@ -20,8 +20,6 @@ import { handleLogout } from '../../store/features/auth/authThunk.js';
 
 const SideBar = ({ onSelectUser }) => {
 
-    const [size, setSize] = useState()
-
     const [searchText, setSearchText] = useState("");
 
     const navigate = useNavigate()
@@ -29,17 +27,21 @@ const SideBar = ({ onSelectUser }) => {
     const dispatch = useDispatch()
 
 
-    const { users, loading } = useSelector(({ users }) => ({
-        user: users?.users,
-        loading: users?.loading
-    }))
+    const { users, loading } = useSelector((state) => state.users)
 
     useEffect(() => {
         dispatch(getUsers())
     }, [dispatch])
 
     const onSearch = async () => {
-        dispatch(handleSearch(searchText))
+        try {
+            await dispatch(handleSearch(searchText))
+        } catch (error) {
+            if (error.response) {
+                message.error(error.response.data.message)
+            }
+        }
+
     }
 
     const onCancel = () => {
@@ -79,27 +81,23 @@ const SideBar = ({ onSelectUser }) => {
 
             <div className="input-section">
 
-                {loading ? (
-                    <Spin size='large'></Spin>
-                ) : (
-                    <ul className='users-list'>
-                        {
-                            users?.map((item) => {
-                                return (
-                                    <li key={item._id} className='user-item' onClick={() => {
-                                        onSelectUser(item)
-                                    }
-                                    }
-                                    >
-                                        <UserAvatar name={item.name} />
 
-                                        <h2 className='users-name'>{item.name}</h2>
-                                    </li>
-                                )
-                            })
-                        }
-                    </ul>
-                )}
+                <ul className='users-list'>
+                    {users?.map((item) => {
+                        return (
+                            <li key={item._id} className='user-item' onClick={() => {
+                                onSelectUser(item)
+                            }
+                            }
+                            >
+                                <UserAvatar name={item.name} />
+
+                                <h2 className='users-name'>{item.name}</h2>
+                            </li>
+                        )
+                    })
+                    }
+                </ul>
             </div>
 
             <div className="logout-section">

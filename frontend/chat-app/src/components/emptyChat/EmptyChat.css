@@ -19,6 +19,8 @@
 
 .empty-chat-title {
     font-size: 18px;
+    color: white;
+    font-weight: 600;
 }
 
 @media (max-width: 768px) {
