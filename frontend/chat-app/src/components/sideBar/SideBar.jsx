@@ -28,7 +28,11 @@ const SideBar = ({ onSelectUser }) => {
 
     const dispatch = useDispatch()
 
-    const { users, selectedUser, loading } = useSelector((state) => state.users)
+
+    const { users, loading } = useSelector(({ users }) => ({
+        user: users?.users,
+        loading: users?.loading
+    }))
 
     useEffect(() => {
         dispatch(getUsers())

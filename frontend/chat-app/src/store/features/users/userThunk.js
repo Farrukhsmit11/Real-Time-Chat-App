@@ -9,6 +9,7 @@ export const getUsers = createAsyncThunk(
     async (res, { rejectWithValue }) => {
         try {
             const res = await get("/getUsers")
+            console.log(res.data);
             return res.data.res
         } catch (error) {
             return rejectWithValue(

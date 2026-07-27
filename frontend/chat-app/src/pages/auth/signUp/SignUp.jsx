@@ -36,16 +36,16 @@ const SignUp = () => {
 
     const handleSubmit = async () => {
         try {
-            dispatch(handleSignup({
+            await dispatch(handleSignup({
                 name,
                 email,
                 password
             })
             ).unwrap()
+            navigate("/login")
         } catch (error) {
             message.error(error)
         }
-
     }
 
     return (

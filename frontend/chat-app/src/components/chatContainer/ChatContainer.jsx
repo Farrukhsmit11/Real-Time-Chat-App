@@ -31,19 +31,15 @@ const ChatContainer = ({ selectedUser }) => {
     const receiverId = selectedUser?._id
 
     const sendMessage = async () => {
-        dispatch(handleSendMessage({
+       await dispatch(handleSendMessage({
             text,
             receiverId
         }))
     }
 
-    const fetchMessages = async () => {
-        dispatch(handleMessages())
-    }
-
     useEffect(() => {
         if (receiverId) {
-            fetchMessages()
+            dispatch(fetchMessages())
         }
     }, [])
 

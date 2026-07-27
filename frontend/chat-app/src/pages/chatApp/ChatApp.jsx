@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
-import SideBar from '../../components/sideBar/SideBar'
 import "./ChatApp.css"
-import ChatContainer from '../../components/chatContainer/ChatContainer'
-import EmptyChat from '../../components/emptyChat/EmptyChat'
 import { useEffect } from 'react'
 import { useParams } from "react-router-dom"
 import axios from 'axios'
+import { ChatContainer, EmptyChat, SideBar } from '../../components'
 
 const ChatApp = () => {
 

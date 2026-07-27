@@ -1,5 +1,5 @@
 import './App.css'
-import { Login } from './pages/auth'
+import { Login } from './pages'
 import { useEffect, useState } from 'react'
 import Loader from './components/loader/Loader'
 import Auth from "./routes/Auth"

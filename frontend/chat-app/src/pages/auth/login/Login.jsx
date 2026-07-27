@@ -39,9 +39,10 @@ const Login = () => {
         email,
         password
       })
-    ).unwrap()
-    }catch(error){
+      ).unwrap()
+    } catch (error) {
       message.error(error)
+      console.error(error)
     }
   }
 
