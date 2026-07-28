@@ -1,0 +1,10 @@
+.dashboard-container {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+
+}
+
+.ant-layout {
+    background: rgb(231, 231, 238);
+    box-shadow: 3px 4px 1px rgba(0, 0, 0, 0.1);
+}

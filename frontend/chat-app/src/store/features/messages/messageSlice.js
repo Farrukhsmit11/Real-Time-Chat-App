@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { handleMessages } from "./messageThunk";
+import { handleMessages, handleSendMessage } from "./messageThunk";
 
 const initialState = {
     messages: [],
@@ -22,6 +22,20 @@ const messageSlice = createSlice({
 
             .addCase(handleMessages.rejected, (state) => {
                 state.loading = false
+            })
+
+        builder
+            .addCase(handleSendMessage.pending, (state) => {
+                state.loading = true
+            })
+
+            .addCase(handleSendMessage.fulfilled, (state, action) => {
+                state.loading = false,
+                state.messages = action.payload
+            })
+
+            .addCase(handleSendMessage.rejected, (state) => {
+                
             })
     }
 })

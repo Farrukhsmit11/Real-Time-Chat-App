@@ -1,121 +1,59 @@
 import React from 'react'
 import "./SideBar.css"
-import sidebarLogo from "../../assets/right-sidebar-logo.png"
-import { SlOptionsVertical } from "react-icons/sl";
-import { Avatar, Button, Divider, Form, Input, Popover, Radio, Spin } from "antd"
-import { SearchOutlined } from "@ant-design/icons"
-import { useState } from 'react';
-import { useEffect } from 'react';
-import avatarImg from "../../assets/avatar-img.jfif"
-import { FiEdit2 } from "react-icons/fi"
-import { TbTrash } from "react-icons/tb";
-import { LuLogOut } from "react-icons/lu";
-import { useNavigate } from "react-router-dom"
-import { message } from "antd"
-import { getInitials } from "../../utils/helper.js"
-import UserAvatar from '../userAvatar/UserAvatar.jsx';
-import { useDispatch, useSelector } from "react-redux"
-import { getUsers, handleSearch } from '../../store/features/users/userThunk.js';
-import { handleLogout } from '../../store/features/auth/authThunk.js';
+import { Avatar, Divider, Layout, Space } from "antd"
+import Sider from 'antd/es/layout/Sider'
+import sideBarLogo from "../../assets/sideBar-logo.svg"
+import { HomeOutlined, PlusOutlined, UserOutlined } from "@ant-design/icons"
+import { LuUsers } from "react-icons/lu";
+import { LuMessageCircleMore } from "react-icons/lu";
+import { IoIosSettings } from "react-icons/io";
+import UserAvatar from '../userAvatar/UserAvatar'
+import { TbLogout2 } from "react-icons/tb";
+import { useDispatch } from "react-redux"
+import { handleLogout } from "../../store/features/auth/authThunk"
+import { useNavigate } from 'react-router-dom'
 
-const SideBar = ({ onSelectUser }) => {
+const SideBar = () => {
 
-    const [searchText, setSearchText] = useState("");
-
-    const navigate = useNavigate()
+    const navItems = [
+        { icon: <HomeOutlined />, label: "Home" },
+        { icon: <LuUsers className="nav-icon" />, label: "Users" },
+        { icon: <LuMessageCircleMore />, label: "Chats" },
+        { icon: <IoIosSettings />, label: "Settings" },
+    ]
 
     const dispatch = useDispatch()
 
+    const navigate = useNavigate()
 
-    const { users, loading } = useSelector((state) => state.users)
-
-    useEffect(() => {
-        dispatch(getUsers())
-    }, [dispatch])
-
-    const onSearch = async () => {
-        try {
-            await dispatch(handleSearch(searchText))
-        } catch (error) {
-            if (error.response) {
-                message.error(error.response.data.message)
-            }
-        }
-
-    }
-
-    const onCancel = () => {
+    const logoutUser = () => {
         dispatch(handleLogout())
+        navigate("/login")
     }
 
     return (
-        <div className="sidebar">
-            <div className="sidebar-header">
-                <div className="sidebar-logo-section">
-                    <img src={sidebarLogo} className='sidebar-logo' />
-                    <div className="icon-right">
-                    </div>
+        <Layout hasSider>
+            <Sider width={100} className='sidebar'>
+                <div className='sidebar-logo'>
+                    <img src={sideBarLogo} className='header-logo' />
                 </div>
-            </div>
 
-            <div className="input-main">
-                <Form enctype="multipart/form-data">
-                    <Input
-                        placeholder='Search Conversations'
-                        autoComplete='true'
-                        value={searchText}
-                        onChange={(e) => setSearchText(e.target.value)}
-                        suffix={
-                            <Button
-                                onClick={() => onSearch()}
-                                className='search-users-btn'
-                                icon={
-                                    <SearchOutlined className='search-icon' />
-                                }>
-                            </Button>
-                        }
-                        className='conversation-input'
-                    ></Input>
-                </Form>
-            </div>
-
-            <div className="input-section">
-
-
-                <ul className='users-list'>
-                    {users?.map((item) => {
+                <div className="nav-icon-main">
+                    {navItems.map((item, index) => {
                         return (
-                            <li key={item._id} className='user-item' onClick={() => {
-                                onSelectUser(item)
-                            }
-                            }
-                            >
-                                <UserAvatar name={item.name} />
-
-                                <h2 className='users-name'>{item.name}</h2>
-                            </li>
+                            <div className="nav-item">
+                                <span className='nav-icon'>{item.icon}</span>
+                            </div>
                         )
-                    })
-                    }
-                </ul>
-            </div>
+                    })}
+                </div>
 
-            <div className="logout-section">
-                <Divider />
-                <a href='#' className='sidebar-link'>
-                    <div className="sidebar-inner-content">
-                        <Button
-                            onClick={() => onCancel()}
-                            className='logout-btn'
-                            icon={
-                                <LuLogOut className='logout-icon' />
-                            }>
-                            <h1 className='logout-title'>Logout</h1>
-                        </Button>
-                    </div>
-                </a>
-            </div>
-        </div>
+                <div className="sidebar-inner">
+                    <PlusOutlined className='add-new-chat-icon' />
+                    <TbLogout2 className='logout-icon' onClick={() => logoutUser()} />
+                </div>
+            </Sider>
+        </Layout>
     )
 }
 

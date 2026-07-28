@@ -18,7 +18,7 @@ const protectRoute = async (request, response, next) => {
             response.status(400).send({ message: "user not found" })
             return
         }
-        request.user = decoded
+        request.user = user
         next()
 
     } catch (error) {

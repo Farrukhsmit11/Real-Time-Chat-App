@@ -1,12 +1,12 @@
 import { Route, Routes } from 'react-router-dom'
 import React from 'react'
-import { ChatApp } from "../pages"
+import { Dashboard } from '../pages'
 
 const AppRoutes = () => {
     return (
         <Routes>
-            <Route path='/chatApp' element={<ChatApp />}></Route>
-            <Route path='*' element={<ChatApp />}></Route>
+            <Route path='/dashboard' element={<Dashboard />}></Route>
+            <Route path='*' element={<Dashboard />}></Route>
         </Routes>
     )
 }
