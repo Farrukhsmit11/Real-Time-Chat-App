@@ -3,12 +3,12 @@ import { Login } from './pages/auth'
 import { useEffect, useState } from 'react'
 import Loader from './components/loader/Loader'
 import Auth from "./routes/Auth"
-import AppRoutes from "./routes/AppRoutes"
 import { useDispatch, useSelector } from 'react-redux'
 import { getProfile } from './store/features/auth/authThunk'
 import { useNavigate } from 'react-router-dom'
 import { TOKEN } from './utils/constant'
-import { socket } from './utils/socket'
+import ProtectedRoutes from './routes/ProtectedRoutes'
+import { PageWrapper } from './container'
 
 function App() {
 
@@ -23,21 +23,7 @@ function App() {
     if (token) {
       dispatch(getProfile())
     }
-
   }, [])
-
-
-  useEffect(() => {
-    if (isAuthenticate) {
-      socket.connect()
-    } else {
-      socket.disconnect()
-    }
-
-    return () => {
-      socket.disconnect()
-    }
-  }, [isAuthenticate])
 
 
   if (loading) {
@@ -49,7 +35,11 @@ function App() {
   }
 
   if (isAuthenticate) {
-    return <AppRoutes />
+    return (
+      <PageWrapper>
+        <ProtectedRoutes />
+      </PageWrapper>
+    )
   }
 
   return (

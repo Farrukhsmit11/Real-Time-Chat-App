@@ -1,0 +1,7 @@
+.container-wrapper-main {
+    background: #8190ae;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 24px;
+}

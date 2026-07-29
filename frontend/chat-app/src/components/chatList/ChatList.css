@@ -1,0 +1,17 @@
+.chat-list-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.chat-list-title {
+    font-family: "Instrument Sans", sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+}
+
+.add-icon-main {
+    background: rgb(47, 47, 190);
+    border-radius: 50%;
+}
