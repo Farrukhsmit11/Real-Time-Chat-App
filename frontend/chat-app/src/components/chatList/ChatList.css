@@ -1,17 +1,173 @@
 .chat-list-container {
+    display: flex;
+    flex-direction: column;
     width: 100%;
+    max-width: 330px;
+    height: 100%;
+    background: #ffffff;
+    font-family: var(--instrument);
+    border-right: 2px solid #DEEAFF;
+}
+
+
+.chat-list-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 20px 20px 0;
+    border-bottom: 2px solid #DEEAFF;
+    width: 100%;
+    padding-bottom: 23px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .chat-list-title {
-    font-family: "Instrument Sans", sans-serif;
-    font-weight: 700;
-    font-size: 17px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 22px;
+    font-weight: 600;
+    color: #14142b;
+    margin: 0;
 }
 
-.add-icon-main {
-    background: rgb(47, 47, 190);
+.chat-list-title-icon {
+    font-size: 12px;
+    color: #8a8ca5;
+}
+
+.chat-list-count {
+    background: #f1f2f8;
+    color: #6b6d84;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+.chat-list-add-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
+    background: #635bff;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.1s ease;
+    padding: 20px;
+}
+
+.chat-list-add-btn:hover {
+    background: #635bff !important;
+    color: white !important;
+}
+
+.chat-list-add-btn:active {
+    transform: scale(0.94);
+}
+
+.plus-icon {
+    font-size: 18px;
+}
+
+.search-input {
+    border: 1px solid #DEEAFF;
+    border-radius: 13px;
+    background: #F5F6F8 !important;
+    padding: 8.8px 16px;
+    font-family: var(--instrument);
+    font-weight: 600;
+}
+
+.input-group {
+    padding: 16px;
+}
+
+.search-icon {
+    font-size: 17px;
+    color: #B8BCC8;
+    font-size: 15px;
+    margin-right: 8px;
+    font-weight: 600
+}
+
+.message-count {
+    background: #DEEAFF;
+    border-radius: 20px;
+    padding: 6px;
+    font-weight: 700;
+}
+
+.ant-input-affix-wrapper>input.ant-input {
+    font-family: var(--instrument);
+    font-weight: 600;
+}
+
+.chat-list-section {
+    padding: 10px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    height: auto;
+    cursor: pointer;
+}
+
+.chat-card {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.chat-card:active{
+    background: #DEEAFF;
+    border-radius: 12px;
+    padding: 12px;
+}
+
+.profile-avatar {
+    border-radius: 50%;
+    height: 45px;
+}
+
+.profile-name {
+    font-size: 16px;
+    font-family: var(--instrument);
+    font-weight: 600;
+    line-height: 1.7;
+
+}
+
+.last-message {
+    color: gray;
+    font-family: "Instrument Sans", sans-serif;
+    font-weight: 600;
+}
+
+.status {
+    color: gray;
+    font-weight: 600;
+}
+
+.profile-detail-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: space-between;
+}
+
+.chat-content {
+    flex: 1;
 }

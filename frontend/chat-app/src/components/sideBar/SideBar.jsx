@@ -16,8 +16,11 @@ const SideBar = () => {
             {routes.map((route, index) => {
                 return (
                     <div className='nav-icon-main' key={index}>
-                        <span className='nav-icon'> {route.icon}
-                        </span>
+                        <div className='nav-items-content'>
+                            <span className='route-label'>{route.key}</span>
+                            <span className='nav-icon'> {route.icon}
+                            </span>
+                        </div>
                     </div>
                 )
             })}

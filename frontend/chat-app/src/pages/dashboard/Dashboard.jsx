@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import "./Dashboard.css"
 import ChatList from '../../components/chatList/ChatList'
+import ChatWindow from '../../components/chatWindow/ChatWindow'
+import { Layout } from 'antd'
 
 const Dashboard = () => {
 
@@ -11,10 +13,8 @@ const Dashboard = () => {
     }
 
     return (
-        <div className='dashboard-container'>
-            <div className="dashboard-header">
-                <ChatList    />
-            </div>
+        <div className='dashboard'>
+            {/* <ChatList /> */}
         </div>
     )
 }

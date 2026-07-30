@@ -2,6 +2,6 @@
     background: #8190ae;
     min-height: 100vh;
     display: flex;
-    align-items: center;
+    align-items: stretch;
     padding: 24px;
 }

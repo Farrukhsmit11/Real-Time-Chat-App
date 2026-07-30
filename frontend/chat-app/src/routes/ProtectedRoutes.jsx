@@ -13,27 +13,27 @@ import { PiChatsTeardropBold } from "react-icons/pi";
 export const routes = [
     {
         path: "/",
-        key: "dashboard",
+        key: "Dashboard",
         element: <Dashboard />,
         icon: <HomeOutlined />,
     },
 
     {
         path: "/chats",
-        key: "chats",
+        key: "Chats",
         element: <Chats />,
         icon: <PiChatsTeardropBold />,
     },
 
     {
         path: "/addFreind",
-        key: "addFriend",
+        key: "AddFriend",
         icon: <UserAddOutlined />
     },
 
     {
         path: "/settings",
-        key: "settings",
+        key: "Settings",
         element: <Settings />,
         icon: <IoSettingsOutline />
     }

@@ -1,5 +1,5 @@
 .sidebar {
-    width: 72px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     background: white;
@@ -13,11 +13,11 @@
     position: relative;
     overflow: hidden;
     width: 100%;
-    height: 85px;
+    /* height: 85px; */
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 17px;
+    /* margin-bottom: 17px; */
 }
 
 .header-logo {
@@ -32,7 +32,7 @@
 
 .nav-icon-main {
     width: 100%;
-    margin-top: 20px;
+    margin-top: 60px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -43,17 +43,14 @@
 
 .nav-item {
     width: 100%;
-    padding: 8px 0;
 }
 
 .nav-item:last-child {
     border-bottom: 2px solid rgba(255, 255, 255, .12) !important;
-    padding-bottom: 29px;
 }
 
 .nav-icon {
     font-size: 26px;
-    color: black;
     font-weight: 600;
     cursor: pointer;
 }
@@ -102,7 +99,7 @@
 .page-header-title {
     margin-bottom: 0px;
     font-size: 22px;
-    font-family: 'Inter', sans-serif;
+    font-family: var(--instrument);
     font-weight: 600;
 }
 
@@ -123,4 +120,19 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+.route-label {
+    font-family: 'Instrument Sans';
+    font-weight: 600;
+    font-size: 15px;
+    color: white;
+}
+
+.nav-items-content {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
 }
