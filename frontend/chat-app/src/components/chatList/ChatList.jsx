@@ -154,7 +154,7 @@ const ChatList = () => {
             </div>
 
             <div className="input-group">
-                <Input placeholder='Search messages' className='search-input' prefix={<SearchOutlined className='search-icon' />}></Input>
+                <Input placeholder='Search messages' className='search-input' suffix={<SearchOutlined className='search-icon' />}></Input>
             </div>
 
 
@@ -163,7 +163,8 @@ const ChatList = () => {
                     return (
                         <div
                             className={`chat-card ${active === item.id ? "active" : ""}`}
-                            key={item.id}>
+                            key={item.id}
+                        >
                             <img src={item.avatar} className='profile-avatar' />
                             <div className="chat-content">
                                 <div className="profile-detail-left">
@@ -194,10 +195,7 @@ const ChatList = () => {
                         })
                     }
                 })}
-
-
             </div>
-
         </div>
     )
 }

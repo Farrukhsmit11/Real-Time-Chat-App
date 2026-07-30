@@ -6,13 +6,14 @@ import { PlusOutlined } from '@ant-design/icons'
 import { TbLogout2 } from 'react-icons/tb'
 import { useDispatch } from 'react-redux'
 import { Outlet, useNavigate } from 'react-router-dom'
-import sideBarLogo from "../../assets/logo1.png"
 import { handleLogout } from "../../store/features/auth/authThunk"
 import "./PageWrapper.css"
 import { MdNotificationsNone } from "react-icons/md";
 import SideBar from '../../components/sideBar/SideBar'
 import ChatList from '../../components/chatList/ChatList'
 import ChatWindow from '../../components/chatWindow/ChatWindow'
+import sideBarLogo from "../../assets/Logo.svg"
+import { IoSettingsOutline } from 'react-icons/io5'
 
 const PageWrapper = ({ children }) => {
 
@@ -28,26 +29,28 @@ const PageWrapper = ({ children }) => {
     return (
         <Layout hasSider>
             <Sider width={100} className='sidebar'>
-                {/* <div className='sidebar-logo'> */}
-                {/* <img src={sideBarLogo} className='logo' /> */}
-                {/* </div> */}
+                <div className='sidebar-logo'>
+                    <img src={sideBarLogo} className='logo' />
+                </div>
 
                 <SideBar />
 
                 <div className="sidebar-body">
-                    <PlusOutlined className='add-new-chat-icon' />
                     <TbLogout2 className='logout-icon' onClick={() => logoutUser()} />
+
+                </div>
+
+
+                <div className="nav-icon-main">
                 </div>
             </Sider>
 
             <Layout>
-                <Content >
+                <Content style={{ display: "flex", minHeight: "100vh", alignItems: "center" }}>
                     <ChatList />
                     <ChatWindow />
                 </Content>
             </Layout>
-
-
         </Layout>
     )
 }
