@@ -28,7 +28,7 @@
 .auth-title {
     font-size: 25px;
     font-family: var(--instrument);
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 11px;
 }
 
@@ -68,15 +68,15 @@
     width: 100%;
     font-weight: 600;
     border-radius: 26px;
-    background: #0059f7;
-    color: white;
+    background: var(--them-primary);
+    color: var(--them-white);
     height: 41px;
     padding: 0 !important;
 }
 
 .submit-btn:hover {
-    background: #0059f7 !important;
-    color: white !important;
+    background: var(--them-primary) !important;
+    color: var(--them-white) !important;
 }
 
 .form-input input::placeholder {
@@ -90,13 +90,13 @@
     width: 100%;
     background: black;
     height: 44px;
-    color: white;
+    color: var(--them-white);
     border-radius: 40px;
 }
 
 .submit-btn-black {
     background: black !important;
-    color: white !important;
+    color: var(--them-white) !important;
 }
 
 .auth-footer {

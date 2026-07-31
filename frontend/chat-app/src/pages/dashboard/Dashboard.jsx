@@ -6,15 +6,9 @@ import { Layout } from 'antd'
 
 const Dashboard = () => {
 
-    const [selectedUser, setSelectedUser] = useState(null)
-
-    const handleSelectUser = (user) => {
-        setSelectedUser(user)
-    }
-
     return (
         <div className='dashboard'>
-            {/* <ChatList /> */}
+          
         </div>
     )
 }

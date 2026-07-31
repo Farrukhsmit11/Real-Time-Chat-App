@@ -1,9 +1,129 @@
 .chat-window-container {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 100% !important;
     height: 100%;
-    background: #ffffff;
+    gap: 24px;
+    background: #ffff;
     font-family: var(--instrument);
-    border-right: 2px solid #DEEAFF;
+    border-right: var(--border-width) solid var(--border-color);
+}
+
+.chat-window-header {
+    display: flex;
+    align-items: center;
+    border-bottom: var(--border-width) solid var(--border-color);
+    width: 100%;
+    height: 83px;
+    justify-content: space-between;
+}
+
+.user-details-left {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+    padding-left: 10px;
+    margin: 12px 1px;
+}
+
+.user-name {
+    font-family: var(--instrument);
+    font-weight: 640;
+    font-size: 19px;
+    line-height: 1.6;
+}
+
+.user-status {
+    font-family: var(--instrument);
+    font-weight: 600;
+    font-size: 13px;
+    color: gray;
+}
+
+.message-action-right {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    padding-right: 22px;
+}
+
+.actions {
+    background: aliceblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 17px;
+    border-radius: 0px;
+}
+
+.call-icon {
+    color: blue;
+}
+
+.action-btn {
+    color: blue;
+    background: aliceblue;
+    font-family: 'Instrument Sans';
+    font-weight: 700;
+    border: none !important;
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+    box-shadow: none !important;
+    padding: 0 18px;
+    height: 42px !important;
+}
+
+.profile-icon {
+    font-size: 21px;
+    font-weight: 600;
+}
+
+.call-icon {
+    font-size: 20px;
+}
+
+.messages-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-left: 12px;
+}
+
+.send-message-area {
+    display: flex;
+    align-items: center;
+    margin-top: auto;
+    padding: 18px 20px;
+    gap: 20px;
+    justify-content: center;
+}
+
+.send-message-input {
+    width: 100%;
+    max-width: 702px;
+    height: 42px;
+    border-radius: 34px;
+    padding: 12px 17px;
+    border: 2px solid #cbd0db;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+}
+
+.upload-file-icon {
+    font-size: 23px;
+    color: gray;
+    cursor: pointer;
+}
+
+.emoji-icon {
+    color: burlywood;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.send-message-icon {
+    color: blue;
+    font-size: 25px;
+    cursor: pointer;
 }

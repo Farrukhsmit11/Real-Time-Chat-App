@@ -1,0 +1,35 @@
+.empty-chat-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.empty-chat-img {
+    width: 100%;
+    max-width: 700px;
+}
+
+.empty-chat-description {
+    font-family: var(--instrument);
+    font-size: 17px;
+    font-weight: 600;
+    color: gray;
+    margin: 0;
+}
+
+.empty-chat-title {
+    font-family: var(--instrument);
+    font-weight: 700;
+    margin: 0;
+    font-size: 24px;
+}
+
+.empty-details {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+}

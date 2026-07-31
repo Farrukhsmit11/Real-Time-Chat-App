@@ -124,7 +124,7 @@ export const data = [
 ];
 
 
-const ChatList = () => {
+const ChatList = ({ selectedUser, setSelectedUser }) => {
 
     const [active, setActive] = useState(null)
 
@@ -164,6 +164,7 @@ const ChatList = () => {
                         <div
                             className={`chat-card ${active === item.id ? "active" : ""}`}
                             key={item.id}
+                            onClick={() => setSelectedUser(item)}
                         >
                             <img src={item.avatar} className='profile-avatar' />
                             <div className="chat-content">
