@@ -1,6 +1,4 @@
 import express from "express"
-import http from "http"
-import { Server } from "socket.io"
 import cors from "cors"
 import 'dotenv/config';
 import connectDB from "./config/db.js"
@@ -23,28 +21,10 @@ app.use(authRoutes)
 app.use(userRoutes)
 app.use(messageRoutes)
 
-const server = http.createServer(app)
-const io = new Server(server, {
-    cors: {
-        origin: "http://localhost:5173",
-        credentials: true,
-        methods: ["GET, POST"]
-    }
-})
-
-io.on("connection", (socket) => {
-    console.log("User a connected", socket.id)
-
-    socket.on("disconnect", () => {
-        console.log("user disconnected")
-    })
-})
-
-
 app.get("/", (request, response) => {
     response.send("Hello world backend working")
 })
 
-server.listen(PORT, (request, response) => {
+app.listen(PORT, (request, response) => {
     console.log(`Server is running on ${PORT}`)
 })
