@@ -10,8 +10,7 @@ import { handleLogout } from "../../store/features/auth/authThunk"
 import "./PageWrapper.css"
 import { MdNotificationsNone } from "react-icons/md";
 import SideBar from '../../components/sideBar/SideBar'
-import ChatList from '../../components/chatList/ChatList'
-import ChatWindow from '../../components/chatWindow/ChatWindow'
+import { ChatList, ChatWindow } from '../../components'
 import sideBarLogo from "../../assets/Logo.svg"
 import { IoSettingsOutline } from 'react-icons/io5'
 import EmptyChat from '../../components/emptyChat/EmptyChat'
