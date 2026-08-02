@@ -40,6 +40,7 @@ const Login = () => {
         password
       })
       ).unwrap()
+      navigate("/")
     } catch (error) {
       message.error(error)
       console.error(error)
