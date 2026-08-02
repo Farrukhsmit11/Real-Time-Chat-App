@@ -1,0 +1,25 @@
+
+.title {
+    padding-left: 17px;
+    margin: 21px 3px;
+}
+
+.add-friend-header .page-header {
+    display: flex;
+    justify-content: left;
+    gap: 18px;
+    padding-left: 12px;
+}
+
+.table-container{
+    background: rgb(255, 255, 255);
+    border-width: 0px;
+    border-style: solid;
+    border-color: rgba(212, 212, 212, 0.692);
+    border-image: initial;
+    border-radius: 16px;
+}
+
+.ant-table-content > table{
+    max-height: 500px;
+}

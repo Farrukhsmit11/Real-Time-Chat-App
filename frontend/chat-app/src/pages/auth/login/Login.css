@@ -27,7 +27,7 @@
 
 .auth-title {
     font-size: 25px;
-    font-family: var(--instrument);
+      --jakarta: "Plus Jakarta Sans", sans-serif;
     font-weight: 700;
     margin-bottom: 11px;
 }
@@ -57,7 +57,7 @@
     height: 42px;
     border-radius: 34px;
     border: 1px solid #DEEAFF;
-    font-family: var(--instrument);
+      --jakarta: "Plus Jakarta Sans", sans-serif;
     font-weight: 600;
     padding: 8.8px 16px;
     color: black !important;
@@ -82,7 +82,7 @@
 .form-input input::placeholder {
     color: #94a3b8;
     font-size: 14px;
-    font-family: var(--instrument);
+      --jakarta: "Plus Jakarta Sans", sans-serif;
     font-weight: 500;
 }
 
@@ -117,7 +117,7 @@
 }
 
 .checkbox-label {
-    font-family: var(--instrument);
+      --jakarta: "Plus Jakarta Sans", sans-serif;
 }
 
 .signup-footer {
@@ -129,6 +129,6 @@
     display: flex;
     gap: 4px;
     justify-content: center;
-    font-family: var(--instrument);
+      --jakarta: "Plus Jakarta Sans", sans-serif;
     font-weight: 500;
 }

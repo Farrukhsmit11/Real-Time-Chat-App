@@ -1,9 +1,15 @@
 import React from 'react'
+import ChatList from '../../components/chatList/ChatList'
+import "./Chats.css"
+import { ChatWindow } from '../../components'
 
-const Chats = () => {
+const Chats = ({selectedUser}) => {
     return (
-        <div>Chats</div>
+        <div className='chats-page'>
+            <ChatList />
+            <ChatWindow />
+        </div>
     )
 }
 
-export default Chats
+export default Chats    

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./ChatWindow.css"
 import { data } from "../../components/chatList/ChatList"
 import { IoMdCall } from "react-icons/io";
@@ -7,7 +7,9 @@ import { LiaUserSolid } from "react-icons/lia";
 import { PaperClipOutlined, UploadOutlined } from '@ant-design/icons';
 import { IoIosSend } from "react-icons/io";
 import { BsEmojiSmile } from "react-icons/bs";
-
+import ProfileModal from '../profileModal/ProfileModal';
+import PageHeader from "../pageHeader/PageHeader"
+import UserAvatar from '../userAvatar/UserAvatar';
 
 const messages = [
     {
@@ -28,32 +30,39 @@ const messages = [
         receiverId: "user456",
         text: "How are you?"
     }
-];
-
+]
 
 const ChatWindow = ({ selectedUser }) => {
+    const [open, setOpen] = useState(false);
+
     return (
         <>
             <div className='chat-window-container'>
-                <div className="chat-window-header">
-                    <div className="user-details-left">
-                        <img src={selectedUser.avatar} className='profile-avatar' />
+                <PageHeader
+                    leftContent={
+                        <div className="user-details-left">
 
-                        <div className='user-info'>
-                            <h1 className='user-name'>{selectedUser.name}</h1>
-                            <span className='user-status'>Online</span>
+                            <div className='user-info'>
+                                <UserAvatar
+                                    size={50}
+                                    onClick={() => setOpen(true)}
+                                    className='profile-avatar'
+                                    src={
+                                        "https://i.pravatar.cc/150?img=12"
+                                    }>
+                                </UserAvatar>
+                            </div>
                         </div>
-                    </div>
+                    }
 
-                    <div className="message-action-right">
-                        <Button icon={<LiaUserSolid className='profile-icon' />} className='action-btn'>Profile</Button>
-                        <Button icon={<IoMdCall className='call-icon' />} className='action-btn'>Call</Button>
-
-                    </div>
-                </div>
+                    rightContent={
+                        <div className="message-action-right">
+                            <Button icon={<IoMdCall className='call-icon' />} className='action-btn'>Call</Button>
+                        </div>
+                    }
+                />
 
                 <div className='messages-container'>
-                    <img src={selectedUser.avatar} className='profile-avatar' />
                     {messages.map((msg) => {
                         return (
                             <div key={msg._id}>
@@ -78,7 +87,13 @@ const ChatWindow = ({ selectedUser }) => {
                     >
                     </Input>
                 </div>
-            </div>
+            </div >
+
+            <ProfileModal
+                selectedUser={selectedUser}
+                isOpenProfileModal={open}
+                setIsOpenProfileModal={setOpen}
+            />
         </>
     )
 }

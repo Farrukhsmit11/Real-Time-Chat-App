@@ -1,7 +1,9 @@
-import Dashboard from '../pages/dashboard/Dashboard'
-import Chats from "../pages/chats/Chats"
+import { lazy } from "react";
+
+const Chats = lazy(() => import("../pages/chats/Chats"))
+const AddFriend = lazy(() => import("../pages/addFriend/AddFriend"))
 
 export {
-    Dashboard,
-    Chats
+    Chats,
+    AddFriend
 }

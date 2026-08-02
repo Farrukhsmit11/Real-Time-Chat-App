@@ -1,26 +1,19 @@
-import { Layout, Menu } from 'antd'
-import React, { useState } from 'react'
-import { Content, Header } from 'antd/es/layout/layout'
-import Sider from 'antd/es/layout/Sider'
-import { PlusOutlined } from '@ant-design/icons'
-import { TbLogout2 } from 'react-icons/tb'
-import { useDispatch } from 'react-redux'
-import { Outlet, useNavigate } from 'react-router-dom'
-import { handleLogout } from "../../store/features/auth/authThunk"
-import "./PageWrapper.css"
-import { MdNotificationsNone } from "react-icons/md";
-import SideBar from '../../components/sideBar/SideBar'
-import { ChatList, ChatWindow } from '../../components'
+import { Avatar, Layout } from "antd"
+import Sider from "antd/es/layout/Sider"
+import { useState } from "react"
+import { SideBar } from "../../components"
+import { Content } from "antd/es/layout/layout"
+import ProfileModal from "../../components/profileModal/ProfileModal"
 import sideBarLogo from "../../assets/Logo.svg"
-import { IoSettingsOutline } from 'react-icons/io5'
-import EmptyChat from '../../components/emptyChat/EmptyChat'
+import { useDispatch } from "react-redux"
+import "./PageWrapper.css"
+import { useNavigate } from "react-router-dom"
 
 const PageWrapper = ({ children }) => {
-
     const [selectedUser, setSelectedUser] = useState(null)
+    const [isOpenProfileModal, setIsOpenProfileModal] = useState(false)
 
     const dispatch = useDispatch()
-
     const navigate = useNavigate()
 
     const logoutUser = () => {
@@ -35,19 +28,31 @@ const PageWrapper = ({ children }) => {
                     <img src={sideBarLogo} className='logo' />
                 </div>
 
-                <SideBar />
+                <SideBar
+                    selectedUser={selectedUser}
+                    setSelectedUser={setSelectedUser}
+                />
 
                 <div className="sidebar-body">
-                    <TbLogout2 className='logout-icon' onClick={() => logoutUser()} />
+                    <div className="sidebar-bottom">
+                        <Avatar
+                            size={50}
+                            onClick={() => navigate("/userProfile")}
+                            src="https://i.pravatar.cc/150?img=12"
+                        />
+                    </div>
                 </div>
             </Sider>
 
             <Layout>
-                <Content style={{ display: "flex" }}>
-                    <ChatList selectedUser={selectedUser} setSelectedUser={setSelectedUser} />
-                    {selectedUser ? <ChatWindow selectedUser={selectedUser} /> : <EmptyChat />}
-                </Content>
+                <Content>{children}</Content>
             </Layout>
+
+            <ProfileModal
+                isOpenProfileModal={isOpenProfileModal}
+                setIsOpenProfileModal={setIsOpenProfileModal}
+                selectedUser={selectedUser}
+            />
         </Layout>
     )
 }

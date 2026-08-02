@@ -2,12 +2,14 @@ import React, { useState } from 'react'
 import "./ChatList.css"
 import { DownOutlined, PlusOutlined, SearchOutlined } from "@ant-design/icons"
 import { Avatar, Button, Input, Tag } from 'antd'
+import UserAvatar from '../userAvatar/UserAvatar';
 
 export const data = [
     {
         id: 1,
         name: "Elmer Laverty",
         avatar: "https://i.pravatar.cc/150?img=11",
+        email: "elemar@gmail.com",
         lastMessage: "Haha that's funny 🔥",
         time: "12m",
         unread: 2,
@@ -29,11 +31,12 @@ export const data = [
     {
         id: 2,
         name: "Florencio Dorrance",
+        email: "florencio@gmail.com",
         avatar: "https://i.pravatar.cc/150?img=12",
         lastMessage: "Woohoooo 😄",
         time: "24m",
         unread: 0,
-        online: true,
+        online: false,
         active: true,
         tags: [
             {
@@ -124,7 +127,7 @@ export const data = [
 ];
 
 
-const ChatList = ({ selectedUser, setSelectedUser }) => {
+const ChatList = () => {
 
     const [active, setActive] = useState(null)
 
@@ -141,7 +144,6 @@ const ChatList = ({ selectedUser, setSelectedUser }) => {
                     </div>
                 </div>
 
-
                 <div className="header-right">
                     <Button
                         type="button"
@@ -157,35 +159,26 @@ const ChatList = ({ selectedUser, setSelectedUser }) => {
                 <Input placeholder='Search messages' className='search-input' suffix={<SearchOutlined className='search-icon' />}></Input>
             </div>
 
-
             <div className="chat-list-section">
                 {data.map((item) => {
                     return (
                         <div
                             className={`chat-card ${active === item.id ? "active" : ""}`}
                             key={item.id}
-                            onClick={() => setSelectedUser(item)}
                         >
-                            <img src={item.avatar} className='profile-avatar' />
+                            <UserAvatar src={item.avatar} className='profile-avatar' />
+
                             <div className="chat-content">
                                 <div className="profile-detail-left">
                                     <h1 className='profile-name'>
                                         {item.name}
                                     </h1>
                                     <span className='status'>{item.time}</span>
-
                                 </div>
-
                                 <span className='last-message'>{item.lastMessage}</span>
-
-                                <div className="tag-section">
-
-                                </div>
-
                             </div>
                         </div>
                     )
-
                     {
                         item.tags.map((tag) => {
                             return (

@@ -12,7 +12,7 @@
 }
 
 .empty-chat-description {
-    font-family: var(--instrument);
+      --jakarta: "Plus Jakarta Sans", sans-serif;
     font-size: 17px;
     font-weight: 600;
     color: gray;
@@ -20,7 +20,7 @@
 }
 
 .empty-chat-title {
-    font-family: var(--instrument);
+      --jakarta: "Plus Jakarta Sans", sans-serif;
     font-weight: 700;
     margin: 0;
     font-size: 24px;

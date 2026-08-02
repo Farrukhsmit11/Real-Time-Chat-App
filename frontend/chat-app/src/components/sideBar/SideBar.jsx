@@ -5,7 +5,7 @@ import { LuUsers } from "react-icons/lu";
 import { LuMessageCircleMore } from "react-icons/lu";
 import { IoIosSettings } from "react-icons/io";
 import { routes } from '../../routes/ProtectedRoutes';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const SideBar = () => {
 
@@ -15,13 +15,16 @@ const SideBar = () => {
         <div className='nav-items-main'>
             {routes.map((route, index) => {
                 return (
-                    <div className='nav-icon-main' key={index}>
-                        <div className='nav-items-content'>
-                            <span className='route-label'>{route.key}</span>
-                            <span className='nav-icon'> {route.icon}
-                            </span>
+                    <NavLink to={route.path} key={route.key}>
+                        <div className='nav-icon-main' key={index}>
+                            <div className='nav-items-content'>
+                                <span className='route-label'>{route.key}</span>
+                                <span className='nav-icon'> {route.icon}
+                                </span>
+                            </div>
                         </div>
-                    </div>
+                    </NavLink>
+
                 )
             })}
         </div>
