@@ -18,7 +18,6 @@ const SideBar = () => {
                     <NavLink to={route.path} key={route.key}>
                         <div className='nav-icon-main' key={index}>
                             <div className='nav-items-content'>
-                                <span className='route-label'>{route.key}</span>
                                 <span className='nav-icon'> {route.icon}
                                 </span>
                             </div>

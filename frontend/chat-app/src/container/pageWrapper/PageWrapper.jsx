@@ -5,16 +5,17 @@ import { SideBar } from "../../components"
 import { Content } from "antd/es/layout/layout"
 import ProfileModal from "../../components/profileModal/ProfileModal"
 import sideBarLogo from "../../assets/Logo.svg"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import "./PageWrapper.css"
 import { useNavigate } from "react-router-dom"
 
 const PageWrapper = ({ children }) => {
-    const [selectedUser, setSelectedUser] = useState(null)
     const [isOpenProfileModal, setIsOpenProfileModal] = useState(false)
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
+    const { selectedUser } = useSelector((state) => state.chat)
 
     const logoutUser = () => {
         dispatch(handleLogout())
@@ -30,7 +31,6 @@ const PageWrapper = ({ children }) => {
 
                 <SideBar
                     selectedUser={selectedUser}
-                    setSelectedUser={setSelectedUser}
                 />
 
                 <div className="sidebar-body">

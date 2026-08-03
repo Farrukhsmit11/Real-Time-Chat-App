@@ -6,7 +6,6 @@
     gap: 24px;
     background: #ffff;
     font-family: "Plus Jakarta Sans";
-    border-right: var(--border-width) solid var(--border-color);
 }
 
 
@@ -16,6 +15,7 @@
     gap: 19px;
     padding-left: 10px;
     margin: 12px 1px;
+    flex-direction: row-reverse;
 }
 
 .user-name {
@@ -54,7 +54,6 @@
 
 .action-btn {
     color: blue;
-    background: aliceblue;
     font-family: 'Instrument Sans';
     font-weight: 700;
     border: none !important;
@@ -72,7 +71,7 @@
 }
 
 .call-icon {
-    font-size: 20px;
+    font-size: 2px;
 }
 
 .messages-container {
@@ -121,6 +120,14 @@
 
 .user-info {
     display: flex;
-    align-items: center;
-    gap: 12px;
+    align-items: flex-start;
+    gap: 4px;
+
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
 }

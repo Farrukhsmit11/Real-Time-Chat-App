@@ -1,48 +1,28 @@
 import React from 'react'
 import './ProfileModal.css'
-import { Avatar, Button, Divider, Modal } from 'antd';
-import { useState } from 'react';
-import { LuTrash2 } from "react-icons/lu";
-import { data } from "../../components/chatList/ChatList"
+import { Modal } from 'antd'
+import { useSelector } from 'react-redux'
 
-const ProfileModal = ({ isOpenProfileModal, setIsOpenProfileModal, selectedUser }) => {
+const ProfileModal = ({ isOpenProfileModal, setIsOpenProfileModal }) => {
+
+    const { selectedUser } = useSelector((state) => state.chat)
 
     return (
         <Modal
             className='Profile Details'
             closable={{ 'aria-label': 'Custom Close Button' }}
             open={isOpenProfileModal}
-            width={400}
-            destroyOnClose={true}
+            width={436}
             onCancel={() => setIsOpenProfileModal(false)}
             footer={
                 null
             }
         >
-            <div className='profile-modal-header'>
-                <Avatar
-                    size={90}
-                    onClick={() => navigate("/userProfile")}
-                    className='profile-avatar'
-                    src={
-                        "https://i.pravatar.cc/150?img=12"
-                    }></Avatar>
+            <div className='modal-body'>
+                <img src={selectedUser?.avatar} className='modal-avatar' />
             </div>
 
-            <div>
-                <h1 className='user-name' style={{ margin: 0, color: '#000' }}>{selectedUser?.name}</h1>
-                <label className='profile-label'>Email</label>
-            </div>
 
-            {data.map((user) => (
-                <div key={user.id}>
-                    <div className="modal-content">
-                        <div className="form-label">
-                            <span>{user.email}</span>
-                        </div>
-                    </div>
-                </div>
-            ))}
         </Modal>
     )
 }

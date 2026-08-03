@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import "./ChatWindow.css"
-import { data } from "../../components/chatList/ChatList"
+import { data } from '../chatList/helper';
 import { IoMdCall } from "react-icons/io";
 import { Button, Input, Upload } from 'antd';
 import { LiaUserSolid } from "react-icons/lia";
@@ -10,30 +10,13 @@ import { BsEmojiSmile } from "react-icons/bs";
 import ProfileModal from '../profileModal/ProfileModal';
 import PageHeader from "../pageHeader/PageHeader"
 import UserAvatar from '../userAvatar/UserAvatar';
+import { useSelector } from 'react-redux';
 
-const messages = [
-    {
-        _id: "1",
-        senderId: "user123",
-        receiverId: "user456",
-        text: "Hello"
-    },
-    {
-        _id: "2",
-        senderId: "user456",
-        receiverId: "user123",
-        text: "Hi!"
-    },
-    {
-        _id: "3",
-        senderId: "user123",
-        receiverId: "user456",
-        text: "How are you?"
-    }
-]
+const ChatWindow = () => {
 
-const ChatWindow = ({ selectedUser }) => {
     const [open, setOpen] = useState(false);
+
+    const { selectedUser } = useSelector((state) => state.chat)
 
     return (
         <>
@@ -41,35 +24,27 @@ const ChatWindow = ({ selectedUser }) => {
                 <PageHeader
                     leftContent={
                         <div className="user-details-left">
-
+                            <div className='user-info'>
+                                <h1 className='user-name'>{selectedUser?.name}</h1>
+                                <span className='user-status'>{selectedUser?.status ? 'Online' : 'Offline'}</span>
+                            </div>
                             <div className='user-info'>
                                 <UserAvatar
                                     size={50}
                                     onClick={() => setOpen(true)}
                                     className='profile-avatar'
-                                    src={
-                                        "https://i.pravatar.cc/150?img=12"
-                                    }>
-                                </UserAvatar>
+                                    src={selectedUser?.avatar}
+                                />
                             </div>
                         </div>
                     }
 
                     rightContent={
                         <div className="message-action-right">
-                            <Button icon={<IoMdCall className='call-icon' />} className='action-btn'>Call</Button>
+                            <Button icon={<IoMdCall className='call-icon' />} className='action-btn'></Button>
                         </div>
                     }
                 />
-
-                <div className='messages-container'>
-                    {messages.map((msg) => {
-                        return (
-                            <div key={msg._id}>
-                            </div>
-                        )
-                    })}
-                </div>
 
                 <div className="send-message-area">
                     <Upload>
