@@ -7,16 +7,20 @@ import { LiaUserSolid } from "react-icons/lia";
 import { PaperClipOutlined, UploadOutlined } from '@ant-design/icons';
 import { IoIosSend } from "react-icons/io";
 import { BsEmojiSmile } from "react-icons/bs";
-import ProfileModal from '../profileModal/ProfileModal';
 import PageHeader from "../pageHeader/PageHeader"
 import UserAvatar from '../userAvatar/UserAvatar';
 import { useSelector } from 'react-redux';
+import { useNavigate } from "react-router-dom"
 
-const ChatWindow = () => {
+
+const ChatWindow = ({ onHeaderClick }) => {
+
+    const navigate = useNavigate()
 
     const [open, setOpen] = useState(false);
 
     const { selectedUser } = useSelector((state) => state.chat)
+
 
     return (
         <>
@@ -31,7 +35,7 @@ const ChatWindow = () => {
                             <div className='user-info'>
                                 <UserAvatar
                                     size={50}
-                                    onClick={() => setOpen(true)}
+                                    onClick={onHeaderClick}
                                     className='profile-avatar'
                                     src={selectedUser?.avatar}
                                 />
@@ -62,13 +66,7 @@ const ChatWindow = () => {
                     >
                     </Input>
                 </div>
-            </div >
-
-            <ProfileModal
-                selectedUser={selectedUser}
-                isOpenProfileModal={open}
-                setIsOpenProfileModal={setOpen}
-            />
+            </div>
         </>
     )
 }

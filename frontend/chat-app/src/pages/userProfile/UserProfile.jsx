@@ -9,32 +9,8 @@ import { UserOutlined, InfoCircleOutlined, MailOutlined, PhoneOutlined, PictureO
     from "@ant-design/icons";
 import UserAvatar from '../../components/userAvatar/UserAvatar'
 
-const profileItems = [
-    {
-        icon: <UserOutlined />,
-        title: "Name",
-        value: "Farrukh Mansoor",
-        editable: true,
-    },
-    {
-        icon: <InfoCircleOutlined />,
-        title: "About",
-        value: "Building something amazing 🚀",
-        editable: true,
-    },
-    {
-        icon: <MailOutlined />,
-        title: "Email",
-        value: "farrukh@gmail.com",
-    },
-    {
-        icon: <PhoneOutlined />,
-        title: "Phone",
-        value: "+92 3001234567",
-    },
-];
 
-const UserProfile = () => {
+const UserProfile = ({setShowProfile}) => {
 
     const navigate = useNavigate()
 
@@ -44,7 +20,7 @@ const UserProfile = () => {
                 <PageHeader
                     leftContent={
                         <div className="page-header-icon">
-                            <Button className="header-back-icon" onClick={() => navigate("/")} >
+                            <Button className="header-back-icon" onClick={() => setShowProfile(false)} >
                                 <FaArrowLeftLong />
                             </Button>
                         </div>
@@ -56,18 +32,6 @@ const UserProfile = () => {
                         </div>
                     }
                 />
-
-                <div className="profile-section-main">
-                    <div className="user-avatar-wrapper">
-                        <UserAvatar
-                            size={200}
-                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQu5v0tocLtdcVrsfwZkfPHoDkLThWWgVyduWNkMV_dwg&s"
-                        />
-                        <div className="camera-option">
-                            <FaCamera />
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     )

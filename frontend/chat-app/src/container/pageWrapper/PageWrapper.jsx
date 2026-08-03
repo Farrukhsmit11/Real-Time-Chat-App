@@ -3,14 +3,13 @@ import Sider from "antd/es/layout/Sider"
 import { useState } from "react"
 import { SideBar } from "../../components"
 import { Content } from "antd/es/layout/layout"
-import ProfileModal from "../../components/profileModal/ProfileModal"
 import sideBarLogo from "../../assets/Logo.svg"
 import { useDispatch, useSelector } from "react-redux"
 import "./PageWrapper.css"
 import { useNavigate } from "react-router-dom"
+import UserAvatar from "../../components/userAvatar/UserAvatar"
 
 const PageWrapper = ({ children }) => {
-    const [isOpenProfileModal, setIsOpenProfileModal] = useState(false)
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -35,9 +34,8 @@ const PageWrapper = ({ children }) => {
 
                 <div className="sidebar-body">
                     <div className="sidebar-bottom">
-                        <Avatar
+                        <UserAvatar
                             size={50}
-                            onClick={() => navigate("/userProfile")}
                             src="https://i.pravatar.cc/150?img=12"
                         />
                     </div>
@@ -47,12 +45,6 @@ const PageWrapper = ({ children }) => {
             <Layout>
                 <Content>{children}</Content>
             </Layout>
-
-            <ProfileModal
-                isOpenProfileModal={isOpenProfileModal}
-                setIsOpenProfileModal={setIsOpenProfileModal}
-                selectedUser={selectedUser}
-            />
         </Layout>
     )
 }

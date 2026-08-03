@@ -1,3 +1,8 @@
+.user-profile-container {
+    width: 100%;
+}
+
+
 .header-back-icon {
     color: var(--them-primary);
     background-color: var(--them-white) !important;
@@ -44,6 +49,8 @@
 }
 
 .user-profile-header .page-header {
+    width: 100% !important;
+    max-width: 400px;
     display: flex;
     gap: 17px;
     justify-content: left;
@@ -51,7 +58,7 @@
     align-items: center;
 }
 
-.details-card{
-    border-radius:18px;
-    box-shadow:0 2px 12px rgba(0,0,0,.06);
+.details-card {
+    border-radius: 18px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, .06);
 }
