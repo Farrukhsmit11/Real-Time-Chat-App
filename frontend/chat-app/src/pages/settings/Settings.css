@@ -1,0 +1,116 @@
+.settings-sider {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #e6e8ec;
+    background: hsl(0, 0%, 100%);
+    overflow: hidden;
+    min-height: 100vh;
+}
+
+.avatar-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-left: 12px;
+}
+
+.settings-title {
+    display: flex;
+    align-items: center;
+    font-size: 29px;
+    font-weight: 600;
+    color: #14142b;
+    padding-left: 12px;
+    margin: 0;
+    font-family: 'Plus Jakarta Sans';
+}
+
+.input-group {
+    padding: 16px 0px;
+}
+
+.settings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-left: 19px;
+    margin-top: 16px;
+}
+
+.avatar-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-left: 12px;
+}
+
+.setting-header-main {
+    flex-shrink: 0;
+}
+
+.settings-header-title {
+    display: flex;
+    align-items: center;
+    font-size: 27px;
+    font-weight: 700;
+    color: #14142b;
+    padding-left: 12px;
+    margin: 0;
+    font-family: 'Plus Jakarta Sans';
+}
+
+.input-group {
+    flex-shrink: 0;
+    padding: 16px 0px;
+}
+
+.settings-list-main {
+    flex: 1;
+    min-height: 0;
+    overflow-y: scroll;
+    padding-left: 15px;
+}
+
+.list-item-title {
+    font-size: 17px;
+    font-weight: 600;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    line-height: 1.6;
+}
+
+.list-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 0px;
+    margin: 0;
+    cursor: pointer;
+}
+
+.settings-item-icon {
+    padding: 20px 6px;
+    border-radius: 20%;
+    display: flex;
+    border-bottom: 1px solid var(--theme-stroke) !important;
+    justify-content: center;
+}
+
+.list-icon {
+    font-size: 26px;
+}
+
+.tools-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    flex: 1;
+}
+
+.list-item-description {
+    font-family: 'Plus Jakarta Sans';
+    font-weight: 500;
+    font-style: italic;
+    font-size: 15px;
+    line-height: 1.6
+}

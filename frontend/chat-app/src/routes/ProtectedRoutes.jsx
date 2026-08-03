@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react'
-import { AddFriend, Chats } from '../pages'
+import { AddFriend } from '../pages'
 import { Route, Routes } from 'react-router-dom'
 import Loader from '../components/loader/Loader'
 import { HomeOutlined, PlusCircleOutlined, SettingFilled, UserAddOutlined } from '@ant-design/icons'
@@ -9,13 +9,14 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { PiChatsDuotone } from "react-icons/pi";
 import { PiChatsTeardropBold } from "react-icons/pi";
 import UserProfile from '../pages/userProfile/UserProfile'
+import Dashboard from '../pages/dashboard/Dashboard'
 
 
 export const routes = [
     {
         path: "/",
         key: "Dashboard",
-        element: <Chats />,
+        element: <Dashboard />,
         icon: <HomeOutlined />,
     },
 
@@ -31,6 +32,12 @@ export const routes = [
         element: <Settings />,
         icon: <IoSettingsOutline />
     },
+
+    {
+        path: "/userProfile",
+        key: "UserProfile",
+        element: <UserProfile />
+    }
 ]
 
 const ProtectedRoutes = () => {
@@ -47,11 +54,6 @@ const ProtectedRoutes = () => {
                         </Route>
                     )
                 })}
-
-                <Route
-                    path="/userProfile"
-                    element={<UserProfile />}
-                />
             </Routes>
         </Suspense>
 
