@@ -7,7 +7,7 @@ import { data } from './helper';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedUser, clearSelectedUser } from '../../store/features/chats/chatSlice';
 
-const ChatList = () => {
+const ChatList = ({ setShowProfile }) => {
 
     const [active, setActive] = useState(null)
     const dispatch = useDispatch()
@@ -46,7 +46,11 @@ const ChatList = () => {
                         <div
                             className={`chat-card ${active === item.id ? "active" : ""}`}
                             key={item.id}
-                            onClick={() => dispatch(setSelectedUser(item))}
+                            onClick={() => {
+                                setShowProfile(false)
+                                dispatch(setSelectedUser(item))
+                            }
+                            }
                         >
                             <UserAvatar src={item.avatar} className='profile-avatar' />
 

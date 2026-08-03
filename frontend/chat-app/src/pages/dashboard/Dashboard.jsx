@@ -19,7 +19,7 @@ const Dashboard = () => {
 
     return (
         <div className='chats-page'>
-            <ChatList />
+            <ChatList setShowProfile={setShowProfile} />
 
             {selectedUser ? (
                 showProfile ? (
