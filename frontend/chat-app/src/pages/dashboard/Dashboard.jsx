@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import "./Dashboard.css"
 import { ChatList, ChatWindow, EmptyChat } from '../../components'
 import { useSelector } from 'react-redux'
-import UserProfile from '../userProfile/UserProfile'
+import { UserProfile } from "../../pages"
 
 const Dashboard = () => {
 
