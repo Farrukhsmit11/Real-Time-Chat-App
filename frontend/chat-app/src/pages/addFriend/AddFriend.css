@@ -1,7 +1,12 @@
+.add-friend-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
 
 .title {
     padding-left: 17px;
-    margin: 21px 3px;
 }
 
 .add-friend-header .page-header {
@@ -11,15 +16,58 @@
     padding-left: 12px;
 }
 
-.table-container{
-    background: rgb(255, 255, 255);
-    border-width: 0px;
-    border-style: solid;
-    border-color: rgba(212, 212, 212, 0.692);
-    border-image: initial;
-    border-radius: 16px;
+
+.table-container {
+    border-radius: 12px !important;
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--theme-stroke) !important;
+    border-color: rgba(212, 212, 212, 0.692) !important;
 }
 
-.ant-table-content > table{
-    max-height: 500px;
+.table-container .ant-table-wrapper {
+    width: 100%;
+    height: 100%;
+    font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.table-filters {
+    padding: 16px;
+}
+
+.table-filters .ant-tabs {
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.table-filters .ant-tabs-tab {
+    font-size: 16px;
+    font-weight: 600;
+    color: #666;
+    padding: 10px 20px;
+}
+
+.table-filters .ant-tabs-content-holder {
+    margin-top: 10px;
+}
+
+.ant-table-cell {
+    font-family: 'Plus Jakarta Sans' !important;
+    font-weight: 600 !important;
+}
+
+.add-friend-btn {
+    padding: 16px;
+    height: 35px;
+    border-radius: 20px;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    background: var(--them-primary);
+    color: white;
+}
+
+.reject-btn {
+    height: 36px;
+    padding: 16px;
+    border-radius: 16px;
+    border: 1px solid #FFD5D5;
 }
