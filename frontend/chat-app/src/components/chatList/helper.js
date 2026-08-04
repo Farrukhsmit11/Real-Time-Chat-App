@@ -1,121 +1,99 @@
 export const data = [
     {
         id: 1,
-        name: "Elmer Laverty",
+        name: "Elemer Laverty",
         avatar: "https://i.pravatar.cc/150?img=11",
         email: "elemar@gmail.com",
+        phone: "+92 300 1234567",
+        about: "Frontend Developer 💻",
+        lastSeen: "Today at 2:30 PM",
         lastMessage: "Haha that's funny 🔥",
         time: "12m",
+        about: "Developer",
         unread: 2,
         online: true,
         active: false,
-        tags: [
-            {
-                label: "Question",
-                color: "#FFE8CC",
-                textColor: "#D97706"
-            },
-            {
-                label: "Help Wanted",
-                color: "#DCFCE7",
-                textColor: "#16A34A"
-            }
-        ]
     },
+
     {
         id: 2,
         name: "Florencio Dorrance",
-        email: "florencio@gmail.com",
         avatar: "https://i.pravatar.cc/150?img=12",
+        email: "florencio@gmail.com",
+        phone: "+92 301 9876543",
+        about: "Engineer",
+        about: "UI/UX Designer 🎨",
+        lastSeen: "Yesterday at 9:15 PM",
         lastMessage: "Woohoooo 😄",
         time: "24m",
-        unread: 0,
         online: false,
         active: true,
-        tags: [
-            {
-                label: "Some Content",
-                color: "#EEF2FF",
-                textColor: "#6366F1"
-            }
-        ]
     },
+
     {
         id: 3,
         name: "Lavern Laboy",
         avatar: "https://i.pravatar.cc/150?img=13",
+        email: "lavern@gmail.com",
+        about: "QA",
+        phone: "+92 302 1239876",
+        lastSeen: "Today at 10:00 AM",
         lastMessage: "Haha that's terrifying 😂",
         time: "10h",
         unread: 5,
         online: false,
-        active: false,
-        tags: [
-            {
-                label: "Bug",
-                color: "#FEE2E2",
-                textColor: "#DC2626"
-            },
-            {
-                label: "Hacktoberfest",
-                color: "#DCFCE7",
-                textColor: "#16A34A"
-            }
-        ]
+        media: [],
+        links: [],
+        documents: [],
     },
+
     {
         id: 4,
         name: "Titus Kitamura",
         avatar: "https://i.pravatar.cc/150?img=14",
+        email: "titus@gmail.com",
+        about: "Designer",
+        phone: "+92 333 4445566",
+        lastSeen: "Online",
         lastMessage: "Omg, this is amazing.",
         time: "16h",
         unread: 0,
         online: true,
-        active: false,
-        tags: [
-            {
-                label: "Question",
-                color: "#FFE8CC",
-                textColor: "#D97706"
-            },
-            {
-                label: "Some Content",
-                color: "#F3F4F6",
-                textColor: "#6B7280"
-            }
-        ]
+        media: [],
+        links: [],
+        documents: [],
     },
+
     {
         id: 5,
         name: "Geoffrey Mott",
         avatar: "https://i.pravatar.cc/150?img=15",
+        email: "geoffrey@gmail.com",
+        phone: "+92 300 5556677",
+        about: "Builder",
+        lastSeen: "2 hours ago",
         lastMessage: "Aww ❤️",
         time: "2d",
         unread: 1,
         online: true,
-        active: false,
-        tags: [
-            {
-                label: "Request",
-                color: "#DCFCE7",
-                textColor: "#16A34A"
-            }
-        ]
+        media: [],
+        links: [],
+        documents: [],
     },
+
     {
         id: 6,
         name: "Alfonzo Schuessler",
         avatar: "https://i.pravatar.cc/150?img=16",
+        email: "alfonzo@gmail.com",
+        phone: "+92 321 7778899",
+        lastSeen: "5 minutes ago",
         lastMessage: "Perfect!",
         time: "1m",
         unread: 0,
         online: false,
-        active: false,
-        tags: [
-            {
-                label: "Follow Up",
-                color: "#E0E7FF",
-                textColor: "#4338CA"
-            }
-        ]
-    }
+        media: [],
+        links: [],
+        documents: [],
+    },
 ];
