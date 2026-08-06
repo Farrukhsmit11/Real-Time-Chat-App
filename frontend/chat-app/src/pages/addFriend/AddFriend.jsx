@@ -16,17 +16,16 @@ const AddFriend = () => {
 
     const columns = [
         {
-            title: 'Avatar',
+            title: 'User',
             dataIndex: 'avatar',
-            key: 'avatar',
-            render: (url) => <UserAvatar src={url} className='profile-avatar' />
-        },
+            key: 'user',
+            render: (url, record) => (
+                <div className='avatar-name-main'>
+                    <UserAvatar src={url} className='profile-avatar' />
+                    <span>{record.name}</span>
+                </div>
 
-
-        {
-            title: 'Name',
-            dataIndex: 'name',
-            key: 'name',
+            )
         },
 
 

@@ -4,7 +4,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    transition: 0.4s;
+    transition: 0.7s;
 }
 
 .sidebar-body {
@@ -36,7 +36,6 @@
 .nav-icon {
     font-size: 24px;
     font-weight: 600;
-    color: black;
     cursor: pointer;
 }
 
@@ -52,7 +51,7 @@
     gap: 31px;
     justify-content: center;
     align-items: center;
-    margin-top: 29px;
+    margin-top: 24px;
 }
 
 .nav-items-content {
@@ -63,10 +62,15 @@
     align-items: center;
 }
 
+
 .nav-icon-main:active {
-    background: rgb(105, 105, 249);
-    border-radius: 70px;
-    color: white !important;
-    padding: 6px;
-    transform: scale(1.05);
+    background: #6c66eb;
+    color: #fff !important;
+    border-radius: 17px;
+    padding: 4px;
+    box-shadow: 0 6px 17px rgba(105, 105, 249, 0.2);
+}
+
+.route-label {
+    font-size: 13px;
 }

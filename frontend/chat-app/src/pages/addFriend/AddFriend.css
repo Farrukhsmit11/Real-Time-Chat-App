@@ -70,3 +70,9 @@
     color: white;
     height: 36px;
 }
+
+.avatar-name-main {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
