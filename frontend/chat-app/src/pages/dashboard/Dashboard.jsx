@@ -12,7 +12,7 @@ const Dashboard = () => {
             <ChatList />
 
             {selectedUser ? (
-                <ChatWindow onHeaderClick={() => setShowProfile(true)} />
+                <ChatWindow />
             ) : (
                 <EmptyChat />
             )}

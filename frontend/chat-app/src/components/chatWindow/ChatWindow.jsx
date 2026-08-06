@@ -13,7 +13,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom"
 import { handleMessages } from '../../store/features/messages/messageThunk';
 
-const ChatWindow = ({ onHeaderClick }) => {
+const ChatWindow = () => {
 
     const navigate = useNavigate()
 
@@ -35,7 +35,6 @@ const ChatWindow = ({ onHeaderClick }) => {
                             <div className='user-info'>
                                 <UserAvatar
                                     size={50}
-                                    onClick={onHeaderClick}
                                     className='profile-avatar'
                                     src={selectedUser?.avatar}
                                 />
