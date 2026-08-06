@@ -12,17 +12,21 @@ const protectRoute = async (request, response, next) => {
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY)
 
+        console.log(decoded)
+
         const user = await User.findById(decoded.id).select("-password")
 
         if (!user) {
             response.status(400).send({ message: "user not found" })
             return
         }
-        request.user = user
+        request.user = decoded
         next()
 
     } catch (error) {
+        response.status(401).send({ message: "Invalid Token" })
         console.error("Error authenticating user", error)
+
     }
 }
 
