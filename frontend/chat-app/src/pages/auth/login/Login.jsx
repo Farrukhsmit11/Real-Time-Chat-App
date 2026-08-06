@@ -42,7 +42,9 @@ const Login = () => {
       ).unwrap()
       navigate("/")
     } catch (error) {
-      message.error(error)
+      if (error.response) {
+        message.error(error.response.data.message)
+      }
       console.error(error)
     }
   }
@@ -96,7 +98,7 @@ const Login = () => {
 
                 <div className='signup-footer'>
                   <span >Don,t have an account
-                    <a href='#' onClick={() => navigate("/")}>Sign Up</a>
+                    <a href='#' onClick={() => navigate("/signUp")}>Sign Up</a>
                   </span>
                 </div>
 

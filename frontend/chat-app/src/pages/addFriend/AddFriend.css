@@ -5,15 +5,28 @@
     flex-direction: column;
 }
 
-.title {
-    padding-left: 17px;
+.add-friend-title {
+    font-size: 23px;
+    font-style: italic;
+    color: #0958d9;
+}
+
+.back-button {
+    color: var(--them-primary);
+    background-color: var(--them-white) !important;
+    border: 1px solid var(--them-stroke);
+    border-radius: 24px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 15px 9px;
 }
 
 .add-friend-header .page-header {
     display: flex;
     justify-content: left;
     gap: 18px;
-    padding-left: 12px;
+    padding-left: 25px;
 }
 
 
@@ -21,7 +34,6 @@
     border-radius: 12px !important;
     display: flex;
     align-items: center;
-    border: 1px solid var(--theme-stroke) !important;
     border-color: rgba(212, 212, 212, 0.692) !important;
 }
 
@@ -29,10 +41,6 @@
     width: 100%;
     height: 100%;
     font-family: "Plus Jakarta Sans", sans-serif;
-}
-
-.table-filters {
-    padding: 16px;
 }
 
 .table-filters .ant-tabs {
@@ -57,17 +65,8 @@
 }
 
 .add-friend-btn {
-    padding: 16px;
-    height: 35px;
-    border-radius: 20px;
     font-family: "Plus Jakarta Sans", sans-serif;
-    background: var(--them-primary);
+    background: #3182ce;
     color: white;
-}
-
-.reject-btn {
     height: 36px;
-    padding: 16px;
-    border-radius: 16px;
-    border: 1px solid #FFD5D5;
 }

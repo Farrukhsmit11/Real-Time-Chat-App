@@ -36,7 +36,7 @@
     display: flex;
     gap: 16px;
     align-items: center;
-    padding-right: 22px;
+    padding-right: 15px;
 }
 
 .actions {
@@ -58,6 +58,7 @@
     font-family: 'Instrument Sans';
     font-weight: 700;
     border: none !important;
+    background: aqua;
     display: flex;
     justify-content: center;
     border-radius: 10px;

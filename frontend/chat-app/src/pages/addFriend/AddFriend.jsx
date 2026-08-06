@@ -2,18 +2,27 @@ import React, { useState } from 'react'
 import "./AddFriend.css"
 import PageHeader from "../../components/pageHeader/PageHeader"
 import { FaArrowLeftLong } from 'react-icons/fa6'
-import { Button, Input, Radio, Select, Space, Table, Tabs } from 'antd'
+import { Avatar, Button, Input, Radio, Select, Space, Table, Tabs } from 'antd'
 import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { usersData } from './helper'
 import { PlusOutlined } from "@ant-design/icons"
 import { RxCross2 } from "react-icons/rx";
+import UserAvatar from "../../components/userAvatar/UserAvatar"
 
 const AddFriend = () => {
 
     const navigate = useNavigate();
 
     const columns = [
+        {
+            title: 'Avatar',
+            dataIndex: 'avatar',
+            key: 'avatar',
+            render: (url) => <UserAvatar src={url} className='profile-avatar' />
+        },
+
+
         {
             title: 'Name',
             dataIndex: 'name',
@@ -29,9 +38,9 @@ const AddFriend = () => {
 
 
         {
-            title: 'Phone',
-            dataIndex: 'phone',
-            key: 'phone',
+            title: 'Status',
+            dataIndex: 'status',
+            key: 'status',
         },
 
         {
@@ -40,11 +49,10 @@ const AddFriend = () => {
             key: 'actions',
             render: (_, record) => {
                 return (
-                    <Space>
-                        {/* <span>Add</span> */}
-                    </Space>
+                    <>
+                        <Button className='add-friend-btn' icon={<PlusOutlined />}>Add</Button>
+                    </>
                 )
-
             }
         },
     ];
@@ -64,7 +72,7 @@ const AddFriend = () => {
             label: "Requests",
             children: (
                 <div className='table-container'>
-                    <Table columns={columns} dataSource={[]} pagination={false} />
+                    <Table dataSource={[]} pagination={false} />
                 </div>
             )
         },
@@ -77,15 +85,15 @@ const AddFriend = () => {
                     <PageHeader
                         leftContent={
                             <div className="page-header-icon">
-                                <Button className="header-back-icon" onClick={() => navigate("/")} >
-                                    <FaArrowLeftLong />
+                                <Button className='back-button' onClick={() => navigate("/")} >
+                                    <FaArrowLeftLong className="header-back-icon" />
                                 </Button>
                             </div>
                         }
 
                         rightContent={
                             <div className="page-header-title">
-                                <h1 className='user-profile-title'>Add Friend</h1>
+                                <h1 className='add-friend-title'>Add Friend</h1>
                             </div>
                         }
 

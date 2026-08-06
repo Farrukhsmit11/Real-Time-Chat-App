@@ -19,10 +19,6 @@ const ChatList = ({ setShowProfile }) => {
                     <h1 className="chat-list-title">
                         Messages <DownOutlined className="chat-list-title-icon" />
                     </h1>
-
-                    <div className="message-count">
-                        <span className='count'>12</span>
-                    </div>
                 </div>
 
                 <div className="header-right">
@@ -47,7 +43,6 @@ const ChatList = ({ setShowProfile }) => {
                             className={`chat-card ${active === item.id ? "active" : ""}`}
                             key={item.id}
                             onClick={() => {
-                                setShowProfile(false)
                                 dispatch(setSelectedUser(item))
                             }
                             }

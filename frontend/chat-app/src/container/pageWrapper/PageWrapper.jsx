@@ -11,33 +11,22 @@ import UserAvatar from "../../components/userAvatar/UserAvatar"
 
 const PageWrapper = ({ children }) => {
 
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
-
     const { selectedUser } = useSelector((state) => state.chat)
-
-    const logoutUser = () => {
-        dispatch(handleLogout())
-        navigate("/login")
-    }
 
     return (
         <Layout hasSider>
             <Sider width={100} className='sidebar'>
-                <div className='sidebar-logo'>
-                    <img src={sideBarLogo} className='logo' />
-                </div>
+                <div className="sidebar-container">
+                    <div className="sidebar-header">
+                        <img src={sideBarLogo} className='logo' />
+                    </div>
 
-                <SideBar
-                    selectedUser={selectedUser}
-                />
+                    <div className="sidebar-body">
+                        <SideBar selectedUser={selectedUser} />
+                    </div>
 
-                <div className="sidebar-body">
-                    <div className="sidebar-bottom">
-                        <UserAvatar
-                            size={50}
-                            src="https://i.pravatar.cc/150?img=12"
-                        />
+                    <div className="sidebar-footer">
+                        <UserAvatar size={50} src="https://i.pravatar.cc/150?img=12"></UserAvatar>
                     </div>
                 </div>
             </Sider>

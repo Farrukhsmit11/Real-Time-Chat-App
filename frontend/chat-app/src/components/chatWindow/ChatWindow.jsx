@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./ChatWindow.css"
 import { data } from '../chatList/helper';
 import { IoMdCall } from "react-icons/io";
@@ -11,7 +11,7 @@ import PageHeader from "../pageHeader/PageHeader"
 import UserAvatar from '../userAvatar/UserAvatar';
 import { useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom"
-
+import { handleMessages } from '../../store/features/messages/messageThunk';
 
 const ChatWindow = ({ onHeaderClick }) => {
 
@@ -21,10 +21,10 @@ const ChatWindow = ({ onHeaderClick }) => {
 
     const { selectedUser } = useSelector((state) => state.chat)
 
-
     return (
         <>
             <div className='chat-window-container'>
+
                 <PageHeader
                     leftContent={
                         <div className="user-details-left">
@@ -40,12 +40,6 @@ const ChatWindow = ({ onHeaderClick }) => {
                                     src={selectedUser?.avatar}
                                 />
                             </div>
-                        </div>
-                    }
-
-                    rightContent={
-                        <div className="message-action-right">
-                            <Button icon={<IoMdCall className='call-icon' />} className='action-btn'></Button>
                         </div>
                     }
                 />

@@ -1,3 +1,5 @@
+import { Tag } from "antd";
+
 export const usersData = [
     {
         key: "1",
@@ -28,7 +30,7 @@ export const usersData = [
         avatar: "https://i.pravatar.cc/150?img=14",
         name: "Emma Wilson",
         email: "emma.wilson@gmail.com",
-        phone: "+92 303 4567890",
+
         active: true,
     },
     {
@@ -45,22 +47,6 @@ export const usersData = [
         name: "Sophia Davis",
         email: "sophia.davis@gmail.com",
         phone: "+92 305 6789012",
-        active: true,
-    },
-    {
-        key: "7",
-        avatar: "https://i.pravatar.cc/150?img=17",
-        name: "Daniel Harris",
-        email: "daniel.harris@gmail.com",
-        phone: "+92 306 7890123",
-        active: false,
-    },
-    {
-        key: "8",
-        avatar: "https://i.pravatar.cc/150?img=18",
-        name: "Olivia Martin",
-        email: "olivia.martin@gmail.com",
-        phone: "+92 307 8901234",
         active: true,
     },
 ];

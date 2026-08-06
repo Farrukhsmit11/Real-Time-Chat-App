@@ -52,7 +52,7 @@
     display: flex;
     align-items: center;
     font-size: 27px;
-    font-weight: 700;
+    font-weight: 600;
     color: #14142b;
     padding-left: 12px;
     margin: 0;
@@ -65,9 +65,8 @@
 }
 
 .settings-list-main {
-    flex: 1;
-    min-height: 0;
-    overflow-y: scroll;
+    max-height: 600px;
+    overflow-y: auto;
     padding-left: 15px;
 }
 
@@ -112,5 +111,6 @@
     font-weight: 500;
     font-style: italic;
     font-size: 15px;
-    line-height: 1.6
+    line-height: 1.6;
+    color: gray;
 }

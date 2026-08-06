@@ -6,6 +6,7 @@ import { LuMessageCircleMore } from "react-icons/lu";
 import { IoIosSettings } from "react-icons/io";
 import { routes } from '../../routes/ProtectedRoutes';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { TbLogout2 } from 'react-icons/tb';
 
 const SideBar = () => {
 
@@ -15,15 +16,21 @@ const SideBar = () => {
         <div className='nav-items-main'>
             {routes.map((route, index) => {
                 return (
-                    <NavLink to={route.path} key={route.key}>
+                    <NavLink
+                        className={({ isActive }) => isActive ? "nav-icon-main:active" : "nav-icon-main"}
+                        to={route.path}
+                        key={route.key}
+                    >
                         <div className='nav-icon-main' key={index}>
                             <div className='nav-items-content'>
                                 <span className='nav-icon'> {route.icon}
                                 </span>
+
+                                <span className='route-label'>{route.key}</span>
+
                             </div>
                         </div>
                     </NavLink>
-
                 )
             })}
         </div>

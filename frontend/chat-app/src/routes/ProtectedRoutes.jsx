@@ -8,7 +8,6 @@ import Settings from '../pages/settings/Settings'
 import { IoSettingsOutline } from "react-icons/io5";
 import { PiChatsDuotone } from "react-icons/pi";
 import { PiChatsTeardropBold } from "react-icons/pi";
-import UserProfile from '../pages/userProfile/UserProfile'
 import Dashboard from '../pages/dashboard/Dashboard'
 
 
@@ -22,7 +21,7 @@ export const routes = [
 
     {
         path: "/addFreind",
-        key: "AddFriend",
+        key: "Add Friend",
         element: <AddFriend />,
         icon: <UserAddOutlined />
     },
@@ -33,11 +32,7 @@ export const routes = [
         icon: <IoSettingsOutline />
     },
 
-    {
-        path: "/userProfile",
-        key: "UserProfile",
-        element: <UserProfile />
-    }
+
 ]
 
 const ProtectedRoutes = () => {
