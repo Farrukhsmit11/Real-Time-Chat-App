@@ -71,6 +71,11 @@
     height: 36px;
 }
 
+.add-friend-btn:hover {
+    background: #3182ce !important;
+    color: white !important;
+}
+
 .avatar-name-main {
     display: flex;
     align-items: center;

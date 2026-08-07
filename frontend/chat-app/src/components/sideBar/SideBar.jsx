@@ -17,18 +17,16 @@ const SideBar = () => {
             {routes.map((route, index) => {
                 return (
                     <NavLink
-                        className={({ isActive }) => isActive ? "nav-icon-main:active" : "nav-icon-main"}
+                        className={({ isActive }) => `nav-icon-main  ${isActive ? "active" : ""}`}
                         to={route.path}
                         key={route.key}
                     >
-                        <div className='nav-icon-main' key={index}>
-                            <div className='nav-items-content'>
-                                <span className='nav-icon'> {route.icon}
-                                </span>
+                        <div className='nav-items-content'>
+                            <span className='nav-icon'> {route.icon}
+                            </span>
 
-                                <span className='route-label'>{route.key}</span>
+                            <span className='route-label'>{route.key}</span>
 
-                            </div>
                         </div>
                     </NavLink>
                 )

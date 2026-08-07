@@ -12,6 +12,8 @@ const ChatList = ({ setShowProfile }) => {
     const [active, setActive] = useState(null)
     const dispatch = useDispatch()
 
+    const { selectedUser } = useSelector((state) => state.chat)
+
     return (
         <div className="chat-list-container">
             <div className="chat-list-header">
@@ -40,7 +42,7 @@ const ChatList = ({ setShowProfile }) => {
                 {data.map((item) => {
                     return (
                         <div
-                            className={`chat-card ${active === item.id ? "active" : ""}`}
+                            className={`chat-card ${selectedUser?.id === item.id ? "active" : ""}`}
                             key={item.id}
                             onClick={() => {
                                 dispatch(setSelectedUser(item))

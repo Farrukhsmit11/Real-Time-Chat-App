@@ -1,0 +1,51 @@
+.approve-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 38px;
+    padding: 0 21px;
+    box-shadow: none !important;
+    background: rgb(98, 98, 221);
+    border: none !important;
+    font-size: 15px;
+    color: white;
+}
+
+.approve-btn:hover {
+    background: rgb(98, 98, 221) !important;
+    color: white !important;
+}
+
+
+.buttons-main {
+    width: 100%;
+    display: flex;
+    gap: 23px;
+    align-items: center;
+}
+
+.reject-btn {
+    width: 120px;
+    height: 38px;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-weight: 600;
+    box-shadow: none !important;
+    color: white;
+    background: rgb(202, 73, 73);
+
+}
+
+.reject-btn:hover {
+    background: rgb(202, 73, 73) !important;
+    color: white !important;
+}
+
+.reject-icon {
+    font-size: 19px;
+}
+
+.custom-tag {
+    font-weight: 700;
+    font-family: "Plus Jakarta Sans";
+}

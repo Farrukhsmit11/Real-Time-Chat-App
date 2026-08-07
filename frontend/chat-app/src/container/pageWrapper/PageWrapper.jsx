@@ -1,4 +1,4 @@
-import { Avatar, Layout } from "antd"
+import { Avatar, Layout, Popover } from "antd"
 import Sider from "antd/es/layout/Sider"
 import { useState } from "react"
 import { SideBar } from "../../components"
@@ -8,10 +8,31 @@ import { useDispatch, useSelector } from "react-redux"
 import "./PageWrapper.css"
 import { useNavigate } from "react-router-dom"
 import UserAvatar from "../../components/userAvatar/UserAvatar"
+import { FiUser } from "react-icons/fi";
+import { TbLogout2 } from "react-icons/tb";
+import { handleLogout } from "../../store/features/auth/authThunk"
 
 const PageWrapper = ({ children }) => {
 
     const { selectedUser } = useSelector((state) => state.chat)
+
+    const dispatch = useDispatch()
+
+    const LogoutUser = async () => {
+        dispatch(handleLogout())
+    }
+
+    const content = (
+        <div className="popover-content-main">
+            <h3 style={{ margin: 0 }} className="content-item"> <FiUser className="popover-icon" />  Profile</h3>
+            <div className="content-item">
+                <h3
+                    style={{ margin: 0 }}
+                    onClick={() => LogoutUser()}
+                    className="content-item"> <TbLogout2 className="logout-icon" />Logout</h3>
+            </div>
+        </div>
+    );
 
     return (
         <Layout hasSider>
@@ -26,7 +47,9 @@ const PageWrapper = ({ children }) => {
                     </div>
 
                     <div className="sidebar-footer">
-                        <UserAvatar size={50} src="https://i.pravatar.cc/150?img=12"></UserAvatar>
+                        <Popover content={content} trigger="hover">
+                            <Avatar size={50} src="https://i.pravatar.cc/150?img=12"></Avatar>
+                        </Popover>
                     </div>
                 </div>
             </Sider>

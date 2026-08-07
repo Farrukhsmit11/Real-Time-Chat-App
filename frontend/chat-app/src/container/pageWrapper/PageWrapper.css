@@ -18,3 +18,46 @@
 .user-avatar {
     cursor: pointer;
 }
+
+.popover-content-main {
+    width: 100%;
+    display: flex;
+    gap: 9px;
+    flex-direction: column;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-weight: 600;
+}
+
+.content-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 1px 0;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    color: #2d3748;
+}
+
+.content-item:active {
+    transform: scale(0.98);
+}
+
+.popover-icon {
+    font-size: 17px;
+    color: #1677ff;
+    transition: color 0.25s ease;
+}
+
+.logout-icon {
+    font-size: 17px;
+    color: #a30b0eb0;
+    transition: color 0.25s ease;
+}
+
+.ant-popover {
+    box-shadow: none !important;
+}

@@ -62,13 +62,19 @@
     align-items: center;
 }
 
+.nav-icon-main.active {
+    .nav-items-content {
+        .nav-icon {
+            background-color: var(--them-primary);
+            color: white;
+            padding: 7px;
+            border-radius: 13px;
+        }
 
-.nav-icon-main:active {
-    background: #6c66eb;
-    color: #fff !important;
-    border-radius: 17px;
-    padding: 4px;
-    box-shadow: 0 6px 17px rgba(105, 105, 249, 0.2);
+        .route-label {
+            color: black;
+        }
+    }
 }
 
 .route-label {

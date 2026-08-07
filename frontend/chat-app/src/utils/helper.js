@@ -17,3 +17,12 @@ export const colors = [
     "#eb2f96",
     "#722ed1"
 ]
+
+export const ConditionalRendering = ({condition, children, elseChild}) => {
+    if (condition) {
+        return children
+    } else if (elseChild) {
+        return elseChild
+    }
+    return null
+}
