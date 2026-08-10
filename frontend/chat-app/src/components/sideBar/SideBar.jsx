@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./SideBar.css"
 import { HomeOutlined } from "@ant-design/icons"
 import { LuUsers } from "react-icons/lu";
@@ -24,9 +24,7 @@ const SideBar = () => {
                         <div className='nav-items-content'>
                             <span className='nav-icon'> {route.icon}
                             </span>
-
                             <span className='route-label'>{route.key}</span>
-
                         </div>
                     </NavLink>
                 )

@@ -6,7 +6,6 @@ import PageHeader from "../../components/pageHeader/PageHeader"
 import "./Settings.css"
 import { SearchOutlined } from '@ant-design/icons'
 import UserAvatar from '../../components/userAvatar/UserAvatar'
-import { Content } from 'antd/es/layout/layout'
 
 const Settings = () => {
     return (
@@ -15,9 +14,7 @@ const Settings = () => {
                 <div className="settings-header-main">
                     <div className="settings-header-left">
                         <PageHeader
-                            leftContent={
-                                <h1 className='settings-header-title'>Settings</h1>
-                            }
+                            title={<h1 className='settings-header-title'>Settings</h1>}
                         ></PageHeader>
                     </div>
                 </div>
@@ -42,14 +39,6 @@ const Settings = () => {
                     })}
                 </div>
             </Sider>
-
-            <Layout>
-                <Content>
-                    <div className="settings-content">
-
-                    </div>
-                </Content>
-            </Layout>
         </Layout>
     )
 }

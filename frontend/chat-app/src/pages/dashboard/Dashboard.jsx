@@ -11,7 +11,7 @@ const Dashboard = () => {
         <div className='chats-page'>
             <ChatList />
 
-            {selectedUser ? (
+            {selectedUser ? (    
                 <ChatWindow />
             ) : (
                 <EmptyChat />

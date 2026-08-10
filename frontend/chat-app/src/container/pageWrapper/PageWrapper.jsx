@@ -11,10 +11,12 @@ import UserAvatar from "../../components/userAvatar/UserAvatar"
 import { FiUser } from "react-icons/fi";
 import { TbLogout2 } from "react-icons/tb";
 import { handleLogout } from "../../store/features/auth/authThunk"
+import { getInitials } from "../../utils/helper"
 
 const PageWrapper = ({ children }) => {
 
     const { selectedUser } = useSelector((state) => state.chat)
+    const { user } = useSelector((state) => state.auth)
 
     const dispatch = useDispatch()
 
@@ -47,9 +49,14 @@ const PageWrapper = ({ children }) => {
                     </div>
 
                     <div className="sidebar-footer">
-                        <Popover content={content} trigger="hover">
-                            <Avatar size={50} src="https://i.pravatar.cc/150?img=12"></Avatar>
-                        </Popover>
+                        {/* <Popover content={content} trigger="hover"> */}
+                            {/* <UserAvatar
+                                size={50}
+                                src={user?.avatar}
+                                name={user?.avatar}
+                            >
+                            </UserAvatar> */}
+                        {/* </Popover> */}
                     </div>
                 </div>
             </Sider>

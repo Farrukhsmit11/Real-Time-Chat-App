@@ -53,7 +53,6 @@ const authSlice = createSlice({
         builder
             .addCase(getProfile.pending, (state) => {
                 state.loading = true
-                state.isAuthenticate = false
             })
 
             .addCase(getProfile.fulfilled, (state, action) => {

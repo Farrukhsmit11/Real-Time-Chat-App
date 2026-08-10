@@ -1,12 +1,12 @@
 export const getInitials = (name) => {
-    if (!name) return
+    if (!name) return "";
     return name
         .trim()
-        .split(" ")
+        .split(/\s+/)
         .map((word) => word[0])
         .join("")
         .toUpperCase()
-        .slice(0, 4)
+        .slice(0, 2)
 
 }
 

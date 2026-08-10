@@ -4,7 +4,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    transition: 0.7s;
 }
 
 .sidebar-body {
@@ -26,7 +25,7 @@
     justify-content: center !important;
     align-items: center;
     margin-top: auto;
-    padding-bottom: 10px;
+    padding-bottom: 13px;
 }
 
 .nav-item {
@@ -37,6 +36,8 @@
     font-size: 24px;
     font-weight: 600;
     cursor: pointer;
+    border-radius: 13px;
+    color: black;
 }
 
 .add-new-chat-icon {
@@ -60,21 +61,6 @@
     gap: 12px;
     justify-content: center;
     align-items: center;
-}
-
-.nav-icon-main.active {
-    .nav-items-content {
-        .nav-icon {
-            background-color: var(--them-primary);
-            color: white;
-            padding: 7px;
-            border-radius: 13px;
-        }
-
-        .route-label {
-            color: black;
-        }
-    }
 }
 
 .route-label {

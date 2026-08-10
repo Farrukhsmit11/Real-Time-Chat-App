@@ -9,11 +9,11 @@ import { IoIosSend } from "react-icons/io";
 import { BsEmojiSmile } from "react-icons/bs";
 import PageHeader from "../pageHeader/PageHeader"
 import UserAvatar from '../userAvatar/UserAvatar';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom"
-import { handleMessages } from '../../store/features/messages/messageThunk';
+import { ConditionalRendering } from '../../utils/helper';
 
-const ChatWindow = () => {
+const ChatWindow = ({ ...headerProps }) => {
 
     const navigate = useNavigate()
 
@@ -24,24 +24,11 @@ const ChatWindow = () => {
     return (
         <>
             <div className='chat-window-container'>
-
-                <PageHeader
-                    leftContent={
-                        <div className="user-details-left">
-                            <div className='user-info'>
-                                <h1 className='user-name'>{selectedUser?.name}</h1>
-                                <span className='user-status'>{selectedUser?.status ? 'Online' : 'Offline'}</span>
-                            </div>
-                            <div className='user-info'>
-                                <UserAvatar
-                                    size={50}
-                                    className='profile-avatar'
-                                    src={selectedUser?.avatar}
-                                />
-                            </div>
-                        </div>
-                    }
-                />
+                <div className="header-section">
+                    <PageHeader
+                        user={selectedUser}
+                    />
+                </div>
 
                 <div className="send-message-area">
                     <Upload>

@@ -68,3 +68,8 @@ ant-card,
   font-family: 'Plus Jakarta Sans';
   font-weight: 600;
 }
+
+.sidebar-footer .ant-avatar {
+  background: #b42323cf;
+  font-weight: 700;
+}
