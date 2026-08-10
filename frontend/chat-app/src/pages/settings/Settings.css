@@ -26,7 +26,7 @@
 }
 
 .input-group {
-    padding: 16px 0px;
+    padding: 16px 8px;
 }
 
 .settings-list {
@@ -59,10 +59,6 @@
     font-family: 'Plus Jakarta Sans';
 }
 
-.input-group {
-    flex-shrink: 0;
-    padding: 16px 0px;
-}
 
 .settings-list-main {
     max-height: 600px;

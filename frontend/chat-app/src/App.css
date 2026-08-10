@@ -73,3 +73,12 @@ ant-card,
   background: #b42323cf;
   font-weight: 700;
 }
+
+.search-input {
+    border: var(--border-width) solid var(--border-color);
+    border-radius: 13px;
+    background: #F5F6F8 !important;
+    padding: 8.8px 16px;
+    font-family: var(--jakarta);
+    font-weight: 600;
+}

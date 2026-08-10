@@ -9,7 +9,7 @@ export const usersData = [
         phone: "+92 300 1234567",
         active: true,
         createdAt: "13 July 2025",
-        status: "inactive"
+        status: "inActive"
     },
     {
         key: "2",
@@ -18,7 +18,7 @@ export const usersData = [
         email: "sarah.johnson@gmail.com",
         phone: "+92 301 2345678",
         createdAt: "20 July 2025",
-        status: "active"
+        status: "Active"
     },
     {
         key: "3",
@@ -27,7 +27,7 @@ export const usersData = [
         email: "michael.brown@gmail.com",
         phone: "+92 302 3456789",
         createdAt: "16 July 2025",
-        status: "inactive",
+        status: "inActive",
     },
     {
         key: "4",
