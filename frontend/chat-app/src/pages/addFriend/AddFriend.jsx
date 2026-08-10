@@ -21,14 +21,7 @@ const AddFriend = () => {
             <div className="add-friend-container">
                 <div className="add-friend-header">
                     <PageHeader
-                        // leftContent={
-                        //     <div className="page-header-icon">
-                        //         <Button className='back-button' onClick={() => navigate("/")} >
-                        //             <FaArrowLeftLong className="header-back-icon" />
-                        //         </Button>
-                        //     </div>
-                        // }
-                        headerProps={headerProps}
+                        {...headerProps}
                     ></PageHeader>
                 </div>
 
