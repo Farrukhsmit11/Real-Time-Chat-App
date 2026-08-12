@@ -49,14 +49,13 @@ const PageWrapper = ({ children }) => {
                     </div>
 
                     <div className="sidebar-footer">
-                        {/* <Popover content={content} trigger="hover"> */}
-                            {/* <UserAvatar
-                                size={50}
-                                src={user?.avatar}
-                                name={user?.avatar}
+                        <Popover content={content} trigger="hover">
+                            <UserAvatar
+                                size={53}
+                                src="https://i.pravatar.cc/150?img=11"
                             >
-                            </UserAvatar> */}
-                        {/* </Popover> */}
+                            </UserAvatar>
+                        </Popover>
                     </div>
                 </div>
             </Sider>
