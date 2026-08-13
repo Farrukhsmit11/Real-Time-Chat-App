@@ -75,4 +75,13 @@ export const requestsData = [
         status: "Rejected",
     },
 
+    {
+        key: "3",
+        requesterName: "Ahmed Ali",
+        avatar: "https://i.pravatar.cc/150?img=14",
+        requesterEmail: "ahmedAli@example.com",
+        requestTime: "06 Aug 2026, 08:45 PM",
+        status: "Pending",
+    },
+
 ];

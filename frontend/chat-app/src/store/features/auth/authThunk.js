@@ -16,7 +16,7 @@ export const handleSignup = createAsyncThunk(
             return res.data
         } catch (error) {
             return rejectWithValue(
-                error.response?.data?.message
+                error.response?.data?.message || "Signup failed"
             )
             console.error("error Creating User", error)
         }

@@ -61,7 +61,7 @@
 
 
 .settings-list-main {
-    max-height: 600px;
+   height: 600px;
     overflow-y: auto;
     padding-left: 15px;
 }
@@ -70,7 +70,7 @@
     font-size: 17px;
     font-weight: 600;
     font-family: 'Plus Jakarta Sans', sans-serif;
-    line-height: 1.6;
+    line-height: 1.5;
 }
 
 .list-item {

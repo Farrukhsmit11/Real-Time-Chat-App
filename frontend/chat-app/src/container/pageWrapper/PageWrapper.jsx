@@ -11,12 +11,11 @@ import UserAvatar from "../../components/userAvatar/UserAvatar"
 import { FiUser } from "react-icons/fi";
 import { TbLogout2 } from "react-icons/tb";
 import { handleLogout } from "../../store/features/auth/authThunk"
-import { getInitials } from "../../utils/helper"
+import { IoIosNotificationsOutline } from "react-icons/io"
 
 const PageWrapper = ({ children }) => {
 
     const { selectedUser } = useSelector((state) => state.chat)
-    const { user } = useSelector((state) => state.auth)
 
     const dispatch = useDispatch()
 
@@ -24,9 +23,11 @@ const PageWrapper = ({ children }) => {
         dispatch(handleLogout())
     }
 
+    const navigate = useNavigate();
+
     const content = (
         <div className="popover-content-main">
-            <h3 style={{ margin: 0 }} className="content-item"> <FiUser className="popover-icon" />  Profile</h3>
+            <h3 style={{ margin: 0 }} className="content-item" onClick={() => navigate("/userProfile")} > <FiUser className="popover-icon" />  Profile</h3>
             <div className="content-item">
                 <h3
                     style={{ margin: 0 }}
@@ -52,7 +53,6 @@ const PageWrapper = ({ children }) => {
                         <Popover content={content} trigger="hover">
                             <UserAvatar
                                 size={53}
-                                src="https://i.pravatar.cc/150?img=11"
                             >
                             </UserAvatar>
                         </Popover>

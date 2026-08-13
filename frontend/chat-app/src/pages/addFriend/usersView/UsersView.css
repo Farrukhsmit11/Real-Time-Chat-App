@@ -1,0 +1,14 @@
+.add-friend-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 42px;
+    padding: 0 19px;
+    border: none;
+    box-shadow: none !important;
+    background: #625ce6;
+    border: none !important;
+    font-size: 15px;
+    color: white;
+}

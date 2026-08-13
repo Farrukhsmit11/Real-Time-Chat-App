@@ -14,8 +14,9 @@
     align-items: center;
     justify-content: left;
     gap: 19px;
-    flex-direction: row-reverse;
     padding-left: 8px;
+    flex-direction: row-reverse;
+    width: 100%;
 }
 
 .user-name {
@@ -49,9 +50,7 @@
     border-radius: 0px;
 }
 
-.call-icon {
-    color: blue;
-}
+
 
 .action-btn {
     color: blue;
@@ -70,10 +69,6 @@
 .profile-icon {
     font-size: 21px;
     font-weight: 600;
-}
-
-.call-icon {
-    font-size: 2px;
 }
 
 
@@ -118,5 +113,42 @@
     display: flex;
     align-items: flex-start;
     flex-direction: column;
-    gap: 4px;
+    gap: 3px;
+}
+
+
+.messages-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.message-bubble {
+    max-width: 60%;
+    padding: 8px 12px;
+    border-radius: 12px;
+    font-size: 14px;
+}
+
+.message-bubble.sent {
+    align-self: flex-end;
+    background-color: #1677ff;
+    color: #fff;
+}
+
+.message-bubble.received {
+    align-self: flex-start;
+    background-color: #f0f0f0;
+    color: #000;
+}
+
+.message-time {
+    display: block;
+    font-size: 10px;
+    opacity: 0.7;
+    margin-top: 4px;
+    text-align: right;
 }

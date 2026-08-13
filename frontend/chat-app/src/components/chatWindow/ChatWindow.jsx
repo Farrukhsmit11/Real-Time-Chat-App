@@ -12,6 +12,7 @@ import UserAvatar from '../userAvatar/UserAvatar';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom"
 import { ConditionalRendering } from '../../utils/helper';
+import { messages } from './helper';
 
 const ChatWindow = ({ ...headerProps }) => {
 

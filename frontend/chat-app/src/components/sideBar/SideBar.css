@@ -22,12 +22,12 @@
     justify-content: center;
     align-items: center;
     height: 83px;
-    width: 100%;
-    border-bottom: var(--border-width) solid var(--border-color) !important;
 }
 
 .sidebar-footer {
     display: flex;
+    flex-direction: column;
+    gap: 24px;
     justify-content: center !important;
     align-items: center;
     margin-top: auto;
@@ -71,4 +71,13 @@
 
 .route-label {
     font-size: 13px;
+    color: #0059F7;
+}
+
+.route-label:hover {
+    color: #0059F7 !important;
+}
+
+.notification-icon{
+    font-size: 22px;
 }

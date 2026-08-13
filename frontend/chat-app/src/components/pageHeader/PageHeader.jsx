@@ -5,6 +5,12 @@ import { FaArrowLeftLong } from 'react-icons/fa6'
 import { useNavigate } from 'react-router-dom'
 import { ConditionalRendering } from './../../utils/helper'
 import UserAvatar from '../userAvatar/UserAvatar'
+import { IoMdCall } from "react-icons/io";
+import { SlOptionsVertical } from "react-icons/sl";
+import { IoIosNotificationsOutline } from "react-icons/io";
+
+
+
 
 const PageHeader = ({ ...headerProps }) => {
 
@@ -31,19 +37,38 @@ const PageHeader = ({ ...headerProps }) => {
                 </div>
 
                 {user && (
-                    <div className='user-details-left'>
-                        <div className='user-info'>
-                            <h1 className='user-name'>{user?.name}</h1>
-                            <span className='user-status'>{user?.status ? 'Online' : 'Offline'}</span>
+                    <>
+                        <div className='user-details-left'>
+                            <div className='user-info'>
+                                <h1 className='user-name'>{user?.name}</h1>
+                                <span className='user-status'>{user?.status ? 'Online' : 'Offline'}</span>
+                            </div>
+                            <UserAvatar
+                                size={50}
+                                className='profile-avatar'
+                                src={user?.avatar}
+                            />
                         </div>
-                        <UserAvatar
-                            size={50}
-                            className='profile-avatar'
-                            src={user?.avatar}
-                        />
-                    </div>
+
+                        <div className="user-details-right">
+                           
+
+                            <Button
+                                className='call-btn'
+                                icon={
+                                    <IoMdCall className='call-icon' />
+                                }>
+                                Call
+                            </Button>
+
+
+
+
+
+                        </div>
+                    </>
+
                 )}
-                {leftContent}
 
                 <div className="page-header-right">
                     <ConditionalRendering
@@ -54,9 +79,8 @@ const PageHeader = ({ ...headerProps }) => {
                             </div>
                         }
                     />
-                    {rightContent}
-                </div>
 
+                </div>
             </div>
         </div>
     )

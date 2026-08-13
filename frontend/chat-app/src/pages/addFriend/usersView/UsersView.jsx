@@ -3,6 +3,9 @@ import React from 'react'
 import { usersData } from '../helper';
 import UserAvatar from '../../../components/userAvatar/UserAvatar';
 import { PlusOutlined } from '@ant-design/icons';
+import { RxCross2 } from "react-icons/rx";
+import "./UsersView.css"
+import { MdDelete } from "react-icons/md";
 
 const UsersView = () => {
 
@@ -58,9 +61,11 @@ const UsersView = () => {
             key: 'actions',
             render: (_, record) => {
                 return (
-                    <>
-                        <Button className='add-friend-btn' icon={<PlusOutlined />}>Add</Button>
-                    </>
+                    <div className='buttons-main'>
+                        <Button className='add-friend-btn' icon={<PlusOutlined />}>
+                            Add
+                        </Button>
+                    </div>
                 )
             }
         },

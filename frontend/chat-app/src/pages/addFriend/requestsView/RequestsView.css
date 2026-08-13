@@ -1,12 +1,13 @@
 .approve-btn {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    height: 38px;
-    padding: 0 21px;
+    height: 42px;
+    padding: 0 19px;
+    border: none;
     box-shadow: none !important;
-    background: rgb(98, 98, 221);
+    background: #625ce6;
     border: none !important;
     font-size: 15px;
     color: white;
@@ -26,13 +27,21 @@
 }
 
 .reject-btn {
-    height: 38px;
-    font-family: "Plus Jakarta Sans", sans-serif;
-    font-weight: 600;
-    box-shadow: none !important;
-    color: white;
-    background: rgb(202, 73, 73);
-
+    width: 106px;
+    height: 42px;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 16px !important;
+    border: none !important;
+    border-radius: 6px !important;
+    background: #d64b4b !important;
+    color: #ffffff !important;
+    font-size: 15px;
+    font-weight: 500;
+    box-shadow: none;
+    transition: all 0.2s ease;
 }
 
 .reject-btn:hover {

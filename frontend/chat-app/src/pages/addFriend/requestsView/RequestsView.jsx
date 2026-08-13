@@ -80,7 +80,14 @@ const RequestsView = () => {
 
     return (
         <div className='table-container'>
-            <Table columns={columns} dataSource={requestsData}></Table>
+            <Table
+                columns={columns}
+                rowKey="_id"
+                pagination={{
+                    pageSize: 5,
+                    showSizeChanger: false
+                }}
+                dataSource={requestsData}></Table>
         </div>
     )
 }
