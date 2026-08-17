@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import "./ChatWindow.css"
 import { data } from '../chatList/helper';
 import { IoMdCall } from "react-icons/io";
-import { Button, Input, Upload } from 'antd';
+import { Button, Input, Skeleton, Upload } from 'antd';
 import { LiaUserSolid } from "react-icons/lia";
 import { PaperClipOutlined, UploadOutlined } from '@ant-design/icons';
 import { IoIosSend } from "react-icons/io";
@@ -22,6 +22,15 @@ const ChatWindow = ({ ...headerProps }) => {
 
     const { selectedUser } = useSelector((state) => state.chat)
 
+    const [messagesLoading, setMessagesLoading] = useState(false)
+
+    const filteredMessages = messages.filter((message) => {
+        return (
+            message.senderId === selectedUser?.id ||
+            message.receiverId === selectedUser?.id
+        )
+    })
+
     return (
         <>
             <div className='chat-window-container'>
@@ -29,6 +38,42 @@ const ChatWindow = ({ ...headerProps }) => {
                     <PageHeader
                         user={selectedUser}
                     />
+                </div>
+
+                <div className="messages-container">
+
+                    {filteredMessages.map((msg) => {
+
+                        const isSent = msg.senderId === selectedUser?.id;
+
+                        return (
+                            <div
+                                key={msg.id}
+                                className={
+                                    isSent
+                                        ? "message-row message-row-sent"
+                                        : "message-row message-row-received"
+                                }
+                            >
+                                <div
+                                    className={
+                                        isSent
+                                            ? "message-bubble message-bubble-sent"
+                                            : "message-bubble message-bubble-received"
+                                    }
+                                >
+                                    <span className="message-text">
+                                        {msg.text}
+                                    </span>
+
+                                    <span className="message-time">
+                                        {msg.time}
+                                    </span>
+                                </div>
+                            </div>
+                        );
+                    })
+                    }
                 </div>
 
                 <div className="send-message-area">
@@ -46,6 +91,7 @@ const ChatWindow = ({ ...headerProps }) => {
                         }
                     >
                     </Input>
+
                 </div>
             </div>
         </>

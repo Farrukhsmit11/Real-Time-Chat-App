@@ -45,7 +45,7 @@ a {
 
 .ant-checkbox-label {
   font-weight: 600;
-  --jakarta: "Plus Jakarta Sans", sans-serif;
+  font-family: var(--jakarta);
 }
 
 .ant-divider .--ant-margin-lg {
@@ -65,7 +65,7 @@ ant-card,
 }
 
 .ant-table-body {
-  font-family: 'Plus Jakarta Sans';
+  font-family: var(--jakarta);
   font-weight: 600;
 }
 
@@ -75,10 +75,44 @@ ant-card,
 }
 
 .search-input {
-    border: var(--border-width) solid var(--border-color);
-    border-radius: 13px;
-    background: #F5F6F8 !important;
-    padding: 8.8px 16px;
-    font-family: var(--jakarta);
-    font-weight: 600;
+  border: var(--border-width) solid var(--border-color);
+  border-radius: 13px;
+  background: #F5F6F8 !important;
+  padding: 8.8px 16px;
+  font-family: var(--jakarta);
+  font-weight: 600;
+}
+
+
+.form-label {
+  font-size: 16px;
+  font-family: "Plus Jakarta Sans";
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.form-input {
+  width: 100%;
+  height: 42px;
+  border-radius: 34px;
+  border: 1px solid #DEEAFF !important;
+  font-family: var(--jakarta);
+  font-weight: 600;
+  padding: 8.8px 16px;
+  color: black !important;
+}
+
+.ant-tag {
+  font-family: var(--jakarta) !important;
+  font-weight: 500;
+}
+
+.ant-descriptions-item-label{
+  font-weight: 600 !important;
+  font-family: var(--jakarta) !important;
+}
+
+.ant-descriptions-item-content{
+  font-weight: 600 !important;
+  font-family: var(--jakarta) !important;
 }

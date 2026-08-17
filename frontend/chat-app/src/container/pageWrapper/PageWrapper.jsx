@@ -27,10 +27,9 @@ const PageWrapper = ({ children }) => {
 
     const content = (
         <div className="popover-content-main">
-            <h3 style={{ margin: 0 }} className="content-item" onClick={() => navigate("/userProfile")} > <FiUser className="popover-icon" />  Profile</h3>
+            <h3 className="content-item" onClick={() => navigate("/userProfile")} > <FiUser className="popover-icon" />  Profile</h3>
             <div className="content-item">
                 <h3
-                    style={{ margin: 0 }}
                     onClick={() => LogoutUser()}
                     className="content-item"> <TbLogout2 className="logout-icon" />Logout</h3>
             </div>

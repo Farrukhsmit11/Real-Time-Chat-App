@@ -8,7 +8,7 @@ import { routes } from '../../routes/ProtectedRoutes';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { TbLogout2 } from 'react-icons/tb';
 
-const SideBar = () => {
+const SideBar = ({isActive}) => {
 
     const navigate = useNavigate()
 
@@ -17,14 +17,17 @@ const SideBar = () => {
             {routes.map((route, index) => {
                 return (
                     <NavLink
-                        className={({ isActive }) => `nav-icon-main  ${isActive ? "active" : ""}`}
+                        className={({ isActive }) => `nav-item-link  ${isActive ? "active" : ""}`}
                         to={route.path}
                         key={route.key}
                     >
                         <div className='nav-items-content'>
                             <span className='nav-icon'> {route.icon}
                             </span>
-                            <span className='route-label'>{route.key}</span>
+                            <span
+                                className="route-label"
+                            >
+                                {route.key}</span>
                         </div>
                     </NavLink>
                 )

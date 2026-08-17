@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import "./Dashboard.css"
 import { ChatList, ChatWindow } from '../../components'
 import { useSelector } from 'react-redux'
+import EmptyChat from '../../components/emptyChat/EmptyChat'
 
 const Dashboard = () => {
 
@@ -14,7 +15,7 @@ const Dashboard = () => {
             {selectedUser ? (
                 <ChatWindow />
             ) : (
-                ""
+                <EmptyChat />
             )}
         </div>
     )

@@ -40,7 +40,7 @@ const Login = () => {
         password
       })
       ).unwrap()
-      navigate("/")
+      navigate("/dashboard")
     } catch (error) {
       if (error.response) {
         message.error(error.response.data.message)
@@ -51,7 +51,7 @@ const Login = () => {
 
   return (
     <>
-      <div className='login-container'>
+      <div className='auth-container'>
         <div className="auth-card">
           <div className="auth-header">
             <h1 className='auth-title'>Sign In 👋</h1>

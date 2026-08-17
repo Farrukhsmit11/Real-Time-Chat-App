@@ -13,7 +13,8 @@ const AddFriend = () => {
     const headerProps = {
         renderGoBack : true,
         title : "Add Friend",
-        subtitle : ""
+        subtitle : "",
+        className: "add-friend-header"
     }
 
     return (

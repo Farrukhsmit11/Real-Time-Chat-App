@@ -5,7 +5,7 @@ import { Login, SignUp } from '../pages/auth'
 const Auth = () => {
     return (
         <Routes>
-            <Route path='/' element={<Login />}></Route>
+            <Route path='/login' element={<Login />}></Route>
             <Route path='/signUp' element={<SignUp />}></Route>
             <Route path='*' element={<Login />}></Route>
         </Routes>

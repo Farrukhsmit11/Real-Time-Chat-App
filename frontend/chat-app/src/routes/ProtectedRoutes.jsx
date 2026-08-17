@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react'
 import { AddFriend } from '../pages'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import Loader from '../components/loader/Loader'
 import { HomeOutlined, PlusCircleOutlined, SettingFilled, UserAddOutlined } from '@ant-design/icons'
 import { LuMessageCircleMore, LuUsers } from 'react-icons/lu'
@@ -14,7 +14,7 @@ import UserProfile from "../pages/userProfile/UserProfile"
 
 export const routes = [
     {
-        path: "/",
+        path: "/dashboard",
         key: "Dashboard",
         element: <Dashboard />,
         icon: <HomeOutlined />,
@@ -52,6 +52,7 @@ const ProtectedRoutes = () => {
                 })}
 
                 <Route path='/userProfile' element={<UserProfile />}></Route>
+                <Route path='*' element={<Navigate to="/dashboard" replace />}></Route>
             </Routes>
         </Suspense>
 

@@ -1,0 +1,35 @@
+.modal-header {
+    margin-bottom: 34px;
+}
+
+.modal-header h2 {
+    font-size: 20px;
+    font-family: 'Plus Jakarta Sans';
+    font-weight: 600;
+}
+
+.edit-profile-modal .ant-modal-container {
+    border-radius: 13px;
+}
+
+.edit-modal-description {
+    font-size: 16px;
+    color: gray;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.form-footer {
+    margin-top: 40px;
+}
+
+.form-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: center;
+}
+
+.ant-divider-horizontal {
+    margin: 16px 0;
+}

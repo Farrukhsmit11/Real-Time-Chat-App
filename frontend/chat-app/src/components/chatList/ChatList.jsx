@@ -5,11 +5,9 @@ import { Avatar, Button, Input, Tag } from 'antd'
 import UserAvatar from '../userAvatar/UserAvatar';
 import { data } from './helper';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSelectedUser, clearSelectedUser } from '../../store/features/chats/chatSlice';
+import { setSelectedUser } from '../../store/features/chats/chatSlice';
 
 const ChatList = ({ setShowProfile }) => {
-
-    const [active, setActive] = useState(null)
     const dispatch = useDispatch()
 
     const { selectedUser } = useSelector((state) => state.chat)
@@ -34,9 +32,9 @@ const ChatList = ({ setShowProfile }) => {
                 </div>
             </div>
 
-            <div className="input-group">
-                <Input placeholder='Search messages' className='search-input' suffix={<SearchOutlined className='search-icon' />}></Input>
-            </div>
+            {/* <div className="input-group"> */}
+                {/* <Input placeholder='Search messages' className='search-input' suffix={<SearchOutlined className='search-icon' />}></Input> */}
+            {/* </div> */}
 
             <div className="chat-list-section">
                 {data.map((item) => {

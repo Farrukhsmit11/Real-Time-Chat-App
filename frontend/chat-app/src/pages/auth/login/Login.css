@@ -7,7 +7,7 @@
     color: #a29797;
 }
 
-.login-container {
+.auth-container {
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -27,7 +27,7 @@
 
 .auth-title {
     font-size: 25px;
-      --jakarta: "Plus Jakarta Sans", sans-serif;
+    font-family: var(--jakarta);
     font-weight: 700;
     margin-bottom: 11px;
 }
@@ -52,17 +52,6 @@
 }
 
 
-.form-input {
-    width: 100%;
-    height: 42px;
-    border-radius: 34px;
-    border: 1px solid #DEEAFF;
-      --jakarta: "Plus Jakarta Sans", sans-serif;
-    font-weight: 600;
-    padding: 8.8px 16px;
-    color: black !important;
-}
-
 
 .submit-btn {
     width: 100%;
@@ -82,7 +71,7 @@
 .form-input input::placeholder {
     color: #94a3b8;
     font-size: 14px;
-      --jakarta: "Plus Jakarta Sans", sans-serif;
+    font-family: var(--jakarta);
     font-weight: 500;
 }
 
@@ -117,7 +106,7 @@
 }
 
 .checkbox-label {
-      --jakarta: "Plus Jakarta Sans", sans-serif;
+    font-family: var(--jakarta);
 }
 
 .signup-footer {
@@ -129,6 +118,6 @@
     display: flex;
     gap: 4px;
     justify-content: center;
-      --jakarta: "Plus Jakarta Sans", sans-serif;
+    font-family: var(--jakarta) !important;
     font-weight: 500;
 }
