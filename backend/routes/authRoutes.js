@@ -11,6 +11,6 @@ router.route("/logoutUser").post(logout)
 router.route("/get-profile").get(protectRoute, getProfile)
 router.route("/forgotPassword").post(forgotPassword)
 router.route("/verifyOtp").post(verifyOtp)
-router.route("/changePassword").post(changePassword)
+router.route("/resetPassword").post(changePassword)
 
 export default router

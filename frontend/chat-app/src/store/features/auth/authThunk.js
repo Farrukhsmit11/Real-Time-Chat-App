@@ -97,3 +97,20 @@ export const handleVerifyOtp = createAsyncThunk(
         }
     }
 )
+
+export const handleChangePassword = createAsyncThunk(
+    "auth/changePassword",
+    async ({ email, newPassword }) => {
+        try {
+            const password = await post("/resetPassword", {
+                email,
+                newPassword
+            })
+            return password.data
+        } catch (error) {
+            console.error("Error while Updating Password", error)
+
+
+        }
+    }
+)

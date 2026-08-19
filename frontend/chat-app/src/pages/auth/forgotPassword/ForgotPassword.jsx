@@ -28,6 +28,7 @@ const ForgotPassword = () => {
             await dispatch(handleForgotPassword({
                 email
             })).unwrap()
+            message.success(`We have sent an Otp to ${email}`)
             navigate("/otpVerification")
         } catch (error) {
             if (error.response) {
@@ -47,7 +48,6 @@ const ForgotPassword = () => {
                 <Formik
                 >
                     {({
-
                     }) => (
                         <AntForm form={form} layout='vertical'>
                             <AntForm.Item label="Email">

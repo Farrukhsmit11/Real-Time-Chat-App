@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { Form as AntForm, Button, Input } from 'antd'
+import { Form as AntForm, Button, Input, message } from 'antd'
 import "./OtpVerification.css"
 import { handleVerifyOtp } from "../../../store/features/auth/authThunk"
 import { useDispatch } from "react-redux"
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const OtpVerification = () => {
 
@@ -12,8 +12,10 @@ const OtpVerification = () => {
     const [otp, setOtp] = useState("")
 
     const dispatch = useDispatch()
+    const location = useLocation()
 
     const navigate = useNavigate()
+    const resetEmail = location.state?.email
 
     const handleSubmit = async () => {
         try {
@@ -21,8 +23,8 @@ const OtpVerification = () => {
                 email,
                 otp
             })).unwrap()
-
-            navigate("/changePassword")
+            message.success("OTP Verified")
+            navigate("/changePassword", { state: {email: resetEmail} })
 
         } catch (error) {
             console.error("error verifying otp", error)

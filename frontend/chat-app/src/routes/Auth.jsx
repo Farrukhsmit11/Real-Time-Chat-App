@@ -1,4 +1,3 @@
-import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { ForgotPassword, Login, OtpVerification, SignUp, ChangePassword } from '../pages/auth'
 

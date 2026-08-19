@@ -2,6 +2,7 @@ import { transporter } from "../services/email.service.js"
 import { generateOtp } from "../utils/helper.js"
 import bcrypt from "bcrypt"
 import { Otp } from "../models/Otp.js"
+import { User } from "../models/User.js"
 
 export const forgotPassword = async (request, response) => {
 
@@ -42,13 +43,8 @@ export const verifyOtp = async (request, response) => {
     const { email, otp } = request.body
 
     try {
-
-        if (!request.body.email || !request.body.otp) {
-            response.status(400).send({ message: "email ans otp required" })
-            return
-        }
-
         const otpRecord = await Otp.findOne({ email })
+        
         if (!otpRecord) {
             response.status(400).send({ message: "Otp Not Found" })
             return
@@ -67,11 +63,33 @@ export const verifyOtp = async (request, response) => {
     }
 }
 
-export const changePassword = (request, response) => {
+export const changePassword = async (request, response) => {
+
+    const { email, newPassword } = request.body
+
     try {
 
-    } catch (error) {
+        if (!email || !newPassword) {
+            response.status(400).send({ message: "email and password is required" })
+            return
+        }
 
+        const user = await User.findOne({ email })
+        if (!user) {
+            response.status(400).send({ message: "user not found" })
+            return
+        }
+
+        const hashedPassword = await bcrypt.hash(newPassword, 10)
+
+        user.password = hashedPassword
+        user.otp = undefined
+        await user.save()
+
+        response.status(200).json({ message: "Password Reset Sucessfully" })
+
+    } catch (error) {
+        console.error("Error While Resetting Password", error)
     }
 }
 
