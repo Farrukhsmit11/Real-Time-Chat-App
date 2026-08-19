@@ -88,20 +88,6 @@ export const data = [
         media: [],
         links: [],
         documents: [],
-    }, {
-        id: 7,
-        name: "Alfonzo Schuessler",
-        avatar: "https://i.pravatar.cc/150?img=19",
-        email: "alfonzo@gmail.com",
-        phone: "+92 321 7778899",
-        lastSeen: "5 minutes ago",
-        lastMessage: "Perfect!",
-        time: "1m",
-        unread: 0,
-        online: false,
-        media: [],
-        links: [],
-        documents: [],
-    },
+    }, 
     
 ];

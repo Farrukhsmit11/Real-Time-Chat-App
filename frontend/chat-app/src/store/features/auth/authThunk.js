@@ -58,12 +58,42 @@ export const getProfile = createAsyncThunk(
 
 export const handleLogout = createAsyncThunk(
     "auth/logout",
-    async (_, rejectWithValue) => {
+    async () => {
         try {
             const data = await post("/logoutUser")
             localStorage.removeItem(TOKEN)
         } catch (error) {
             console.error("Error logging out", error)
+        }
+    }
+)
+
+export const handleForgotPassword = createAsyncThunk(
+    "auth/forgotpassword",
+    async ({ email }, { rejectWithValue }) => {
+        try {
+            const res = await post("/forgotPassword", {
+                email
+            })
+            return res.data
+        } catch (error) {
+            return rejectWithValue(error.response?.data?.message || "Something went wrong")
+        }
+
+    }
+)
+
+export const handleVerifyOtp = createAsyncThunk(
+    "auth/verifyOtp",
+    async ({ email, otp }) => {
+        try {
+            const verifyData = await post("/verifyOtp", {
+                email,
+                otp
+            })
+            return verifyData.data
+        } catch (error) {
+            console.error("Error Verifying Otp")
         }
     }
 )

@@ -120,7 +120,7 @@
 }
 
 .chat-card.active {
-    background: aliceblue !important;
+    /* background: aliceblue !important; */
     border-radius: 10px;
 }
 

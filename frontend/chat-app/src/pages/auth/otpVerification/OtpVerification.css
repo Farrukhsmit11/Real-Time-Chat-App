@@ -1,0 +1,11 @@
+.resend-otp-title {
+    font-weight: 600;
+    color: blue;
+}
+
+.auth-otp-title {
+    font-size: 22px;
+    font-family: var(--jakarta);
+    font-weight: 600;
+    margin-bottom: 11px;
+}

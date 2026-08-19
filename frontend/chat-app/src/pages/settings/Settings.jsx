@@ -5,7 +5,6 @@ import { settingsData } from './data'
 import PageHeader from "../../components/pageHeader/PageHeader"
 import "./Settings.css"
 import { SearchOutlined } from '@ant-design/icons'
-import UserAvatar from '../../components/userAvatar/UserAvatar'
 
 const Settings = () => {
     return (

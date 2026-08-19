@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getProfile, handleLogin, handleLogout, handleSignup } from "./authThunk.js";
+import { getProfile, handleLogin, handleLogout, handleSignup, handleForgotPassword } from "./authThunk.js";
 
 const initialState = {
     user: {},
     isAuthenticate: false,
     loginLoading: false,
     signUpLoading: false,
+    forgotPasswordLoading: false,
     error: null
 }
 
@@ -48,39 +49,37 @@ const authSlice = createSlice({
                 state.loginLoading = false
                 state.isAuthenticate = false
                 state.error = action.payload
-            })
+            }),
 
-        builder
-            .addCase(getProfile.pending, (state) => {
-                state.loading = true
-            })
+            builder
+                .addCase(getProfile.pending, (state) => {
+                    state.loading = true
+                })
 
-            .addCase(getProfile.fulfilled, (state, action) => {
-                state.loading = false
-                state.isAuthenticate = true,
-                    state.user = action.payload
-            })
+                .addCase(getProfile.fulfilled, (state, action) => {
+                    state.loading = false
+                    state.isAuthenticate = true,
+                        state.user = action.payload
+                })
 
-            .addCase(getProfile.rejected, (state) => {
-                state.isAuthenticate = false
-                state.loading = false
-                state.user = null
-            })
+                .addCase(getProfile.rejected, (state) => {
+                    state.isAuthenticate = false
+                    state.loading = false
+                    state.user = null
+                }),
 
+            builder
+                .addCase(handleForgotPassword.pending, (state) => {
+                    state.forgotPasswordLoading = true
+                })
 
-        builder
-            .addCase(handleLogout.pending, (state) => {
-                state.loading = true
-            })
+                .addCase(handleForgotPassword.fulfilled, (state) => {
+                    state.forgotPasswordLoading = false
+                })
 
-            .addCase(handleLogout.fulfilled, (state) => {
-                state.loading = false
-                state.isAuthenticate = false
-            })
-
-            .addCase(handleLogout.rejected, (state) => {
-                state.loading = false
-            })
+                .addCase(handleForgotPassword.rejected, (state) => {
+                    state.forgotPasswordLoading = false
+                })
     }
 })
 

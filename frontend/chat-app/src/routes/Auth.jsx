@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import { Login, SignUp } from '../pages/auth'
+import { ForgotPassword, Login, OtpVerification, SignUp, ChangePassword } from '../pages/auth'
 
 const Auth = () => {
     return (
@@ -8,6 +8,9 @@ const Auth = () => {
             <Route path='/login' element={<Login />}></Route>
             <Route path='/signUp' element={<SignUp />}></Route>
             <Route path='*' element={<Login />}></Route>
+            <Route path='/otpVerification' element={<OtpVerification />}></Route>
+            <Route path='/forgotPassword' element={<ForgotPassword />}></Route>
+            <Route path='/changePassword' element={<ChangePassword />}></Route>
         </Routes>
     )
 }

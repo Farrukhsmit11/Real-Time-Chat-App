@@ -200,10 +200,6 @@ export const messages = [
         text: "Almost finished!",
         time: "12:02 PM",
     },
-
-
-
-
      {
         id: 7,
         senderId: 1,
@@ -212,42 +208,6 @@ export const messages = [
         time: "12:02 PM",
     },  {
         id: 7,
-        senderId: 1,
-        receiverId: 5,
-        text: "Almost finished!",
-        time: "12:02 PM",
-    },  {
-        id: 7,
-        senderId: 1,
-        receiverId: 5,
-        text: "Almost finished!",
-        time: "12:02 PM",
-    },  {
-        id: 7,
-        senderId: 1,
-        receiverId: 5,
-        text: "Almost finished!",
-        time: "12:02 PM",
-    },  {
-        id: 7,
-        senderId: 1,
-        receiverId: 5,
-        text: "Almost finished!",
-        time: "12:02 PM",
-    },  {
-        id: 7,
-        senderId: 1,
-        receiverId: 5,
-        text: "Almost finished!",
-        time: "12:02 PM",
-    },  {
-        id: 8,
-        senderId: 1,
-        receiverId: 5,
-        text: "Almost finished!",
-        time: "12:02 PM",
-    },  {
-        id: 9,
         senderId: 1,
         receiverId: 5,
         text: "Almost finished!",

@@ -7,11 +7,9 @@ import { LiaUserSolid } from "react-icons/lia";
 import { PaperClipOutlined, UploadOutlined } from '@ant-design/icons';
 import { IoIosSend } from "react-icons/io";
 import { BsEmojiSmile } from "react-icons/bs";
-import PageHeader from "../pageHeader/PageHeader"
-import UserAvatar from '../userAvatar/UserAvatar';
+import PageHeader from "../pageHeader/PageHeader";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom"
-import { ConditionalRendering } from '../../utils/helper';
 import { messages } from './helper';
 
 const ChatWindow = ({ ...headerProps }) => {

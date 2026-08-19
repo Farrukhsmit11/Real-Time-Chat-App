@@ -54,7 +54,7 @@ const Login = () => {
       <div className='auth-container'>
         <div className="auth-card">
           <div className="auth-header">
-            <h1 className='auth-title'>Sign In 👋</h1>
+            <h1 className='auth-title'>Sign In</h1>
             <span className='auth-description'>Join to start Conversations</span>
           </div>
 
@@ -85,6 +85,7 @@ const Login = () => {
 
                 <div className='footer'>
                   <Checkbox className='checkbox-label'>Remember me</Checkbox>
+                  <a href='#' onClick={() => navigate("/forgotPassword")}>Forgot Password?</a>
                 </div>
 
                 <div className="auth-login-footer">

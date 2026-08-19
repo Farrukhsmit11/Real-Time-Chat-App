@@ -17,7 +17,7 @@ const ChatList = ({ setShowProfile }) => {
             <div className="chat-list-header">
                 <div className="header-left">
                     <h1 className="chat-list-title">
-                        Messages <DownOutlined className="chat-list-title-icon" />
+                        Messages 
                     </h1>
                 </div>
 

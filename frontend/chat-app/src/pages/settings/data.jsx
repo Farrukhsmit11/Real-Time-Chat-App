@@ -9,6 +9,7 @@ import {
 import { LuBriefcaseBusiness, LuUsers } from "react-icons/lu";
 import { IoMdKey } from "react-icons/io";
 import { BiLogOut } from "react-icons/bi";
+import { TbLogout2 } from "react-icons/tb";
 
 export const settingsData = [
     {
@@ -64,6 +65,14 @@ export const settingsData = [
         title: "Help",
         description: "Get support, FAQs, contact us, and app information.",
         icon: <FaQuestionCircle className="list-icon" />,
+        color: "#F44336",
+    },
+
+    {
+        id: 8,
+        title: "Logout",
+        description: "Logout of your Accounts.",
+        icon: <TbLogout2 className="list-icon" />,
         color: "#F44336",
     },
 ];
