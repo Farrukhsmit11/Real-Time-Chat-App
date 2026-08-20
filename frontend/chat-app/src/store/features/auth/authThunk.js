@@ -71,6 +71,9 @@ export const handleLogout = createAsyncThunk(
 export const handleForgotPassword = createAsyncThunk(
     "auth/forgotpassword",
     async ({ email }, { rejectWithValue }) => {
+        if (!email.trim()) {
+            return rejectWithValue("Email is required")
+        }
         try {
             const res = await post("/forgotPassword", {
                 email
@@ -83,9 +86,10 @@ export const handleForgotPassword = createAsyncThunk(
     }
 )
 
+
 export const handleVerifyOtp = createAsyncThunk(
     "auth/verifyOtp",
-    async ({ email, otp }) => {
+    async ({ email, otp }, { rejectWithValue }) => {
         try {
             const verifyData = await post("/verifyOtp", {
                 email,
@@ -93,24 +97,23 @@ export const handleVerifyOtp = createAsyncThunk(
             })
             return verifyData.data
         } catch (error) {
-            console.error("Error Verifying Otp")
+            return rejectWithValue(error.response?.data?.message || "error")
         }
     }
 )
 
 export const handleChangePassword = createAsyncThunk(
     "auth/changePassword",
-    async ({ email, newPassword }) => {
+    async ({ email, newPassword }, { rejectWithValue }) => {
         try {
             const password = await post("/resetPassword", {
                 email,
                 newPassword
             })
-            return password.data
+            return password?.data
         } catch (error) {
             console.error("Error while Updating Password", error)
-
-
+            return rejectWithValue(error.response?.data?.message)
         }
     }
 )

@@ -3,6 +3,7 @@ import { generateOtp } from "../utils/helper.js"
 import bcrypt from "bcrypt"
 import { Otp } from "../models/Otp.js"
 import { User } from "../models/User.js"
+import { changePasswordSchema } from "../validations/auth.validations.js"
 
 export const forgotPassword = async (request, response) => {
 
@@ -14,13 +15,19 @@ export const forgotPassword = async (request, response) => {
             return
         }
 
+        const res = await User.findOne({ email })
+        if (!res) {
+            response.status(400).send({ message: "user not found" })
+            return
+        }
+
         const otp = generateOtp()
 
         const hashedOtp = await bcrypt.hash(otp, 10)
 
         const data = await Otp.create({
             email,
-            otp: hashedOtp
+            otp: hashedOtp,
         })
 
         const mailOptions = {
@@ -44,7 +51,7 @@ export const verifyOtp = async (request, response) => {
 
     try {
         const otpRecord = await Otp.findOne({ email })
-        
+
         if (!otpRecord) {
             response.status(400).send({ message: "Otp Not Found" })
             return
@@ -65,9 +72,17 @@ export const verifyOtp = async (request, response) => {
 
 export const changePassword = async (request, response) => {
 
-    const { email, newPassword } = request.body
+    const { email } = request.body
+
+    const { error, value } = changePasswordSchema.validate(request.body)
+
+    if (error) {
+        response.status(400).json(error.details[0].message)
+    }
 
     try {
+
+        const { newPassword } = value
 
         if (!email || !newPassword) {
             response.status(400).send({ message: "email and password is required" })

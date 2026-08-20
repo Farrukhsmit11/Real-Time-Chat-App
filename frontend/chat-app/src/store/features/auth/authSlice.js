@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getProfile, handleLogin, handleLogout, handleSignup, handleForgotPassword } from "./authThunk.js";
+import { getProfile, handleLogin, handleSignup, handleForgotPassword, handleChangePassword, handleVerifyOtp } from "./authThunk.js";
 
 const initialState = {
     user: {},
@@ -7,6 +7,8 @@ const initialState = {
     loginLoading: false,
     signUpLoading: false,
     forgotPasswordLoading: false,
+    changePasswordLoading: false,
+    verifyOtpLoading: false,
     error: null
 }
 
@@ -34,52 +36,76 @@ const authSlice = createSlice({
                 state.signUpLoading = false
             })
 
-        builder
             .addCase(handleLogin.pending, (state) => {
-                state.isAuthenticate = false,
-                    state.loginLoading = true
+                state.isAuthenticate = false
+                state.loginLoading = true
             })
 
             .addCase(handleLogin.fulfilled, (state, action) => {
-                state.isAuthenticate = true,
-                    state.loginLoading = false
+                state.isAuthenticate = true
+                state.loginLoading = false
             })
 
             .addCase(handleLogin.rejected, (state, action) => {
                 state.loginLoading = false
                 state.isAuthenticate = false
                 state.error = action.payload
-            }),
+            })
 
-            builder
-                .addCase(getProfile.pending, (state) => {
-                    state.loading = true
-                })
+            .addCase(getProfile.pending, (state) => {
+                state.loading = true
+            })
 
-                .addCase(getProfile.fulfilled, (state, action) => {
-                    state.loading = false
-                    state.isAuthenticate = true,
-                        state.user = action.payload
-                })
+            .addCase(getProfile.fulfilled, (state, action) => {
+                state.loading = false
+                state.isAuthenticate = true
+                state.user = action.payload
+            })
 
-                .addCase(getProfile.rejected, (state) => {
-                    state.isAuthenticate = false
-                    state.loading = false
-                    state.user = null
-                }),
+            .addCase(getProfile.rejected, (state) => {
+                state.isAuthenticate = false
+                state.loading = false
+                state.user = null
+            })
 
-            builder
-                .addCase(handleForgotPassword.pending, (state) => {
-                    state.forgotPasswordLoading = true
-                })
+        builder
+            .addCase(handleForgotPassword.pending, (state) => {
+                state.forgotPasswordLoading = true
+            })
 
-                .addCase(handleForgotPassword.fulfilled, (state) => {
-                    state.forgotPasswordLoading = false
-                })
+            .addCase(handleForgotPassword.fulfilled, (state) => {
+                state.forgotPasswordLoading = false
+            })
 
-                .addCase(handleForgotPassword.rejected, (state) => {
-                    state.forgotPasswordLoading = false
-                })
+            .addCase(handleForgotPassword.rejected, (state) => {
+                state.forgotPasswordLoading = false
+            })
+
+        builder
+            .addCase(handleChangePassword.pending, (state) => {
+                state.changePasswordLoading = true
+            })
+
+            .addCase(handleChangePassword.fulfilled, (state) => {
+                state.changePasswordLoading = false
+            })
+
+            .addCase(handleChangePassword.rejected, (state) => {
+                state.changePasswordLoading = false
+            })
+
+        builder
+            .addCase(handleVerifyOtp.pending, (state) => {
+                state.verifyOtpLoading = true
+            })
+
+            .addCase(handleVerifyOtp.fulfilled, (state) => {
+                state.verifyOtpLoading = false
+            })
+
+            .addCase(handleVerifyOtp.rejected, (state) => {
+                state.verifyOtpLoading = false
+            })
     }
 })
 

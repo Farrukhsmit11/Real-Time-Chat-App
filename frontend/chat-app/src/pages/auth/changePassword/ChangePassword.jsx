@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
 import "./ChangePassword.css"
-import { Form as AntForm, Button, Input } from "antd"
-import { useDispatch } from "react-redux"
+import { Form as AntForm, Button, Input, message } from "antd"
+import { useDispatch, useSelector } from "react-redux"
 import { handleChangePassword } from '../../../store/features/auth/authThunk'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const ChangePassword = () => {
 
     const [form] = AntForm.useForm()
+
+    const navigate = useNavigate()
 
     const [newPassword, setNewPassword] = useState("");
 
@@ -16,11 +18,20 @@ const ChangePassword = () => {
 
     const changedEmail = location.state?.email
 
+    const reducers = useSelector(({ auth }) => ({
+        loading: auth?.changePasswordLoading,
+        error: auth?.error
+    }))
+
+    const { loading, error } = reducers
+
     const handleChange = async () => {
         try {
-            dispatch(handleChangePassword({ email: changedEmail, newPassword }))
-
+            await dispatch(handleChangePassword({ email: changedEmail, newPassword })
+            ).unwrap()
+            navigate("/login")
         } catch (error) {
+            message.error(error)
             console.error("error while changing password", error)
         }
     }
@@ -33,7 +44,7 @@ const ChangePassword = () => {
                 </div>
 
                 <AntForm form={form} layout='vertical'>
-                    <AntForm.Item label={<span className=''>New Password</span>}>
+                    <AntForm.Item label={<span>New Password</span>}>
                         <Input.Password
                             placeholder='New Password'
                             className='form-input'
@@ -43,7 +54,7 @@ const ChangePassword = () => {
                         </Input.Password>
                     </AntForm.Item>
 
-                    <AntForm.Item label={<span className=''>Confirm Password</span>}>
+                    <AntForm.Item label={<span>Confirm Password</span>}>
                         <Input.Password
                             placeholder='Confirm Password'
                             className='form-input'
@@ -53,6 +64,7 @@ const ChangePassword = () => {
 
                     <div className='form-footer'>
                         <Button
+                            loading={loading}
                             onClick={() => {
                                 handleChange()
                             }}

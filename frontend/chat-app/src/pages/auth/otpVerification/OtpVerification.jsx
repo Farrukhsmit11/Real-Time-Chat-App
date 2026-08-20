@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Form as AntForm, Button, Input, message } from 'antd'
 import "./OtpVerification.css"
 import { handleVerifyOtp } from "../../../store/features/auth/authThunk"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useLocation, useNavigate } from 'react-router-dom'
 
 const OtpVerification = () => {
@@ -17,15 +17,20 @@ const OtpVerification = () => {
     const navigate = useNavigate()
     const resetEmail = location.state?.email
 
+    const data = useSelector(({ auth }) => ({
+        loading: auth?.verifyOtpLoading
+    }))
+
+    const { loading } = data
+
     const handleSubmit = async () => {
         try {
-            dispatch(handleVerifyOtp({
-                email,
+            await dispatch(handleVerifyOtp({
+                email: resetEmail,
                 otp
             })).unwrap()
             message.success("OTP Verified")
-            navigate("/changePassword", { state: {email: resetEmail} })
-
+            navigate("/changePassword", { state: { email: resetEmail } })
         } catch (error) {
             console.error("error verifying otp", error)
         }
@@ -42,10 +47,12 @@ const OtpVerification = () => {
                     <AntForm.Item>
                         <Input.OTP
                             separator="-"
-                            value={otp}
-                            onChange={(value) => setOtp(value)}
+                            onChange={(value) => {
+                                setOtp(value)
+                            }
+                            }
                             size='medium'
-                            length="6"
+                            length={6}
                         >
                         </Input.OTP>
                     </AntForm.Item>
@@ -57,6 +64,7 @@ const OtpVerification = () => {
                     <div className="form-footer">
                         <Button className='submit-btn-black'>Resend OTP</Button>
                         <Button
+                            loading={loading}
                             onClick={() => handleSubmit()}
                             className='submit-btn'
                         >

@@ -1,7 +1,5 @@
-import React from 'react'
 import { Form as AntForm, Button, Input, message } from "antd"
 import { Formik } from 'formik'
-import { post } from '../../../utils/apiMethod'
 import { useState } from 'react'
 import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
@@ -16,25 +14,25 @@ const ForgotPassword = () => {
     const dispatch = useDispatch()
 
     const res = useSelector(({ auth }) => ({
-        loading: auth?.forgotPasswordLoading
+        loading: auth?.forgotPasswordLoading,
+        error: auth?.error
     }))
 
-    const { loading } = res
+
 
     const navigate = useNavigate();
+
+    const { loading } = res
 
     const onSubmit = async () => {
         try {
             await dispatch(handleForgotPassword({
                 email
             })).unwrap()
-            message.success(`We have sent an Otp to ${email}`)
-            navigate("/otpVerification")
+            message.success(`We have sent 6 Digit Otp to ${email}`)
+            navigate("/otpVerification", { state: { email } })
         } catch (error) {
-            if (error.response) {
-                message.error(error.response.data.message)
-            }
-            console.error("error sending email")
+            message.error(error)
         }
     }
 
@@ -64,6 +62,7 @@ const ForgotPassword = () => {
                             <div className="form-footer">
                                 <Button
                                     onClick={() => onSubmit()}
+                                    htmlType="submit"
                                     className='submit-btn'
                                     loading={loading}
                                 >Send Verification Code</Button>
