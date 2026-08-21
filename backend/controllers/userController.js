@@ -2,7 +2,9 @@ import { User } from "../models/User.js"
 
 export const getUsers = async (request, response) => {
     try {
-        const res = await User.find()
+        const res = await User.find({
+            _id: { $ne: request.user.id }
+        })
         response.status(200).json({ message: "users fetched sucessfully", res })
     } catch (error) {
         console.error("error fetching users", error)

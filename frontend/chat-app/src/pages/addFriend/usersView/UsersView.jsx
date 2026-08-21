@@ -1,13 +1,14 @@
 import { Button, Table, Tag } from 'antd';
-import React from 'react'
-import { usersData } from '../helper';
 import UserAvatar from '../../../components/userAvatar/UserAvatar';
 import { PlusOutlined } from '@ant-design/icons';
-import { RxCross2 } from "react-icons/rx";
 import "./UsersView.css"
-import { MdDelete } from "react-icons/md";
+import { useDispatch, useSelector } from 'react-redux';
+import { getUsers } from '../../../store/features/users/userThunk';
+import { useEffect } from 'react';
+import { sendFriendRequest } from '../../../store/features/requests/requestThunk';
 
 const UsersView = () => {
+
 
     const columns = [
         {
@@ -16,7 +17,7 @@ const UsersView = () => {
             key: 'user',
             render: (url, record) => (
                 <div className='avatar-name-main'>
-                    <UserAvatar src={url} className='profile-avatar' />
+                    <UserAvatar src={url} className='user-avatar' name={record.name} />
                     <span>{record.name}</span>
                 </div>
             )
@@ -35,26 +36,6 @@ const UsersView = () => {
             key: 'createdAt',
         },
 
-
-        {
-            title: 'User Status',
-            dataIndex: 'status',
-            key: 'status',
-            render: (status) => {
-                let color = "default"
-
-                if (status === "active") color = "red";
-                if (status === "inactive") color = "blue";
-
-                return (
-                    <Tag color={color}>
-                        {status}
-                    </Tag>
-                )
-
-            }
-        },
-
         {
             title: 'Actions',
             dataIndex: 'actions',
@@ -62,8 +43,12 @@ const UsersView = () => {
             render: (_, record) => {
                 return (
                     <div className='buttons-main'>
-                        <Button className='add-friend-btn' icon={<PlusOutlined />}>
-                            Add
+                        <Button
+                            onClick={() => handleSend()}
+                            className='add-friend-btn'
+                            icon={<PlusOutlined />}
+                        >
+                            Send Request
                         </Button>
                     </div>
                 )
@@ -71,10 +56,27 @@ const UsersView = () => {
         },
     ];
 
+    const handleSend = async (record) => {
+        try {
+            await dispatch(sendFriendRequest({
+                receiverId: record._id
+            })).unwrap()
+        } catch (error) {
+
+        }
+    }
+
+    const { users, loading } = useSelector((state) => state.users)
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getUsers())
+    }, [dispatch])
 
     return (
         <div className='table-container'>
-            <Table columns={columns} dataSource={usersData} />
+            <Table dataSource={users} loading={loading} columns={columns} rowKey="id" />
         </div>
     )
 }

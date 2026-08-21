@@ -13,16 +13,16 @@ const userSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(getUsers.pending, (state) => {
-                state.loading = true
+                state.usersLoading = true
             })
 
             .addCase(getUsers.fulfilled, (state, action) => {
-                state.loading = false
+                state.usersLoading = false
                 state.users = action.payload
             })
 
             .addCase(getUsers.rejected, (state, action) => {
-                state.loading = false
+                state.usersLoading = false
                 state.error = action.payload
                 
             })

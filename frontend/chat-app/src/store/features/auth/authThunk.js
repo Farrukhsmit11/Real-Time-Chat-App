@@ -1,7 +1,5 @@
-import axios from "axios"
 import { message } from "antd"
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import { useNavigate } from "react-router-dom"
 import { TOKEN } from '../../../utils/constant'
 import { get, post } from "../../../utils/apiMethod"
 

@@ -21,6 +21,8 @@ export const forgotPassword = async (request, response) => {
             return
         }
 
+        await Otp.deleteMany({ email })
+
         const otp = generateOtp()
 
         const hashedOtp = await bcrypt.hash(otp, 10)
@@ -57,7 +59,7 @@ export const verifyOtp = async (request, response) => {
             return
         }
 
-        const isVerified = await bcrypt.compare(otp, otpRecord.otp)
+        const isVerified = await bcrypt.compare(otp.toString(), otpRecord.otp)
         if (!isVerified) {
             response.status(400).send({ message: "invalid otp" })
             return

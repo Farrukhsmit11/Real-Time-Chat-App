@@ -1,19 +1,14 @@
-import React, { useState } from 'react'
 import "./AddFriend.css"
 import PageHeader from "../../components/pageHeader/PageHeader"
-import { FaArrowLeftLong } from 'react-icons/fa6'
-import { Button, Tabs } from 'antd'
-import { useNavigate } from "react-router-dom"
+import { Tabs } from 'antd'
 import { items } from '.'
 
 const AddFriend = () => {
 
-    const navigate = useNavigate();
-
     const headerProps = {
-        renderGoBack : true,
-        title : "Add Friend",
-        subtitle : "",
+        renderGoBack: true,
+        title: "Add Friend",
+        subtitle: "",
         className: "add-friend-header"
     }
 

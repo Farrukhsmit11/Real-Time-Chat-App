@@ -1,10 +1,11 @@
 import { Button, Table, Tag } from 'antd'
-import React from 'react'
-import { requestsData } from '../helper'
 import UserAvatar from '../../../components/userAvatar/UserAvatar'
 import { CheckOutlined } from '@ant-design/icons'
 import { RxCross2 } from "react-icons/rx";
 import "./RequestsView.css"
+import { handleRequests } from '../../../store/features/requests/requestThunk';
+import { useDispatch, useSelector } from "react-redux"
+import { useEffect } from 'react';
 
 const RequestsView = () => {
 
@@ -16,21 +17,23 @@ const RequestsView = () => {
             render: (url, record) => (
                 <div className='avatar-name-main'>
                     <UserAvatar src={url} className='profile-avatar' />
-                    <span>{record.requesterName}</span>
+                    <span>{record.senderId?.name}</span>
                 </div>
             )
         },
 
         {
             title: "Requester Email",
-            dataIndex: "requesterEmail",
-            label: "requesterEmail"
+            key: "requesterEmail",
+            render: (_, record) => (
+                <span>{record.senderId?.email}</span>
+            )
         },
 
         {
             title: "Request Time",
-            dataIndex: "requestTime",
-            label: "requesteTime"
+            dataIndex: "createdAt",
+            key: "createdAt"
 
         },
 
@@ -38,19 +41,6 @@ const RequestsView = () => {
             title: "Request Status",
             dataIndex: "status",
             key: "status",
-
-            render: (status) => {
-                let color = "gray"
-
-                if (status === "Approved") color = "blue";
-                if (status === "Pending") color = "green"
-                if (status === "Rejected") color = "red";
-                return (
-                    <Tag color={color} className='custom-tag'>
-                        {status}
-                    </Tag>
-                )
-            }
         },
 
         {
@@ -78,16 +68,31 @@ const RequestsView = () => {
         }
     ]
 
+
+    const dispatch = useDispatch()
+
+    const { requests, loading } = useSelector((state) => state.request)
+
+    useEffect(() => {
+        dispatch(handleRequests())
+    }, [dispatch])
+
     return (
         <div className='table-container'>
+
             <Table
                 columns={columns}
+                loading={loading}
                 rowKey="_id"
+                dataSource={requests}
                 pagination={{
                     pageSize: 5,
                     showSizeChanger: false
                 }}
-                dataSource={requestsData}></Table>
+            >
+
+
+            </Table>
         </div>
     )
 }

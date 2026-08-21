@@ -1,6 +1,5 @@
-import { Avatar, Layout, Popover } from "antd"
+import { Layout, Popover } from "antd"
 import Sider from "antd/es/layout/Sider"
-import { useState } from "react"
 import { SideBar } from "../../components"
 import { Content } from "antd/es/layout/layout"
 import sideBarLogo from "../../assets/Logo.svg"
@@ -11,26 +10,25 @@ import UserAvatar from "../../components/userAvatar/UserAvatar"
 import { FiUser } from "react-icons/fi";
 import { TbLogout2 } from "react-icons/tb";
 import { handleLogout } from "../../store/features/auth/authThunk"
-import { IoIosNotificationsOutline } from "react-icons/io"
+import { clearLocalStorage } from "../../utils/methods"
 
 const PageWrapper = ({ children }) => {
 
     const { selectedUser } = useSelector((state) => state.chat)
 
     const dispatch = useDispatch()
-
-    const LogoutUser = async () => {
-        dispatch(handleLogout())
-    }
-
     const navigate = useNavigate();
+
 
     const content = (
         <div className="popover-content-main">
             <h3 className="content-item" onClick={() => navigate("/userProfile")} > <FiUser className="popover-icon" />  Profile</h3>
             <div className="content-item">
                 <h3
-                    onClick={() => LogoutUser()}
+                    onClick={() => {
+                        navigate("/login")
+                        clearLocalStorage()
+                    }}
                     className="content-item"> <TbLogout2 className="logout-icon" />Logout</h3>
             </div>
         </div>
@@ -51,7 +49,7 @@ const PageWrapper = ({ children }) => {
                     <div className="sidebar-footer">
                         <Popover content={content} trigger="hover">
                             <UserAvatar
-                                size={53}
+                                size={46}
                             >
                             </UserAvatar>
                         </Popover>

@@ -16,7 +16,12 @@
 }
 
 .user-avatar {
+    width: 48px;
+    height: 48px;
     cursor: pointer;
+    background: #b42323cf;
+    font-size: 15px;
+    text-align: center;
 }
 
 .popover-content-main {
