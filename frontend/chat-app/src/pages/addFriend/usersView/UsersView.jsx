@@ -1,14 +1,13 @@
-import { Button, Table, Tag } from 'antd';
+import { Button, message, Table, Tag } from 'antd';
 import UserAvatar from '../../../components/userAvatar/UserAvatar';
 import { PlusOutlined } from '@ant-design/icons';
 import "./UsersView.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { getUsers } from '../../../store/features/users/userThunk';
 import { useEffect } from 'react';
-import { sendFriendRequest } from '../../../store/features/requests/requestThunk';
+import { sendRequest } from '../../../store/features/requests/requestThunk';
 
 const UsersView = () => {
-
 
     const columns = [
         {
@@ -34,6 +33,7 @@ const UsersView = () => {
             title: 'Created At',
             dataIndex: 'createdAt',
             key: 'createdAt',
+            render: (text) => text ? new Date(text).toLocaleDateString() : ""
         },
 
         {
@@ -44,8 +44,8 @@ const UsersView = () => {
                 return (
                     <div className='buttons-main'>
                         <Button
-                            onClick={() => handleSend()}
-                            className='add-friend-btn'
+                            onClick={() => handleSend(record)}
+                            className='send-request-btn'
                             icon={<PlusOutlined />}
                         >
                             Send Request
@@ -56,17 +56,19 @@ const UsersView = () => {
         },
     ];
 
+    const { users, loading, error } = useSelector((state) => state.users)
+
     const handleSend = async (record) => {
         try {
-            await dispatch(sendFriendRequest({
+            await dispatch(sendRequest({
                 receiverId: record._id
             })).unwrap()
+            message.success("Request Sent Sucessfully")
         } catch (error) {
-
+            message.error(error)
+            console.error("Error while sending req", error)
         }
     }
-
-    const { users, loading } = useSelector((state) => state.users)
 
     const dispatch = useDispatch()
 
@@ -76,7 +78,7 @@ const UsersView = () => {
 
     return (
         <div className='table-container'>
-            <Table dataSource={users} loading={loading} columns={columns} rowKey="id" />
+            <Table dataSource={users} loading={loading} columns={columns} rowKey="_id" />
         </div>
     )
 }

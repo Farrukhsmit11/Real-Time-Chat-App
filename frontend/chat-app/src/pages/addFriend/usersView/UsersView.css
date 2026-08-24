@@ -1,10 +1,10 @@
-.add-friend-btn {
+.send-request-btn {
     display: flex;
+    width: 154px;
     align-items: center;
     justify-content: center;
     gap: 8px;
     height: 39px;
-    padding: 0 15px;
     border: none;
     box-shadow: none !important;
     background: #625ce6;
@@ -12,4 +12,9 @@
     font-size: 13px;
     font-weight: 500;
     color: white;
+}
+
+.send-request-btn:hover {
+    background: #625ce6 !important;
+    color: white !important;
 }

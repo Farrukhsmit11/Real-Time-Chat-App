@@ -4,7 +4,7 @@ import { get, post } from "../../../utils/apiMethod"
 
 export const handleRequests = createAsyncThunk(
     "friends/getRequests",
-    async (receiverId, { rejectWithValue }) => {
+    async (_, { rejectWithValue }) => {
         try {
             const res = await get("/getRequests")
             return res.data.data
@@ -15,16 +15,30 @@ export const handleRequests = createAsyncThunk(
 )
 
 
-export const sendFriendRequest = createAsyncThunk(
+export const sendRequest = createAsyncThunk(
     "friends/sendRequest",
-    async ({ receiverId }) => {
+    async ({ receiverId }, { rejectWithValue }) => {
         try {
-            const data = await post("/sendFriendRequest", {
+            const data = await post("/sendRequest", {
                 receiverId
             })
             return data.data
         } catch (error) {
-            console.error("Error While Sending Request", error)
+            return rejectWithValue(error.response?.data?.message || "")
+        }
+    }
+)
+
+export const handleApprove = createAsyncThunk(
+    "/friends/approveRequest",
+    async ({ requestId }, { rejectWithValue }) => {
+        try {
+            const response = await post("approve-request", {
+                requestId
+            })
+            return response.data.request
+        } catch (error) {
+            return rejectWithValue(error.response?.data?.message || "")
         }
     }
 )

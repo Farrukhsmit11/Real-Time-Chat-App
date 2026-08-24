@@ -23,7 +23,8 @@ export const forgotPassword = async (request, response) => {
 
         await Otp.deleteMany({ email })
 
-        const otp = generateOtp()
+        const otp = process.env.NODE_ENV === "development" ? "111111" : generateOtp()
+       
 
         const hashedOtp = await bcrypt.hash(otp, 10)
 

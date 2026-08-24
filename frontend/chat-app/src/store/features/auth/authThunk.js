@@ -108,7 +108,7 @@ export const handleChangePassword = createAsyncThunk(
                 email,
                 newPassword
             })
-            return password?.data
+            return password.data
         } catch (error) {
             console.error("Error while Updating Password", error)
             return rejectWithValue(error.response?.data?.message)

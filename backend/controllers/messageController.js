@@ -1,5 +1,4 @@
 import { Message } from "../models/Message.js"
-import { request } from "express"
 
 export const getMessages = async (request, response) => {
     try {

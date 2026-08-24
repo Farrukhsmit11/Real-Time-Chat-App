@@ -1,52 +1,40 @@
 .approve-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    height: 42px;
-    padding: 0 19px;
-    border: none;
     box-shadow: none !important;
     background: #625ce6;
-    border: none !important;
-    font-size: 15px;
     color: white;
+    width: 134px;
+    height: 38px;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 .approve-btn:hover {
-    background: rgb(98, 98, 221) !important;
+    background: #625ce6 !important;
     color: white !important;
 }
 
+.reject-btn {
+    width: 122px;
+    height: 38px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: none !important;
+    border-radius: 4px !important;
+    background: #c73232 !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
 
 .buttons-main {
     width: 100%;
     display: flex;
-    gap: 23px;
+    gap: 10px;
     align-items: center;
-}
-
-.reject-btn {
-    width: 106px;
-    height: 42px;
-    display: inline-flex !important;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 0 16px !important;
-    border: none !important;
-    border-radius: 6px !important;
-    background: #d64b4b !important;
-    color: #ffffff !important;
-    font-size: 15px;
-    font-weight: 500;
-    box-shadow: none;
-    transition: all 0.2s ease;
-}
-
-.reject-btn:hover {
-    background: rgb(202, 73, 73) !important;
-    color: white !important;
 }
 
 .reject-icon {
