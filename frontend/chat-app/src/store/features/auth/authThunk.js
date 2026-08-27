@@ -115,3 +115,20 @@ export const handleChangePassword = createAsyncThunk(
         }
     }
 )
+
+
+export const handleResendOtp = createAsyncThunk(
+    "auth/resendOtp",
+    async ({ email, otp }) => {
+        try {
+            const resend = await post("/resend-otp", {
+                email,
+                otp
+            })
+
+            return resend.data
+        } catch (error) {
+            return rejectWithValue(error.response?.data?.message || "")
+        }
+    }
+)

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { handleApprove, handleRequests, sendRequest } from "./requestThunk";
+import { handleApprove, handleReject, handleRequests, sendRequest } from "./requestThunk";
 
 const initialState = {
     requests: [],
@@ -52,6 +52,11 @@ const requestSlice = createSlice({
 
             .addCase(handleApprove.rejected, (state) => {
                 state.loading = false
+            })
+
+        builder
+            .addCase(handleReject.pending, (state) => {
+                state.loading = true
             })
     }
 })

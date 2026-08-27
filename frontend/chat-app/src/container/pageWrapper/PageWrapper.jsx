@@ -6,10 +6,8 @@ import sideBarLogo from "../../assets/Logo.svg"
 import { useDispatch, useSelector } from "react-redux"
 import "./PageWrapper.css"
 import { useNavigate } from "react-router-dom"
-import UserAvatar from "../../components/userAvatar/UserAvatar"
 import { FiUser } from "react-icons/fi";
 import { TbLogout2 } from "react-icons/tb";
-import { handleLogout } from "../../store/features/auth/authThunk"
 import { clearLocalStorage } from "../../utils/methods"
 
 const PageWrapper = ({ children }) => {
@@ -48,10 +46,11 @@ const PageWrapper = ({ children }) => {
 
                     <div className="sidebar-footer">
                         <Popover content={content} trigger="hover">
-                            <UserAvatar
+                            {/* <UserAvatar
                                 size={46}
+                                
                             >
-                            </UserAvatar>
+                            </UserAvatar> */}
                         </Popover>
                     </div>
                 </div>

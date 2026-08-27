@@ -57,24 +57,53 @@ export const approveRequest = async (request, response) => {
     const { requestId } = request.body
 
     try {
+
         const request = await FriendRequest.findById(requestId)
+
         if (!request) {
             response.status(400).send({ message: "No Request Found" })
             return
         }
 
-        if (request.receiverId !== senderId) {
-            response.status(400).json({ message: "Unauthorized" })
+
+        if (request.receiverId.toString() !== request.user.id.toString()) {
+            response.status(403).send({ message: "Unauthorized" })
             return
         }
 
         request.status = "approved"
         await request.save()
 
-        response.status(200).json({ message: "Request has been approved", request })
+        response.status(200).json({ message: "Request has been approved", data })
     } catch (error) {
         console.error("Error while approving request", error)
     }
 }
 
-export default { getRequests, sendRequest, approveRequest }
+
+export const rejectRequest = async (request, response) => {
+
+    const { requestId } = request.body
+
+    try {
+
+        const friendRequest = await FriendRequest.findById(requestId)
+        console.log(friendRequest)
+        console.log(requestId)
+
+        if (!friendRequest) {
+            response.status(400).send({ message: "No Request Found" })
+            return
+        }
+
+        friendRequest.status = "rejected"
+        await friendRequest.save()
+
+        response.status(200).json({ message: "Request has been rejected", data: friendRequest })
+
+    } catch (error) {
+        console.error("error while rejecting", error)
+    }
+}
+
+export default { getRequests, sendRequest, approveRequest, rejectRequest }

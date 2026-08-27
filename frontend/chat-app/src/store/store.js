@@ -11,6 +11,6 @@ export const store = configureStore({
         users: userReducer,
         message: messageReducer,
         chat: chatReducer,
-        request: requestReducer
+        request: requestReducer,
     }
 })

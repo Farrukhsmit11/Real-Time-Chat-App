@@ -33,12 +33,26 @@ export const handleApprove = createAsyncThunk(
     "/friends/approveRequest",
     async ({ requestId }, { rejectWithValue }) => {
         try {
-            const response = await post("approve-request", {
+            const response = await post("/approve-request", {
                 requestId
             })
             return response.data.request
         } catch (error) {
             return rejectWithValue(error.response?.data?.message || "")
+        }
+    }
+)
+
+export const handleReject = createAsyncThunk(
+    "/friends/rejectRequest",
+    async ({ requestId }, { rejectWithValue }) => {
+        try {
+            const request = await post("/reject-request", {
+                requestId
+            })
+            return request.data.friendRequest
+        } catch (error) {
+            return rejectWithValue(error.response?.data?.message)
         }
     }
 )

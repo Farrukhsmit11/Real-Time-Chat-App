@@ -1,9 +1,9 @@
-import { Button, Space, Table, Tag } from 'antd'
+import { Button, Table } from 'antd'
 import UserAvatar from '../../../components/userAvatar/UserAvatar'
 import { CheckOutlined } from '@ant-design/icons'
 import { RxCross2 } from "react-icons/rx";
 import "./RequestsView.css"
-import { handleApprove, handleRequests } from '../../../store/features/requests/requestThunk';
+import { handleApprove, handleReject, handleRequests } from '../../../store/features/requests/requestThunk';
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from 'react';
 
@@ -23,7 +23,7 @@ const RequestsView = () => {
 
     const columns = [
         {
-            title: 'Name',
+            title: 'Requester Name',
             dataIndex: 'avatar',
             key: 'user',
             render: (url, record) => (
@@ -69,16 +69,17 @@ const RequestsView = () => {
                             icon={
                                 <CheckOutlined className='approve-icon' />
                             }
-                        >Confirm
+                        >Approve
                         </Button>
 
                         <Button
+                            danger
                             className='reject-btn'
+                            onClick={() => rejectRequest(record)}
                             icon={
                                 <RxCross2 className='reject-icon' />
-                            }>Decline</Button>
+                            }>Reject</Button>
                     </div>
-
                 )
             }
         }
@@ -99,6 +100,16 @@ const RequestsView = () => {
         }
     }
 
+    const rejectRequest = async (record) => {
+        try {
+            await dispatch(handleReject({
+                requestId: record._id
+            })).unwrap()
+        } catch (error) {
+            console.error("Error while rejecting request", error)
+        }
+    }
+
     useEffect(() => {
         dispatch(handleRequests())
     }, [])
@@ -108,7 +119,7 @@ const RequestsView = () => {
             <Table
                 columns={columns}
                 rowSelection={{ type: selectionType, ...rowSelection }}
-                loading={loading}
+                // loading={loading}
                 rowKey="_id"
                 dataSource={requests}
                 pagination={{

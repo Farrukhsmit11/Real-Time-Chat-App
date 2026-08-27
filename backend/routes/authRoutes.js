@@ -1,7 +1,8 @@
 import express from "express"
 import { getProfile, login, logout, registerUser } from "../controllers/authController.js"
 import protectRoute from "../middlewares/auth.js"
-import { changePassword, forgotPassword, verifyOtp } from "../controllers/forgotPassword.js"
+import { changePassword, forgotPassword } from "../controllers/forgotPassword.js"
+import { resendOtp, verifyOtp } from "../controllers/otpController.js"
 
 const router = express.Router()
 
@@ -11,6 +12,7 @@ router.route("/logoutUser").post(logout)
 router.route("/get-profile").get(protectRoute, getProfile)
 router.route("/forgotPassword").post(forgotPassword)
 router.route("/verifyOtp").post(verifyOtp)
+router.route("/resend-otp").post(resendOtp)
 router.route("/resetPassword").post(changePassword)
 
 export default router
