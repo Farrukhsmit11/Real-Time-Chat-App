@@ -6,6 +6,7 @@ import authRoutes from "./routes/authRoutes.js"
 import userRoutes from "./routes/userRoutes.js"
 import messageRoutes from "./routes/messageRoutes.js"
 import requestRoutes from "./routes/requestRoutes.js"
+import friendRoutes from "./routes/friendRoutes.js"
 
 const app = express()
 const PORT = 5000
@@ -22,6 +23,7 @@ app.use(authRoutes)
 app.use(userRoutes)
 app.use(messageRoutes)
 app.use(requestRoutes)
+app.use(friendRoutes)
 
 app.get("/", (request, response) => {
     response.send("Hello world backend working")

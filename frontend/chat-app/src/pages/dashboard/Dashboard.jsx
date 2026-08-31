@@ -1,24 +1,19 @@
-import React, { useState } from 'react'
-import "./Dashboard.css"
-import { ChatList, ChatWindow } from '../../components'
-import { useSelector } from 'react-redux'
-import EmptyChat from '../../components/emptyChat/EmptyChat'
+import React from "react";
+import "./Dashboard.css";
+import { ChatList, ChatWindow } from "../../components";
+import { useSelector } from "react-redux";
 
 const Dashboard = () => {
-
-    const { selectedUser } = useSelector((state) => state.chat)
+    const { selectedUser } = useSelector((state) => state.chat);
 
     return (
-        <div className='chats-page'>
+        <div className="chats-page">
+
             <ChatList />
 
-            {selectedUser ? (
-                <ChatWindow />
-            ) : (
-                <EmptyChat />
-            )}
+            {selectedUser && <ChatWindow />}
         </div>
-    )
-}
+    );
+};
 
-export default Dashboard    
+export default Dashboard;

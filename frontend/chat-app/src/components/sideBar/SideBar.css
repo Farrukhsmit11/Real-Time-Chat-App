@@ -9,11 +9,6 @@
     transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
-.nav-item-link:active::before {
-    content: "";
-    background-color: #00a884 !important;
-}
-
 .sidebar-body {
     flex: 1;
     display: flex;

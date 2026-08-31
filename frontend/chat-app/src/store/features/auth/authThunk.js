@@ -16,7 +16,6 @@ export const handleSignup = createAsyncThunk(
             return rejectWithValue(
                 error.response?.data?.message || "Signup failed"
             )
-            console.error("error Creating User", error)
         }
     }
 )
@@ -95,7 +94,7 @@ export const handleVerifyOtp = createAsyncThunk(
             })
             return verifyData.data
         } catch (error) {
-            return rejectWithValue(error.response?.data?.message || "error")
+            return rejectWithValue(error.response?.data?.message)
         }
     }
 )
@@ -128,7 +127,7 @@ export const handleResendOtp = createAsyncThunk(
 
             return resend.data
         } catch (error) {
-            return rejectWithValue(error.response?.data?.message || "")
+            return rejectWithValue(error.response?.data?.message)
         }
     }
 )

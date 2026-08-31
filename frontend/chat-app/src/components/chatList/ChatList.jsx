@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
 import "./ChatList.css"
-import { DownOutlined, PlusOutlined, SearchOutlined } from "@ant-design/icons"
-import { Avatar, Button, Input, Tag } from 'antd'
+import { PlusOutlined } from "@ant-design/icons"
+import { Button } from 'antd'
 import UserAvatar from '../userAvatar/UserAvatar';
 import { data } from './helper';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedUser } from '../../store/features/chats/chatSlice';
 
-const ChatList = ({ setShowProfile }) => {
+const ChatList = () => {
+
     const dispatch = useDispatch()
 
     const { selectedUser } = useSelector((state) => state.chat)
@@ -17,7 +17,7 @@ const ChatList = ({ setShowProfile }) => {
             <div className="chat-list-header">
                 <div className="header-left">
                     <h1 className="chat-list-title">
-                        Messages 
+                        Messages
                     </h1>
                 </div>
 
@@ -32,12 +32,8 @@ const ChatList = ({ setShowProfile }) => {
                 </div>
             </div>
 
-            {/* <div className="input-group"> */}
-                {/* <Input placeholder='Search messages' className='search-input' suffix={<SearchOutlined className='search-icon' />}></Input> */}
-            {/* </div> */}
-
             <div className="chat-list-section">
-                {data.map((item) => {
+                {data?.map((item) => {
                     return (
                         <div
                             className={`chat-card ${selectedUser?.id === item.id ? "active" : ""}`}

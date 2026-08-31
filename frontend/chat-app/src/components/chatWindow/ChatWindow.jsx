@@ -1,33 +1,46 @@
 import React, { useEffect, useState } from 'react'
 import "./ChatWindow.css"
-import { data } from '../chatList/helper';
-import { IoMdCall } from "react-icons/io";
-import { Button, Input, Skeleton, Upload } from 'antd';
-import { LiaUserSolid } from "react-icons/lia";
-import { PaperClipOutlined, UploadOutlined } from '@ant-design/icons';
+import { Input, Upload } from 'antd';
+import { PaperClipOutlined } from '@ant-design/icons';
 import { IoIosSend } from "react-icons/io";
-import { BsEmojiSmile } from "react-icons/bs";
 import PageHeader from "../pageHeader/PageHeader";
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from "react-router-dom"
-import { messages } from './helper';
+import { handleMessages, handleSendMessage } from '../../store/features/messages/messageThunk';
 
-const ChatWindow = ({ ...headerProps }) => {
+const ChatWindow = () => {
 
-    const navigate = useNavigate()
-
-    const [open, setOpen] = useState(false);
-
+    const [text, setText] = useState("")
     const { selectedUser } = useSelector((state) => state.chat)
 
-    const [messagesLoading, setMessagesLoading] = useState(false)
+    const { messages, loading } = useSelector((state) => state.message)
 
-    const filteredMessages = messages.filter((message) => {
-        return (
-            message.senderId === selectedUser?.id ||
-            message.receiverId === selectedUser?.id
-        )
-    })
+    const dispatch = useDispatch()
+
+    const onSubmit = async () => {
+        try {
+            await dispatch(handleSendMessage({
+                text,
+                receiverId
+            })).unwrap()
+        } catch (error) {
+
+        }
+    }
+
+    const getMessages = async () => {                                                                        
+        try {
+            await dispatch(handleMessages(selectedUser.id)).unwrap()
+        } catch (error) {
+            console.error("error fetching messages", error)
+        }
+    }
+
+
+    useEffect(() => {
+        if (selectedUser) {
+            getMessages()
+        }
+    }, [selectedUser])
 
     return (
         <>
@@ -40,8 +53,7 @@ const ChatWindow = ({ ...headerProps }) => {
 
                 <div className="messages-container">
 
-                    {filteredMessages.map((msg) => {
-
+                    {messages?.map((msg) => {
                         const isSent = msg.senderId === selectedUser?.id;
 
                         return (
@@ -82,9 +94,11 @@ const ChatWindow = ({ ...headerProps }) => {
                     <Input
                         placeholder='Type a message'
                         className='send-message-input'
+                        value={text}
+                        onChange={(e) => setText(e.target.value)}
                         suffix={
                             <>
-                                <IoIosSend className='send-message-icon' />
+                                <IoIosSend className='send-message-icon' onClick={onSubmit} />
                             </>
                         }
                     >

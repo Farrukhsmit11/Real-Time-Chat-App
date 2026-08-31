@@ -1,3 +1,4 @@
+import { Friend } from "../models/Friend.js"
 import { FriendRequest } from "../models/FriendRequest.js"
 
 export const getRequests = async (request, response) => {
@@ -58,23 +59,22 @@ export const approveRequest = async (request, response) => {
 
     try {
 
-        const request = await FriendRequest.findById(requestId)
+        const res = await FriendRequest.findById(requestId)
 
-        if (!request) {
+        if (!res) {
             response.status(400).send({ message: "No Request Found" })
             return
         }
 
-
-        if (request.receiverId.toString() !== request.user.id.toString()) {
-            response.status(403).send({ message: "Unauthorized" })
-            return
-        }
-
         request.status = "approved"
-        await request.save()
 
-        response.status(200).json({ message: "Request has been approved", data })
+        await Friend.create({
+            userId: senderId,
+            friendId: requestId,
+            addedOn: new Date()
+        })
+        
+        response.status(200).json({ message: "Request has been approved" })
     } catch (error) {
         console.error("Error while approving request", error)
     }
@@ -88,8 +88,6 @@ export const rejectRequest = async (request, response) => {
     try {
 
         const friendRequest = await FriendRequest.findById(requestId)
-        console.log(friendRequest)
-        console.log(requestId)
 
         if (!friendRequest) {
             response.status(400).send({ message: "No Request Found" })

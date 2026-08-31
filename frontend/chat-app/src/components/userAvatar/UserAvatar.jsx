@@ -6,7 +6,7 @@ const UserAvatar = ({ src, name, size, className = "", onClick, children, ...pro
 
     return (
         <div className="avatar-main">
-            <Avatar size={size} src={src} className={className} onClick={onClick} {...props}>
+            <Avatar size={size} src={src}  onClick={onClick} {...props} className='avatar'>
                 {!src && (getInitials(name))}
             </Avatar>
         </div>

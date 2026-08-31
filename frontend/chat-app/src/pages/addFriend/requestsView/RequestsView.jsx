@@ -28,7 +28,7 @@ const RequestsView = () => {
             key: 'user',
             render: (url, record) => (
                 <div className='avatar-name-main'>
-                    <UserAvatar src={url} className='user-avatar' name={record.senderId?.name} />
+                    <UserAvatar src={url} className='profile-avatar' name={record.senderId?.name} />
                     <span>{record.senderId?.name}</span>
                 </div>
             )
@@ -74,7 +74,7 @@ const RequestsView = () => {
 
                         <Button
                             danger
-                            className='reject-btn'
+                            className='approve-btn-danger'
                             onClick={() => rejectRequest(record)}
                             icon={
                                 <RxCross2 className='reject-icon' />

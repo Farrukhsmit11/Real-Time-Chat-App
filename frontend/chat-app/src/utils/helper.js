@@ -18,11 +18,25 @@ export const colors = [
     "#722ed1"
 ]
 
-export const ConditionalRendering = ({condition, children, elseChild}) => {
+export const ConditionalRendering = ({ condition, children, elseChild }) => {
     if (condition) {
         return children
     } else if (elseChild) {
         return elseChild
     }
     return null
+}
+
+export const getAvatarColor = (index) => {
+
+    const avatarColors = [
+        "#1677ff",
+        "#52c41a",
+        "#faad14",
+        "#f5222d",
+        "#722ed1",
+        "#13c2c2",
+    ];
+
+    return avatarColors[index]
 }

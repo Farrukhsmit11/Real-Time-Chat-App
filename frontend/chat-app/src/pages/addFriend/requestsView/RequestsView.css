@@ -16,19 +16,15 @@
     color: white !important;
 }
 
-.reject-btn {
-    width: 122px;
-    height: 38px;
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    border-radius: 4px !important;
+.approve-btn-danger {
     box-shadow: none !important;
+    width: 134px;
+    height: 38px;
     font-size: 14px;
-    font-weight: 600;
-    font-family: "Plus Jakrat Sans", sans-serif;
-    transition: all 0.2s ease;
+    font-weight: 500;
+    border-radius: 4px !important;
+    display: flex;
+    align-items: center;
 }
 
 .buttons-main {
