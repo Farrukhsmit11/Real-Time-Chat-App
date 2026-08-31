@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import "./ChatWindow.css"
-import { Input, Upload } from 'antd';
+import { Input, message, Upload } from 'antd';
 import { PaperClipOutlined } from '@ant-design/icons';
 import { IoIosSend } from "react-icons/io";
 import PageHeader from "../pageHeader/PageHeader";
@@ -12,6 +12,8 @@ const ChatWindow = () => {
     const [text, setText] = useState("")
     const { selectedUser } = useSelector((state) => state.chat)
 
+    const receiverId = selectedUser?.userId?._id
+
     const { messages, loading } = useSelector((state) => state.message)
 
     const dispatch = useDispatch()
@@ -22,25 +24,30 @@ const ChatWindow = () => {
                 text,
                 receiverId
             })).unwrap()
-        } catch (error) {
 
+            setText("")
+
+            dispatch(handleMessages(receiverId))
+        } catch (error) {
+            if (error.response) {
+                message.error(error.response?.data?.message)
+            }
         }
     }
 
-    const getMessages = async () => {                                                                        
+    const getMessages = async () => {
         try {
-            await dispatch(handleMessages(selectedUser.id)).unwrap()
+            await dispatch(handleMessages(receiverId)).unwrap()
         } catch (error) {
             console.error("error fetching messages", error)
         }
     }
 
-
     useEffect(() => {
-        if (selectedUser) {
+        if (receiverId) {
             getMessages()
         }
-    }, [selectedUser])
+    }, [receiverId])
 
     return (
         <>
@@ -52,9 +59,8 @@ const ChatWindow = () => {
                 </div>
 
                 <div className="messages-container">
-
-                    {messages?.map((msg) => {
-                        const isSent = msg.senderId === selectedUser?.id;
+                    {messages.map((msg) => {
+                        const isSent = msg.senderId === selectedUser.userId?._id;
 
                         return (
                             <div
@@ -98,12 +104,11 @@ const ChatWindow = () => {
                         onChange={(e) => setText(e.target.value)}
                         suffix={
                             <>
-                                <IoIosSend className='send-message-icon' onClick={onSubmit} />
+                                <IoIosSend className='send-message-icon' onClick={() => onSubmit()} />
                             </>
                         }
                     >
                     </Input>
-
                 </div>
             </div>
         </>

@@ -110,4 +110,6 @@ ant-card,
 
 .ant-avatar-string {
   font-size: 19px !important;
+  font-family: 'Plus Jakarta Sans';
+  font-weight: 500;
 }

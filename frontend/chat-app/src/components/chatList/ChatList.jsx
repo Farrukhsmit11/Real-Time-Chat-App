@@ -2,15 +2,28 @@ import "./ChatList.css"
 import { PlusOutlined } from "@ant-design/icons"
 import { Button } from 'antd'
 import UserAvatar from '../userAvatar/UserAvatar';
-import { data } from './helper';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedUser } from '../../store/features/chats/chatSlice';
+import { handleFriends } from "../../store/features/friends/friendsThunk";
+import { useEffect } from "react";
 
 const ChatList = () => {
 
     const dispatch = useDispatch()
 
-    const { selectedUser } = useSelector((state) => state.chat)
+    const { friends, loading } = useSelector((state) => state.friend)
+
+    const getFriends = async () => {
+        try {
+            await dispatch(handleFriends()).unwrap()
+        } catch (error) {
+            console.error("error fetching friends", error)
+        }
+    }
+
+    useEffect(() => {
+        getFriends()
+    }, [])
 
     return (
         <div className="chat-list-container">
@@ -33,26 +46,35 @@ const ChatList = () => {
             </div>
 
             <div className="chat-list-section">
-                {data?.map((item) => {
+                {friends.map((friend) => {
                     return (
                         <div
-                            className={`chat-card ${selectedUser?.id === item.id ? "active" : ""}`}
-                            key={item.id}
+                            className="chat-list-data-main"
                             onClick={() => {
-                                dispatch(setSelectedUser(item))
+                                dispatch(setSelectedUser(friend))
                             }
                             }
                         >
-                            <UserAvatar src={item.avatar} className='profile-avatar' />
+                            <UserAvatar className='profile-avatar' name={friend.userId?.name} />
 
                             <div className="chat-content">
                                 <div className="profile-detail-left">
                                     <h1 className='profile-name'>
-                                        {item.name}
+                                        <div className="user-details">
+                                            {friend.userId?.name}
+
+                                            <span className="last-message">
+                                                Hello
+                                            </span>
+                                        </div>
                                     </h1>
-                                    <span className='status'>{item.time}</span>
+                                    <span className='status'></span>
                                 </div>
-                                <span className='last-message'>{item.lastMessage}</span>
+                                <span className='last-message'></span>
+                            </div>
+
+                            <div style={{ paddingLeft: "17px", paddingRight: "19px" }} >
+                                <span>Yesterday</span>
                             </div>
                         </div>
                     )

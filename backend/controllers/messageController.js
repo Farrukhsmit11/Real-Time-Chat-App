@@ -1,9 +1,9 @@
 import { Message } from "../models/Message.js"
 
 export const getMessages = async (request, response) => {
-    try {
 
-        const senderId = request.user._id
+    try {
+        const senderId = request.user.id
         const receiverId = request.params.receiverId
 
         const message = await Message.find({
@@ -30,13 +30,19 @@ export const getMessages = async (request, response) => {
 
 export const sendMessage = async (request, response) => {
 
+    const senderId = request.user.id
     const { text, receiverId } = request.body
-    const senderId = request.user._id
+
 
     try {
 
         if (!text || !receiverId) {
             response.status(400).send({ message: "Please enter message" })
+            return
+        }
+
+        if (!senderId || !receiverId) {
+            response.status(400).send({ message: "senderId and receiverId required" })
             return
         }
 

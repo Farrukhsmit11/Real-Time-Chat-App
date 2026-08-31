@@ -154,3 +154,15 @@
 .chat-content {
     flex: 1;
 }
+
+.chat-list-data-main {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+    padding-left:  7px;
+    margin-top: 14px;
+}
+.user-details{
+    display: flex;
+    flex-direction: column;
+}
