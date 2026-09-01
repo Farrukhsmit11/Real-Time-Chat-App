@@ -9,7 +9,7 @@ export const handleSendMessage = createAsyncThunk(
                 text,
                 receiverId
             })
-            return data.data
+            return data.data.data
         } catch (error) {
             console.error("error sending message")
         }

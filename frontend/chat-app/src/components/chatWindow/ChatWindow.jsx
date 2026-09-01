@@ -12,7 +12,7 @@ const ChatWindow = () => {
     const [text, setText] = useState("")
     const { selectedUser } = useSelector((state) => state.chat)
 
-    const receiverId = selectedUser?.userId?._id
+    const receiverId = selectedUser?.friendId?._id
 
     const { messages, loading } = useSelector((state) => state.message)
 

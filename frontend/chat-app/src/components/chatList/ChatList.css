@@ -159,10 +159,11 @@
     display: flex;
     align-items: center;
     gap: 17px;
-    padding-left:  7px;
+    padding-left: 7px;
     margin-top: 14px;
 }
-.user-details{
+
+.user-details {
     display: flex;
     flex-direction: column;
 }

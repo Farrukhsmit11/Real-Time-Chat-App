@@ -1,6 +1,6 @@
 import "./ChatList.css"
 import { PlusOutlined } from "@ant-design/icons"
-import { Button } from 'antd'
+import { Button, Input } from 'antd'
 import UserAvatar from '../userAvatar/UserAvatar';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedUser } from '../../store/features/chats/chatSlice';
@@ -45,6 +45,7 @@ const ChatList = () => {
                 </div>
             </div>
 
+
             <div className="chat-list-section">
                 {friends.map((friend) => {
                     return (
@@ -55,13 +56,13 @@ const ChatList = () => {
                             }
                             }
                         >
-                            <UserAvatar className='profile-avatar' name={friend.userId?.name} />
+                            <UserAvatar className='profile-avatar' name={friend.friendId?.name} />
 
                             <div className="chat-content">
                                 <div className="profile-detail-left">
                                     <h1 className='profile-name'>
                                         <div className="user-details">
-                                            {friend.userId?.name}
+                                            {friend.friendId?.name}
 
                                             <span className="last-message">
                                                 Hello
@@ -71,10 +72,6 @@ const ChatList = () => {
                                     <span className='status'></span>
                                 </div>
                                 <span className='last-message'></span>
-                            </div>
-
-                            <div style={{ paddingLeft: "17px", paddingRight: "19px" }} >
-                                <span>Yesterday</span>
                             </div>
                         </div>
                     )

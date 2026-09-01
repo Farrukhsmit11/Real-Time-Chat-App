@@ -1,4 +1,3 @@
-    import React from 'react'
     import "./PageHeader.css"
     import { Button } from 'antd'
     import { FaArrowLeftLong } from 'react-icons/fa6'
@@ -35,14 +34,14 @@
                     <>
                         <div className='user-details-left'>
                             <div className='user-info'>
-                                <h1 className='user-name'>{user.userId?.name}</h1>
+                                <h1 className='user-name'>{user.friendId?.name}</h1>
                                 <span className='user-status'>{user?.status ? 'Online' : 'Offline'}</span>
                             </div>
                             <UserAvatar
                                 size={50}
                                 className='profile-avatar'
                                 src={user?.avatar}
-                                name={user.userId?.name}
+                                name={user.friendId?.name}
                             />
                         </div>
                         <div className="user-details-right">

@@ -4,10 +4,24 @@ import { PlusOutlined } from '@ant-design/icons';
 import "./UsersView.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { getUsers } from '../../../store/features/users/userThunk';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { sendRequest } from '../../../store/features/requests/requestThunk';
 
+const rowSelection = {
+    onChange: (selectedRowKeys, selectedRows) => {
+        console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+    },
+    getCheckboxProps: record => ({
+        disabled: record.name === 'Disabled User',
+        name: record.name,
+    }),
+};
+
+
 const UsersView = () => {
+
+    const [selectionType, setSelectionType] = useState('checkbox');
+
 
     const columns = [
         {
@@ -63,7 +77,7 @@ const UsersView = () => {
             await dispatch(sendRequest({
                 receiverId: record._id
             })).unwrap()
-            message.success("Request Sent Sucessfully")
+            message.success(`Request Has Been Send to ${record.name}`)
         } catch (error) {
             message.error(error)
             console.error("Error while sending req", error)
@@ -78,7 +92,13 @@ const UsersView = () => {
 
     return (
         <div className='table-container'>
-            <Table dataSource={users} loading={loading} columns={columns} rowKey="_id" />
+            <Table
+                dataSource={users}
+                rowSelection={{ type: selectionType, ...rowSelection }}
+                loading={loading}
+                columns={columns}
+                rowKey="_id"
+            />
         </div>
     )
 }
