@@ -146,17 +146,7 @@
     animation: message-in 0.15s ease-out;
 }
 
-@keyframes message-in {
-    from {
-        opacity: 0;
-        transform: translateY(4px);
-    }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
 .message-bubble-sent {
     background: #0059f7;
@@ -168,13 +158,18 @@
 }
 
 .message-bubble-received {
-    background: #fff;
+       background: #fff;
     color: #172033;
     background: aliceblue;
     border: 1px solid #e9edf2;
     border-bottom-left-radius: 4px;
     width: fit-content;
     padding: 13px;
+    box-shadow: var(--WAWeb-minimal-msg-bubble-shadow, 0 1px .5px rgba(var(--shadow-rgb), .13));
+    border-end-end-radius: 16px;
+    position: relative;
+    border-start-end-radius: 7.5px;
+    z-index: 200;
 }
 
 
