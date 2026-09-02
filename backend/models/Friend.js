@@ -3,7 +3,7 @@ import mongoose from "mongoose"
 const friendSchema = mongoose.Schema({
     userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
     friendId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-    addedOn: { type: Date, required: true }
+    addedOn: { type: Date, required: true },
 },
     { timestamps: true }
 )

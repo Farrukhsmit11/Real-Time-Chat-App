@@ -26,12 +26,7 @@ export const routes = [
         element: <AddFriend />,
         icon: <UserAddOutlined />
     },
-    {
-        path: "/settings",
-        key: "Settings",
-        element: <Settings />,
-        icon: <IoSettingsOutline />
-    },
+    
 
 
 ]
