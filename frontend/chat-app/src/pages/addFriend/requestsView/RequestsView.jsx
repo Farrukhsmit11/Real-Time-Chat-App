@@ -28,8 +28,8 @@ const RequestsView = () => {
             key: 'user',
             render: (url, record) => (
                 <div className='avatar-name-main'>
-                    <UserAvatar src={url} className='profile-avatar' name={record.senderId?.name} />
-                    <span>{record.senderId?.name}</span>
+                    <UserAvatar src={url} className='profile-avatar' name={record.requesterId?.name} />
+                    <span>{record.requesterId?.name}</span>
                 </div>
             )
         },
@@ -38,7 +38,7 @@ const RequestsView = () => {
             title: "Requester Email",
             key: "requesterEmail",
             render: (_, record) => (
-                <span>{record.senderId?.email}</span>
+                <span>{record.requesterId?.email}</span>
             )
         },
 
@@ -93,7 +93,7 @@ const RequestsView = () => {
     const approveRequest = async (record) => {
         try {
             await dispatch(handleApprove({
-                requestId: record._id
+                requestedId: record._id
             })).unwrap()
         } catch (error) {
             console.error("error while approving request", error)
@@ -103,7 +103,7 @@ const RequestsView = () => {
     const rejectRequest = async (record) => {
         try {
             await dispatch(handleReject({
-                requestId: record._id
+                requestedId: record._id
             })).unwrap()
         } catch (error) {
             console.error("Error while rejecting request", error)
@@ -119,7 +119,6 @@ const RequestsView = () => {
             <Table
                 columns={columns}
                 rowSelection={{ type: selectionType, ...rowSelection }}
-                // loading={loading}
                 rowKey="_id"
                 dataSource={requests}
                 pagination={{

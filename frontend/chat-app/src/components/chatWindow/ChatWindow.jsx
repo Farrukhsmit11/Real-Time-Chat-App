@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import "./ChatWindow.css"
 import { Input, message, Upload } from 'antd';
 import { PaperClipOutlined } from '@ant-design/icons';
@@ -27,7 +27,6 @@ const ChatWindow = () => {
 
             setText("")
 
-            dispatch(handleMessages(receiverId))
         } catch (error) {
             if (error.response) {
                 message.error(error.response?.data?.message)
@@ -39,7 +38,7 @@ const ChatWindow = () => {
         try {
             await dispatch(handleMessages(receiverId)).unwrap()
         } catch (error) {
-            console.error("error fetching messages", error)
+            console.error("Error Fetching Messages ")
         }
     }
 
@@ -48,6 +47,7 @@ const ChatWindow = () => {
             getMessages()
         }
     }, [receiverId])
+
 
     return (
         <>
@@ -59,37 +59,19 @@ const ChatWindow = () => {
                 </div>
 
                 <div className="messages-container">
-                    {messages.map((msg) => {
-                        const isSent = msg.senderId === selectedUser.userId?._id;
-
+                    {/* {messages.map((msg) => {
+                      
                         return (
-                            <div
-                                key={msg.id}
-                                className={
-                                    isSent
-                                        ? "message-row message-row-sent"
-                                        : "message-row message-row-received"
-                                }
-                            >
+                            <>
                                 <div
-                                    className={
-                                        isSent
-                                            ? "message-bubble message-bubble-sent"
-                                            : "message-bubble message-bubble-received"
-                                    }
+                                    
                                 >
-                                    <span className="message-text">
-                                        {msg.text}
-                                    </span>
-
-                                    <span className="message-time">
-                                        {msg.time}
-                                    </span>
+                                    <span>{msg?.text}</span>
                                 </div>
-                            </div>
+                            </>
                         );
                     })
-                    }
+                    } */}
                 </div>
 
                 <div className="send-message-area">

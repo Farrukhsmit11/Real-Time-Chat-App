@@ -1,9 +1,14 @@
 import mongoose from "mongoose";
 
-const sessionSchema = mongoose.Schema({
-    user1: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-    user2: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-    messages: { type: Array, default: [] }
+const sessionSchema = new mongoose.Schema({
+    updateAt: { type: Date, default: Date.now },
+    messages: [
+        {
+            senderId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+            receiverId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+            text: { type: String, required: true },
+        }
+    ]
 },
     { timestamps: true }
 )

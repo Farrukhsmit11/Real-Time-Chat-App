@@ -1,4 +1,4 @@
-import { Message } from "../models/Message.js"
+import { Session } from "../models/Session.js"
 
 export const getMessages = async (request, response) => {
 
@@ -6,7 +6,7 @@ export const getMessages = async (request, response) => {
         const senderId = request.user.id
         const receiverId = request.params.receiverId
 
-        const message = await Message.find({
+        const message = await Session.findOne({
             $or: [
                 {
                     senderId: senderId,
@@ -51,13 +51,27 @@ export const sendMessage = async (request, response) => {
             return
         }
 
-        const data = await Message.create({
-            text,
-            receiverId,
-            senderId,
+        const existingSession = await Session.findOne({
+            $or: [
+                { senderId, receiverId },
+                { receiverId, senderId }
+            ]
         })
 
-        response.status(200).json({ message: "Message send sucessfully", data })
+        if (existingSession) {
+            response.status(400).send({ message: "Session already exists" })
+            return
+        }
+
+        if (!existingSession) {
+            const newSession = await Session.create({
+                updatedAt: Date.now(),
+                messages: [{ senderId, receiverId, text }],
+            })
+
+        }
+
+        response.status(200).json({ message: "Message send sucessfully" })
 
     } catch (error) {
         console.error("error sending message", error)

@@ -3,7 +3,7 @@ import { FriendRequest } from "../models/FriendRequest.js"
 
 export const getRequests = async (request, response) => {
     try {
-        const data = await FriendRequest.find().populate("senderId", "name  email")
+        const data = await FriendRequest.find().populate("requesterId", "name  email")
         response.status(200).json({ message: "Requests Fetched Sucessfully", data })
     } catch (error) {
         console.error("Error while Fetching Reqests", error)
@@ -29,8 +29,8 @@ export const sendRequest = async (request, response) => {
 
         const existingRequest = await FriendRequest.findOne({
             $or: [
-                { senderId: senderId, receiverId: receiverId },
-                { senderId: receiverId, receiverId: senderId }
+                { requesterId: senderId, requestedId: receiverId },
+                { requesterId: receiverId, requestedId: senderId }
             ]
         })
 
@@ -40,8 +40,8 @@ export const sendRequest = async (request, response) => {
         }
 
         const data = await FriendRequest.create({
-            senderId: senderId,
-            receiverId: receiverId,
+            requesterId: senderId,
+            requestedId: receiverId,
             status: "pending"
         })
 
