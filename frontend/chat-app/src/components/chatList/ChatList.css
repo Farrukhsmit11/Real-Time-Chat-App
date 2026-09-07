@@ -104,7 +104,7 @@
     padding: 10px 4px;
     display: flex;
     flex-direction: column;
-    gap: 28px;
+    gap: 23px;
     height: 600px;
     overflow-y: auto;
     cursor: pointer;
@@ -120,7 +120,6 @@
 }
 
 .chat-card.active {
-    /* background: aliceblue !important; */
     border-radius: 10px;
 }
 
@@ -159,11 +158,28 @@
     display: flex;
     align-items: center;
     gap: 17px;
-    padding-left: 7px;
+    padding-left: 8px;
     margin-top: 14px;
 }
 
 .user-details {
     display: flex;
     flex-direction: column;
+}
+
+.search-input {
+    border-radius: 11px;
+    height: 42px;
+    font-family: 'Plus Jakarta Sans';
+    font-weight: 600;
+    border: 1px solid #DEEAFF;
+    padding: 8.8px 16px;
+}
+
+.input-section {
+    display: flex;
+    margin-top: 20px;
+    padding-left: 12px;
+    padding-right: 12px;
+    font-family: var(--jakarta);
 }

@@ -1,11 +1,12 @@
 import "./ChatList.css"
-import { PlusOutlined } from "@ant-design/icons"
-import { Button, Input } from 'antd'
+import { PlusOutlined, SearchOutlined } from "@ant-design/icons"
+import { Button, Divider, Input } from 'antd'
 import UserAvatar from '../userAvatar/UserAvatar';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedUser } from '../../store/features/chats/chatSlice';
 import { handleFriends } from "../../store/features/friends/friendsThunk";
 import { useEffect } from "react";
+import AnimatedSection from "../animatedSection/AnimatedSection";
 
 const ChatList = () => {
 
@@ -45,38 +46,49 @@ const ChatList = () => {
                 </div>
             </div>
 
-
-            <div className="chat-list-section">
-                {friends.map((friend) => {
-                    return (
-                        <div
-                            className="chat-list-data-main"
-                            onClick={() => {
-                                dispatch(setSelectedUser(friend))
-                            }
-                            }
-                        >
-                            <UserAvatar className='profile-avatar' name={friend.friendId?.name} />
-
-                            <div className="chat-content">
-                                <div className="profile-detail-left">
-                                    <h1 className='profile-name'>
-                                        <div className="user-details">
-                                            {friend.friendId?.name}
-
-                                            <span className="last-message">
-                                                Hello
-                                            </span>
-                                        </div>
-                                    </h1>
-                                    <span className='status'></span>
-                                </div>
-                                <span className='last-message'></span>
-                            </div>
-                        </div>
-                    )
-                })}
+            <div className="input-section">
+                <Input
+                    className="search-input"
+                    suffix={<SearchOutlined className="search-icon" />}
+                    placeholder="Search Conversations"></Input>
             </div>
+            <Divider />
+
+            <AnimatedSection y={-20} delay={0.2}>
+                <div className="chat-list-section">
+                    {friends.map((friend) => {
+                        return (
+                            <div
+                                className="chat-list-data-main"
+                                onClick={() => {
+                                    dispatch(setSelectedUser(friend))
+                                }
+                                }
+                            >
+                                <UserAvatar className='profile-avatar' name={friend.friendId?.name} />
+
+                                <div className="chat-content">
+                                    <div className="profile-detail-left">
+                                        <h1 className='profile-name'>
+                                            <div className="user-details">
+                                                {friend.friendId?.name}
+
+                                                <span className="last-message">
+                                                    Hello
+                                                </span>
+                                            </div>
+                                        </h1>
+                                        <span className='status'></span>
+                                    </div>
+                                    <span className='last-message'></span>
+                                </div>
+                            </div>
+                        )
+                    })}
+
+                </div>
+            </AnimatedSection>
+
         </div>
     )
 }
