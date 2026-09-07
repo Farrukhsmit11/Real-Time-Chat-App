@@ -3,24 +3,10 @@ import { Session } from "../models/Session.js"
 export const getMessages = async (request, response) => {
 
     try {
-        const senderId = request.user.id
-        const receiverId = request.params.receiverId
 
-        const message = await Session.findOne({
-            $or: [
-                {
-                    senderId: senderId,
-                    receiverId: receiverId
-                },
+        const sessions = await Session.find()
 
-                {
-                    senderId: receiverId,
-                    receiverId: senderId
-                }
-            ]
-        })
-
-        response.status(200).json({ message: "messages fetch properly", data: message })
+        response.status(200).json({ message: "messages fetch properly", data: sessions })
 
     } catch (error) {
         console.error("Failed to Fetch Messages", error)
@@ -32,7 +18,6 @@ export const sendMessage = async (request, response) => {
 
     const senderId = request.user.id
     const { text, receiverId } = request.body
-
 
     try {
 
@@ -51,26 +36,36 @@ export const sendMessage = async (request, response) => {
             return
         }
 
+        const newMessage = {
+            senderId,
+            receiverId,
+            text
+        }
+
         const existingSession = await Session.findOne({
             $or: [
-                { senderId, receiverId },
-                { receiverId, senderId }
+                {
+                    "messages.senderId": senderId,
+                    "messages.receiverId": receiverId
+                },
+
+                {
+                    "messages.senderId": receiverId,
+                    "messages.receiverId": senderId
+                }
             ]
         })
 
         if (existingSession) {
-            response.status(400).send({ message: "Session already exists" })
-            return
-        }
-
-        if (!existingSession) {
-            const newSession = await Session.create({
-                updatedAt: Date.now(),
-                messages: [{ senderId, receiverId, text }],
+            existingSession.messages.push(newMessage)
+            await existingSession.save()
+        } else {
+            await Session.create({
+                senderId,
+                receiverId,
+                messages: [newMessage],
             })
-
         }
-
         response.status(200).json({ message: "Message send sucessfully" })
 
     } catch (error) {
