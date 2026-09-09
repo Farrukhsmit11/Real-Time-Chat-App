@@ -6,11 +6,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedUser } from '../../store/features/chats/chatSlice';
 import { handleFriends, handleSearchFriends } from "../../store/features/friends/friendsThunk";
 import { useEffect, useState } from "react";
+import useDebounce from "../../hooks/useDebounce";
 
 const ChatList = () => {
 
     const dispatch = useDispatch()
     const [query, setQuery] = useState("")
+
+    const debounce = useDebounce(query, 500)
 
     const { friends, loading } = useSelector((state) => state.friend)
 
@@ -24,9 +27,9 @@ const ChatList = () => {
 
     const searchFriends = async () => {
         try {
-            await dispatch(handleSearchFriends()).unwrap()
+            await dispatch(handleSearchFriends(query)).unwrap()
         } catch (error) {
-            console.error("Error Searching Users ")
+            console.error("Error Searching Users", error)
         }
     }
 
@@ -36,7 +39,7 @@ const ChatList = () => {
 
     useEffect(() => {
         searchFriends()
-    }, [query])
+    }, [debounce])
 
     return (
         <div className="chat-list-container">
@@ -69,36 +72,38 @@ const ChatList = () => {
             <Divider />
 
             <div className="chat-list-section">
-                {friends.map((friend) => {
-                    return (
-                        <div
-                            className="chat-list-data-main"
-                            onClick={() => {
-                                dispatch(setSelectedUser(friend))
-                            }
-                            }
-                        >
-                            <UserAvatar className='profile-avatar' name={friend.friendId?.name} />
 
-                            <div className="chat-content">
-                                <div className="profile-detail-left">
-                                    <h1 className='profile-name'>
-                                        <div className="user-details">
-                                            {friend.friendId?.name}
+                {loading ? <p>Loading pleasw wait</p> :
+                    friends.map((friend) => {
+                        return (
+                            <div
+                                className="chat-list-data-main"
+                                onClick={() => {
+                                    dispatch(setSelectedUser(friend))
+                                }
+                                }
+                            >
+                                <UserAvatar className='profile-avatar' name={friend.friendId?.name} />
 
-                                            <span className="last-message">
-                                                Hello
-                                            </span>
-                                        </div>
-                                    </h1>
-                                    <span className='status'></span>
+                                <div className="chat-content">
+                                    <div className="profile-detail-left">
+                                        <h1 className='profile-name'>
+                                            <div className="user-details">
+                                                {friend.friendId?.name}
+
+                                                <span className="last-message">
+                                                    Hello
+                                                </span>
+                                            </div>
+                                        </h1>
+                                        <span className='status'></span>
+                                    </div>
+                                    <span className='last-message'></span>
                                 </div>
-                                <span className='last-message'></span>
                             </div>
-                        </div>
-                    )
-                })}
-
+                        )
+                    })
+                }
             </div>
         </div>
     )
