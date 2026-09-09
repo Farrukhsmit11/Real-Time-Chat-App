@@ -12,3 +12,15 @@ export const handleFriends = createAsyncThunk(
         }
     }
 )
+
+export const handleSearchFriends = createAsyncThunk(
+    "friends/searchFriends",
+    async (query, { rejectWithValue }) => {
+        try {
+            const response = await get(`search-friends?query=${query}`)
+            return response.data.data
+        } catch (error) {
+            return rejectWithValue(error.response.data.message)
+        }
+    }
+)

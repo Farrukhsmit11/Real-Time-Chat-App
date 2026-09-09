@@ -6,13 +6,12 @@ import { IoIosSend } from "react-icons/io";
 import PageHeader from "../pageHeader/PageHeader";
 import { useDispatch, useSelector } from 'react-redux';
 import { handleMessages, handleSendMessage } from '../../store/features/messages/messageThunk';
-import AnimatedSection from "../../components/animatedSection/AnimatedSection"
+import { handleSearchFriends } from '../../store/features/friends/friendsThunk';
 
 const ChatWindow = () => {
 
     const [text, setText] = useState("")
     const { selectedUser } = useSelector((state) => state.chat)
-    const { user } = useSelector((state) => state.auth)
 
     const receiverId = selectedUser?.friendId?._id
 
@@ -50,7 +49,6 @@ const ChatWindow = () => {
         }
     }, [receiverId])
 
-
     return (
         <>
             <div className='chat-window-container'>
@@ -60,24 +58,9 @@ const ChatWindow = () => {
                     />
                 </div>
 
-                <AnimatedSection delay={0.2} y={2.0}>
-                    <div className="messages-container">
+                <div className="messages-container">
 
-                        {/* {messages.map((msg) => {
-
-                            const isSent = msg.senderId === user?.id
-
-                            return (
-                                <div
-                                    key={msg.id}
-                                    className={isSent ? "message-bubble-sent" : "message-bubble-received"}>
-                                    <span>{msg.text}</span>
-                                </div>
-                            )
-                        })} */}
-                    </div>
-                </AnimatedSection>
-
+                </div>
 
                 <div className="send-message-area">
                     <Upload>

@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "./UserProfile.css"
 import PageHeader from '../../components/pageHeader/PageHeader'
-import { useDispatch, useSelector } from 'react-redux'
-import ProfileCard from '../../components/profileCard/ProfileCard'
-import EditProfileModal from '../../components/editProfileModal/EditProfileModal'
+import { useSelector } from 'react-redux'
 
 const UserProfile = () => {
 
@@ -24,13 +22,8 @@ const UserProfile = () => {
                 ></PageHeader>
             </div>
 
-            <div className="user-profile-content">
-                <ProfileCard user={user} onEditModal={() => setIsOpen(true)}></ProfileCard>
-            </div>
 
-            <EditProfileModal
-                IsOpenEditModal={IsOpen}
-                setIsOpenEditModal={setIsOpen} />
+
         </>
     )
 }

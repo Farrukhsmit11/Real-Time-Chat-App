@@ -94,6 +94,7 @@
     padding: 0 17px;
     border: 2px solid #cbd0db;
     box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+    cursor: pointer;
 }
 
 .upload-file-icon {
@@ -111,7 +112,7 @@
 .send-message-icon {
     color: #1616dc;
     font-size: 25px;
-    cursor: pointer;
+    cursor: pointer !important;
 }
 
 .user-info {

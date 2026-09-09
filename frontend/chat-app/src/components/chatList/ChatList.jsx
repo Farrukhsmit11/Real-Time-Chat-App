@@ -4,13 +4,13 @@ import { Button, Divider, Input } from 'antd'
 import UserAvatar from '../userAvatar/UserAvatar';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedUser } from '../../store/features/chats/chatSlice';
-import { handleFriends } from "../../store/features/friends/friendsThunk";
-import { useEffect } from "react";
-import AnimatedSection from "../animatedSection/AnimatedSection";
+import { handleFriends, handleSearchFriends } from "../../store/features/friends/friendsThunk";
+import { useEffect, useState } from "react";
 
 const ChatList = () => {
 
     const dispatch = useDispatch()
+    const [query, setQuery] = useState("")
 
     const { friends, loading } = useSelector((state) => state.friend)
 
@@ -22,9 +22,21 @@ const ChatList = () => {
         }
     }
 
+    const searchFriends = async () => {
+        try {
+            await dispatch(handleSearchFriends()).unwrap()
+        } catch (error) {
+            console.error("Error Searching Users ")
+        }
+    }
+
     useEffect(() => {
         getFriends()
     }, [])
+
+    useEffect(() => {
+        searchFriends()
+    }, [query])
 
     return (
         <div className="chat-list-container">
@@ -49,46 +61,45 @@ const ChatList = () => {
             <div className="input-section">
                 <Input
                     className="search-input"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
                     suffix={<SearchOutlined className="search-icon" />}
                     placeholder="Search Conversations"></Input>
             </div>
             <Divider />
 
-            <AnimatedSection y={-20} delay={0.2}>
-                <div className="chat-list-section">
-                    {friends.map((friend) => {
-                        return (
-                            <div
-                                className="chat-list-data-main"
-                                onClick={() => {
-                                    dispatch(setSelectedUser(friend))
-                                }
-                                }
-                            >
-                                <UserAvatar className='profile-avatar' name={friend.friendId?.name} />
+            <div className="chat-list-section">
+                {friends.map((friend) => {
+                    return (
+                        <div
+                            className="chat-list-data-main"
+                            onClick={() => {
+                                dispatch(setSelectedUser(friend))
+                            }
+                            }
+                        >
+                            <UserAvatar className='profile-avatar' name={friend.friendId?.name} />
 
-                                <div className="chat-content">
-                                    <div className="profile-detail-left">
-                                        <h1 className='profile-name'>
-                                            <div className="user-details">
-                                                {friend.friendId?.name}
+                            <div className="chat-content">
+                                <div className="profile-detail-left">
+                                    <h1 className='profile-name'>
+                                        <div className="user-details">
+                                            {friend.friendId?.name}
 
-                                                <span className="last-message">
-                                                    Hello
-                                                </span>
-                                            </div>
-                                        </h1>
-                                        <span className='status'></span>
-                                    </div>
-                                    <span className='last-message'></span>
+                                            <span className="last-message">
+                                                Hello
+                                            </span>
+                                        </div>
+                                    </h1>
+                                    <span className='status'></span>
                                 </div>
+                                <span className='last-message'></span>
                             </div>
-                        )
-                    })}
+                        </div>
+                    )
+                })}
 
-                </div>
-            </AnimatedSection>
-
+            </div>
         </div>
     )
 }
