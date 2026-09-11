@@ -72,8 +72,7 @@ const ChatList = () => {
             <Divider />
 
             <div className="chat-list-section">
-
-                {loading ? <p>Loading pleasw wait</p> :
+                {
                     friends.map((friend) => {
                         return (
                             <div

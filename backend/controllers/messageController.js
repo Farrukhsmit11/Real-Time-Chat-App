@@ -4,9 +4,21 @@ export const getMessages = async (request, response) => {
 
     try {
 
-        const sessions = await Session.find()
+        const { sessionId } = request.params
 
-        response.status(200).json({ message: "messages fetch properly", data: sessions })
+        if (!sessionId) {
+            response.status(400).send({ message: "Session Id is required" })
+            return
+        }
+
+        const session = await Session.findById(sessionId)
+
+        if (!session) {
+            response.status(400).send({ message: "Session not found" })
+            return
+        }
+
+        response.status(200).json({ message: "Session founded sucessfully", data: session.messages })
 
     } catch (error) {
         console.error("Failed to Fetch Messages", error)

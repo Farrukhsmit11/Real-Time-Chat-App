@@ -1,19 +1,19 @@
-    import "./PageHeader.css"
-    import { Button } from 'antd'
-    import { FaArrowLeftLong } from 'react-icons/fa6'
-    import { useNavigate } from 'react-router-dom'
-    import { ConditionalRendering } from './../../utils/helper'
-    import UserAvatar from '../userAvatar/UserAvatar'
-    import { IoMdCall } from "react-icons/io";
+import "./PageHeader.css"
+import { Button } from 'antd'
+import { FaArrowLeftLong } from 'react-icons/fa6'
+import { useNavigate } from 'react-router-dom'
+import { ConditionalRendering } from './../../utils/helper'
+import UserAvatar from '../userAvatar/UserAvatar'
+import { IoMdCall } from "react-icons/io";
 
-    const PageHeader = ({ ...headerProps }) => {
+const PageHeader = ({ ...headerProps }) => {
 
-        const navigate = useNavigate()
+    const navigate = useNavigate()
 
-        const { title, subtitle, renderGoBack, leftContent, rightContent, user, className } = headerProps
+    const { title, subtitle, renderGoBack, leftContent, rightContent, user, className } = headerProps
 
-        return (
-            <div className={`page-header-container ${className || ""}`} >
+    return (
+        <div className={`page-header-container ${className || ""}`} >
             <div className="page-header">
                 <div className="page-header-left">
                     <ConditionalRendering
@@ -68,8 +68,8 @@
                     />
                 </div>
             </div>
-            </div >
-        )
-    }
+        </div >
+    )
+}
 
-    export default PageHeader
+export default PageHeader

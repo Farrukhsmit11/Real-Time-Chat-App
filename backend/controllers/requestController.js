@@ -54,7 +54,6 @@ export const sendRequest = async (request, response) => {
 
 export const approveRequest = async (request, response) => {
 
-    const senderId = request.user.id
     const { requestId } = request.body
 
     try {
@@ -70,9 +69,9 @@ export const approveRequest = async (request, response) => {
         await res.save()
 
         await Friend.create({
-            userId: senderId,
-            friendId: res.senderId,
-            addedOn: new Date()
+            userId: res.requesterId,
+            friendId: res.requestedId,
+            addedOn: new Date(),
         })
 
         response.status(200).json({ message: "Request has been approved" })

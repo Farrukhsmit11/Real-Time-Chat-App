@@ -93,7 +93,7 @@ const RequestsView = () => {
     const approveRequest = async (record) => {
         try {
             await dispatch(handleApprove({
-                requestedId: record._id
+                requestId: record._id
             })).unwrap()
         } catch (error) {
             console.error("error while approving request", error)
@@ -103,7 +103,7 @@ const RequestsView = () => {
     const rejectRequest = async (record) => {
         try {
             await dispatch(handleReject({
-                requestedId: record._id
+                requestId: record._id
             })).unwrap()
         } catch (error) {
             console.error("Error while rejecting request", error)

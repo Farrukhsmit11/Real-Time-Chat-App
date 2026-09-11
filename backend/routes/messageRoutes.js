@@ -4,6 +4,6 @@ import protectRoute from "../middlewares/auth.js"
 const router = express.Router()
 
 router.route("/send-message").post(protectRoute, sendMessage)
-router.route("/messages/:receiverId").get(protectRoute, getMessages)
+router.route("/get-messages/:sessionId").get(getMessages)
 
 export default router
