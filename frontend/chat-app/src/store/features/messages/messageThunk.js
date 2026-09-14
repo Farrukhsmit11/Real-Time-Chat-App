@@ -18,9 +18,9 @@ export const handleSendMessage = createAsyncThunk(
 
 export const handleMessages = createAsyncThunk(
     "messages/getMessages",
-    async (receiverId) => {
+    async (sessionId) => {
         try {
-            const messages = await get(`/get-messages/${receiverId}`)
+            const messages = await get(`/get-messages/${sessionId}`)
 
             return messages.data.data
         } catch (error) {

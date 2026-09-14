@@ -6,27 +6,34 @@ import { IoIosSend } from "react-icons/io";
 import PageHeader from "../pageHeader/PageHeader";
 import { useDispatch, useSelector } from 'react-redux';
 import { handleMessages, handleSendMessage } from '../../store/features/messages/messageThunk';
-import { handleSearchFriends } from '../../store/features/friends/friendsThunk';
 
 const ChatWindow = () => {
 
-    const [text, setText] = useState("")
+    const [text, setText] = useState("");
+
+    const { user } = useSelector((state) => state.auth);
+
+    const loggedInUser = user?.user?._id
+
     const { selectedUser } = useSelector((state) => state.chat)
 
-    const receiverId = selectedUser?.friendId?._id
-
     const { messages, loading } = useSelector((state) => state.message)
+
+    const sessionId = selectedUser?.sessionId
+    const receiverId = selectedUser?.friendId._id
 
     const dispatch = useDispatch()
 
     const onSubmit = async () => {
+
         try {
             await dispatch(handleSendMessage({
                 text,
-                receiverId
+                receiverId,
             })).unwrap()
 
             setText("")
+            getMessages()
 
         } catch (error) {
             if (error.response) {
@@ -37,17 +44,17 @@ const ChatWindow = () => {
 
     const getMessages = async () => {
         try {
-            await dispatch(handleMessages(receiverId)).unwrap()
+            await dispatch(handleMessages(sessionId)).unwrap()
         } catch (error) {
-            console.error("Error Fetching Messages ")
+            console.error("Error Fetching Messages", error)
         }
     }
 
     useEffect(() => {
-        if (receiverId) {
+        if (sessionId) {
             getMessages()
         }
-    }, [receiverId])
+    }, [sessionId])
 
     return (
         <>
@@ -59,7 +66,22 @@ const ChatWindow = () => {
                 </div>
 
                 <div className="messages-container">
+                    {messages?.map((msg) => {
+                        const isSent = msg?.senderId === loggedInUser
 
+                        return (
+                            <div
+                                className={`message-bubble ${isSent
+                                    ? "message-bubble-sent"
+                                    : "message-bubble-received"
+                                    }`}
+                            >
+                                <span className="message-text">
+                                    {msg?.text}
+                                </span>
+                            </div>
+                        )
+                    })}
                 </div>
 
                 <div className="send-message-area">

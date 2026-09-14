@@ -13,6 +13,7 @@ const messageSlice = createSlice({
         builder
             .addCase(handleMessages.pending, (state) => {
                 state.loading = true
+                state.messages = []
             })
 
             .addCase(handleMessages.fulfilled, (state, action) => {

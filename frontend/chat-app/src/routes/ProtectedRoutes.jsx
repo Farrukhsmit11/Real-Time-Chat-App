@@ -2,12 +2,7 @@ import React, { Suspense } from 'react'
 import { AddFriend } from '../pages'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import Loader from '../components/loader/Loader'
-import { HomeOutlined, PlusCircleOutlined, SettingFilled, UserAddOutlined } from '@ant-design/icons'
-import { LuMessageCircleMore, LuUsers } from 'react-icons/lu'
-import Settings from '../pages/settings/Settings'
-import { IoSettingsOutline } from "react-icons/io5";
-import { PiChatsDuotone } from "react-icons/pi";
-import { PiChatsTeardropBold } from "react-icons/pi";
+import { HomeOutlined, UserAddOutlined } from '@ant-design/icons'
 import Dashboard from '../pages/dashboard/Dashboard'
 import UserProfile from "../pages/userProfile/UserProfile"
 
@@ -26,7 +21,7 @@ export const routes = [
         element: <AddFriend />,
         icon: <UserAddOutlined />
     },
-    
+
 
 
 ]

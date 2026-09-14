@@ -1,9 +1,9 @@
 import express from "express"
-import { getFriends, searchFriends } from "../controllers/friendsController.js"
+import { getFriends } from "../controllers/friendsController.js"
+import protectRoute from "../middlewares/auth.js"
 
 const router = express.Router()
 
-router.route("/get-friends").get(getFriends)
-router.route("/search-friends").get(searchFriends)
+router.route("/get-friends").get(protectRoute, getFriends)
 
 export default router

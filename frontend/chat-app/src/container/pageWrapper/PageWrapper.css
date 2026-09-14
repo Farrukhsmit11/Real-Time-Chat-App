@@ -68,3 +68,37 @@
 .ant-popover {
     box-shadow: none !important;
 }
+
+.sidebar-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+}
+
+.popover-main {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
+}
+
+.ant-popover-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.popover-item {
+    margin: 0px;
+    display: flex;
+    align-items: center;
+    font-family: var(--jakarta);
+    gap: 4px;
+}
+
+.logout-icon{
+    color: red;
+    font-size: 17px;
+}

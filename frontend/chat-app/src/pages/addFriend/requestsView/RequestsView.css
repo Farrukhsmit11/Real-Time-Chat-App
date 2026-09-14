@@ -4,15 +4,17 @@
     width: 134px;
     height: 38px;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 500;
     border-radius: 4px !important;
     display: flex;
     align-items: center;
-    border: 1px solid blue;
+    background: #3f3fb1;
+    color: white;
 }
 
 .approve-btn:hover {
-    color: blue !important;
+    background: #3f3fb1 !important;
+    color: white !important;
 }
 
 .approve-btn-danger {
@@ -20,10 +22,17 @@
     width: 134px;
     height: 38px;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 500;
     border-radius: 4px !important;
     display: flex;
     align-items: center;
+    background: #b84b4b;
+    color: white;
+}
+
+.approve-btn-danger:hover {
+    background: #b84b4b !important;
+    color: white !important;
 }
 
 .buttons-main {

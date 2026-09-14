@@ -47,7 +47,6 @@ export const getProfile = createAsyncThunk(
             return profileData.data
         } catch (error) {
             return rejectWithValue(error.response.data)
-            console.error("Error Fetching Profile", error)
         }
     }
 )

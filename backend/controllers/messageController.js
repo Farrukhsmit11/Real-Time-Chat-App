@@ -1,4 +1,5 @@
 import { Session } from "../models/Session.js"
+import { Friend } from "../models/Friend.js"
 
 export const getMessages = async (request, response) => {
 
@@ -18,7 +19,9 @@ export const getMessages = async (request, response) => {
             return
         }
 
-        response.status(200).json({ message: "Session founded sucessfully", data: session.messages })
+        response.status(200).json({
+            message: "Session founded sucessfully", data: session.messages
+        })
 
     } catch (error) {
         console.error("Failed to Fetch Messages", error)
@@ -54,6 +57,8 @@ export const sendMessage = async (request, response) => {
             text
         }
 
+        let session
+
         const existingSession = await Session.findOne({
             $or: [
                 {
@@ -71,13 +76,26 @@ export const sendMessage = async (request, response) => {
         if (existingSession) {
             existingSession.messages.push(newMessage)
             await existingSession.save()
+
+            session = existingSession
+
         } else {
-            await Session.create({
+            session = await Session.create({
                 senderId,
                 receiverId,
                 messages: [newMessage],
             })
         }
+
+        const friend = await Friend.findOne({
+            userId: senderId,
+            friendId: receiverId,
+        })
+        if (friend) {
+            friend.sessionId = session._id
+            await friend.save()
+        }
+
         response.status(200).json({ message: "Message send sucessfully" })
 
     } catch (error) {

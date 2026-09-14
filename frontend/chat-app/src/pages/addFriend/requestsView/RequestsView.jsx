@@ -1,4 +1,4 @@
-import { Button, Table } from 'antd'
+import { Button, message, Table } from 'antd'
 import UserAvatar from '../../../components/userAvatar/UserAvatar'
 import { CheckOutlined } from '@ant-design/icons'
 import { RxCross2 } from "react-icons/rx";
@@ -95,6 +95,7 @@ const RequestsView = () => {
             await dispatch(handleApprove({
                 requestId: record._id
             })).unwrap()
+            message.success("Request Approved")
         } catch (error) {
             console.error("error while approving request", error)
         }
@@ -105,6 +106,7 @@ const RequestsView = () => {
             await dispatch(handleReject({
                 requestId: record._id
             })).unwrap()
+
         } catch (error) {
             console.error("Error while rejecting request", error)
         }

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { handleFriends, handleSearchFriends } from "./friendsThunk";
+import { handleFriends } from "./friendsThunk";
 
 const initialState = {
     friends: [],
@@ -22,19 +22,6 @@ const friendSlice = createSlice({
             })
 
             .addCase(handleFriends.rejected, (state, action) => {
-                state.error = action.payload
-            })
-
-        builder
-            .addCase(handleSearchFriends.pending, (state) => {
-                state.loading = true
-            })
-
-            .addCase(handleSearchFriends.fulfilled, (state) => {
-                state.loading = false
-            })
-
-            .addCase(handleSearchFriends.rejected, (state, action) => {
                 state.error = action.payload
             })
     }

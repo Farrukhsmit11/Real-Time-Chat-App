@@ -4,7 +4,7 @@ import { Button, Divider, Input } from 'antd'
 import UserAvatar from '../userAvatar/UserAvatar';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedUser } from '../../store/features/chats/chatSlice';
-import { handleFriends, handleSearchFriends } from "../../store/features/friends/friendsThunk";
+import { handleFriends } from "../../store/features/friends/friendsThunk";
 import { useEffect, useState } from "react";
 import useDebounce from "../../hooks/useDebounce";
 
@@ -25,21 +25,21 @@ const ChatList = () => {
         }
     }
 
-    const searchFriends = async () => {
-        try {
-            await dispatch(handleSearchFriends(query)).unwrap()
-        } catch (error) {
-            console.error("Error Searching Users", error)
-        }
-    }
+    // const searchFriends = async () => {
+    //     try {
+    //         await dispatch(handleSearchFriends(query)).unwrap()
+    //     } catch (error) {
+    //         console.error("Error Searching Users", error)
+    //     }
+    // }
 
     useEffect(() => {
         getFriends()
     }, [])
 
-    useEffect(() => {
-        searchFriends()
-    }, [debounce])
+    // useEffect(() => {
+    //     searchFriends()
+    // }, [debounce])
 
     return (
         <div className="chat-list-container">
