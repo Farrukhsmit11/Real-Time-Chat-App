@@ -101,6 +101,7 @@
 }
 
 .chat-list-section {
+    flex: 1;
     padding: 10px 4px;
     display: flex;
     flex-direction: column;
@@ -159,7 +160,8 @@
     align-items: center;
     gap: 17px;
     padding-left: 8px;
-    margin-top: 14px;
+    margin-top: 11px;
+
 }
 
 .user-details {
@@ -182,4 +184,10 @@
     padding-left: 12px;
     padding-right: 12px;
     font-family: var(--jakarta);
+}
+
+.new-chat-btn {
+    border-radius: 50%;
+    width: 40px !important;
+    height: 40px !important;
 }

@@ -20,25 +20,28 @@ const ChatWindow = () => {
     const { messages, loading } = useSelector((state) => state.message)
 
     const sessionId = selectedUser?.sessionId
-    const receiverId = selectedUser?.friendId._id
+    const receiverId = selectedUser?.friendId?._id
 
     const dispatch = useDispatch()
 
     const onSubmit = async () => {
 
+        if (!text.trim()) {
+            message.error("Message cannot be empty");
+            return;
+        }
+
         try {
-            await dispatch(handleSendMessage({
+            const result = await dispatch(handleSendMessage({
                 text,
                 receiverId,
             })).unwrap()
 
             setText("")
-            getMessages()
+
 
         } catch (error) {
-            if (error.response) {
-                message.error(error.response?.data?.message)
-            }
+            console.log("Error Sending Message", error)
         }
     }
 
@@ -65,22 +68,22 @@ const ChatWindow = () => {
                     />
                 </div>
 
-                <div className="messages-container">
-                    {messages?.map((msg) => {
-                        const isSent = msg?.senderId === loggedInUser
+                <div className='messages-container'>
+                    {messages.map((msg) => {
+
+                        const isSent =
+                            String(msg?.senderId) === String(loggedInUser);
 
                         return (
                             <div
-                                className={`message-bubble ${isSent
-                                    ? "message-bubble-sent"
-                                    : "message-bubble-received"
-                                    }`}
+                                key={msg?._id}
+                                className={`message-bubble ${isSent ? 'message-bubble-sent' : 'message-bubble-received'}`}
                             >
                                 <span className="message-text">
                                     {msg?.text}
                                 </span>
                             </div>
-                        )
+                        );
                     })}
                 </div>
 
@@ -102,7 +105,7 @@ const ChatWindow = () => {
                     >
                     </Input>
                 </div>
-            </div>
+            </div >
         </>
     )
 }

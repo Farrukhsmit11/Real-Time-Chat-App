@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getProfile, handleLogin, handleSignup, handleForgotPassword, handleChangePassword, handleVerifyOtp, handleResendOtp } from "./authThunk.js";
+import { getProfile, handleLogin, handleSignup, handleForgotPassword, handleChangePassword, handleVerifyOtp, handleResendOtp, handleLogout } from "./authThunk.js";
 
 const initialState = {
     user: {},
@@ -10,6 +10,7 @@ const initialState = {
     changePasswordLoading: false,
     verifyOtpLoading: false,
     resendOtpLoading: false,
+    logoutLoading: false,
     error: null
 }
 
@@ -119,6 +120,20 @@ const authSlice = createSlice({
 
             .addCase(handleResendOtp.rejected, (state) => {
                 state.resendOtpLoading = false
+            })
+
+        builder
+            .addCase(handleLogout.pending, (state) => {
+                state.logoutLoading = true
+            })
+
+            .addCase(handleLogout.fulfilled, (state) => {
+                state.isAuthenticate = false
+                state.logoutLoading = false
+            })
+
+            .addCase(handleLogout.rejected, (state) => {
+                state.logoutLoading = false
             })
     }
 })

@@ -1,10 +1,10 @@
 import mongoose from "mongoose"
 
 const friendSchema = mongoose.Schema({
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-    friendId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    userId: { type: String, ref: "User", required: true },
+    friendId: { type: String, ref: "User", required: true },
     addedOn: { type: Date, required: true },
-    sessionId: { type: mongoose.Schema.Types.ObjectId, ref: "Session" , default: null }
+    sessionId: { type: mongoose.Schema.Types.ObjectId, ref: "Session", default: null }
 },
     { timestamps: true }
 )

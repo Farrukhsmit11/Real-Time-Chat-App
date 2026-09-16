@@ -18,8 +18,6 @@ const ForgotPassword = () => {
         error: auth?.error
     }))
 
-
-
     const navigate = useNavigate();
 
     const { loading } = res

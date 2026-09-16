@@ -31,76 +31,86 @@ export const getMessages = async (request, response) => {
 
 export const sendMessage = async (request, response) => {
 
-    const senderId = request.user.id
-    const { text, receiverId } = request.body
+    const senderId = request.user.id;
+    const { text, receiverId } = request.body;
 
     try {
-
-        if (!text || !receiverId) {
-            response.status(400).send({ message: "Please enter message" })
-            return
+        if (!text) {
+            return response.status(400).send({
+                message: "Please enter message"
+            });
         }
 
         if (!senderId || !receiverId) {
-            response.status(400).send({ message: "senderId and receiverId required" })
-            return
-        }
-
-        if (!senderId) {
-            response.status(400).send({ message: "User not authenticated" })
-            return
+            return response.status(400).send({
+                message: "senderId and receiverId required"
+            });
         }
 
         const newMessage = {
             senderId,
-            receiverId,
             text
-        }
+        };
 
-        let session
+        let session;
 
         const existingSession = await Session.findOne({
             $or: [
                 {
-                    "messages.senderId": senderId,
-                    "messages.receiverId": receiverId
+                    senderId: senderId,
+                    receiverId: receiverId
                 },
-
                 {
-                    "messages.senderId": receiverId,
-                    "messages.receiverId": senderId
+                    senderId: receiverId,
+                    receiverId: senderId
                 }
             ]
-        })
+        });
 
         if (existingSession) {
-            existingSession.messages.push(newMessage)
-            await existingSession.save()
 
-            session = existingSession
+            existingSession.messages.push(newMessage);
 
-        } else {
+            await existingSession.save();
+
+            session = existingSession;
+
+        }
+        else {
             session = await Session.create({
                 senderId,
                 receiverId,
-                messages: [newMessage],
-            })
+                messages: [newMessage]
+            });
         }
 
-        const friend = await Friend.findOne({
-            userId: senderId,
-            friendId: receiverId,
-        })
-        if (friend) {
-            friend.sessionId = session._id
-            await friend.save()
-        }
+        await Friend.updateMany(
+            {
+                $or: [
+                    { userId: senderId, friendId: receiverId },
+                    { userId: receiverId, friendId: senderId }
+                ]
+            },
 
-        response.status(200).json({ message: "Message send sucessfully" })
+            {
+                sessionId: session._id
+            }
+        )
+
+        response.status(200).json({
+            message: "Message sent successfully",
+            sessionId: session._id,
+            data: newMessage,
+
+        });
 
     } catch (error) {
-        console.error("error sending message", error)
+        console.error("Error sending message:", error);
+
+        return response.status(500).json({
+            message: "Internal server error"
+        });
     }
-}
+};
 
 export default { sendMessage, getMessages }

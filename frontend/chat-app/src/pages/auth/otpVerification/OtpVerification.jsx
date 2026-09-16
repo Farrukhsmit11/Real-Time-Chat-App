@@ -70,9 +70,11 @@ const OtpVerification = () => {
                         </Input.OTP>
                     </AntForm.Item>
 
-                    <span className='resend-otp-title'>
-                        Didn't receive this code?
-                    </span>
+                    <div className='resend-otp-main'>
+                        <span className='resend-otp-title'>
+                            Didn't receive this code?
+                        </span>
+                    </div>
 
                     <div className="form-footer">
                         <Button
@@ -81,7 +83,6 @@ const OtpVerification = () => {
                             loading={authLoading}
                         >Resend OTP
                         </Button>
-
 
                         <Button
                             loading={loading}

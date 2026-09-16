@@ -6,14 +6,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedUser } from '../../store/features/chats/chatSlice';
 import { handleFriends } from "../../store/features/friends/friendsThunk";
 import { useEffect, useState } from "react";
-import useDebounce from "../../hooks/useDebounce";
 
 const ChatList = () => {
 
     const dispatch = useDispatch()
     const [query, setQuery] = useState("")
-
-    const debounce = useDebounce(query, 500)
 
     const { friends, loading } = useSelector((state) => state.friend)
 
@@ -25,21 +22,9 @@ const ChatList = () => {
         }
     }
 
-    // const searchFriends = async () => {
-    //     try {
-    //         await dispatch(handleSearchFriends(query)).unwrap()
-    //     } catch (error) {
-    //         console.error("Error Searching Users", error)
-    //     }
-    // }
-
     useEffect(() => {
         getFriends()
     }, [])
-
-    // useEffect(() => {
-    //     searchFriends()
-    // }, [debounce])
 
     return (
         <div className="chat-list-container">
@@ -95,9 +80,8 @@ const ChatList = () => {
                                                 </span>
                                             </div>
                                         </h1>
-                                        <span className='status'></span>
+                                    
                                     </div>
-                                    <span className='last-message'></span>
                                 </div>
                             </div>
                         )

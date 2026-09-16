@@ -32,7 +32,7 @@ const messageSlice = createSlice({
 
             .addCase(handleSendMessage.fulfilled, (state, action) => {
                 state.loading = false,
-                    state.messages.push(action.payload)
+                    state.messages.push(action.payload.data)
             })
 
             .addCase(handleSendMessage.rejected, (state) => {

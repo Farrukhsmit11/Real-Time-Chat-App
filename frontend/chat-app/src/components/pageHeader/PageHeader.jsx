@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom'
 import { ConditionalRendering } from './../../utils/helper'
 import UserAvatar from '../userAvatar/UserAvatar'
 import { IoMdCall } from "react-icons/io";
+import { IoIosVideocam } from "react-icons/io";
+import { IoIosNotifications } from "react-icons/io";
 
 const PageHeader = ({ ...headerProps }) => {
 
@@ -45,12 +47,29 @@ const PageHeader = ({ ...headerProps }) => {
                             />
                         </div>
                         <div className="user-details-right">
+
                             <Button
-                                className='call-btn'
+                                className='chat-header-btn'
                                 icon={
-                                    <IoMdCall className='call-icon' />
+                                    <IoIosNotifications className="chat-header-icon" />
+
                                 }>
-                                Call
+                            </Button>
+
+                            <Button
+                                className='chat-header-btn'
+                                icon={
+                                    <IoIosVideocam className="chat-header" />
+                                }>
+
+                            </Button>
+
+                            <Button
+                                className='chat-header-btn'
+                                icon={
+                                    <IoMdCall className='chat-header-icon' />
+                                }>
+
                             </Button>
                         </div>
                     </>

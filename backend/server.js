@@ -9,7 +9,7 @@ import requestRoutes from "./routes/requestRoutes.js"
 import friendRoutes from "./routes/friendRoutes.js"
 
 const app = express()
-const PORT = 5000
+const port = process.env.PORT || 5000
 app.use(express.json())
 
 app.use(cors({
@@ -29,6 +29,6 @@ app.get("/", (request, response) => {
     response.send("Hello world backend working")
 })
 
-app.listen(PORT, (request, response) => {
-    console.log(`Server is running on ${PORT}`)
+app.listen(port, (request, response) => {
+    console.log(`Server is running on ${port}`)
 })
