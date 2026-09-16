@@ -13,7 +13,7 @@ const port = process.env.PORT || 5000
 app.use(express.json())
 
 app.use(cors({
-    origin: "https://real-time-chat-app-production-0408.up.railway.app",
+    origin: process.env.FRONTEND_URL,
     credentials: true
 }))
 
