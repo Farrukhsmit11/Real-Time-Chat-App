@@ -29,6 +29,6 @@ app.get("/", (request, response) => {
     response.send("Hello world backend working")
 })
 
-app.listen(port, (request, response) => {
+app.listen(port, () => {
     console.log(`Server is running on ${port}`)
 })
