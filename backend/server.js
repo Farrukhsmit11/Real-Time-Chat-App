@@ -13,7 +13,7 @@ const port = process.env.PORT || 5000
 app.use(express.json())
 
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "https://real-time-chat-app-production-0408.up.railway.app",
     credentials: true
 }))
 

@@ -3,7 +3,7 @@ import { TOKEN } from "./constant";
 import { handleLogout } from "../store/features/auth/authThunk";
 import { store } from "../store/store"
 
-const BASE_URL = "http://localhost:5000"
+const BASE_URL = "https://real-time-chat-app-production-1db8.up.railway.app/"
 
 const initializeInterceptor = () => {
 
