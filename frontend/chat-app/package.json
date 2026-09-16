@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "start": "vite --host 0.0.0.0"
+    "start": "serve -s dist -l $PORT"
   },
   "dependencies": {
     "@ant-design/charts": "^2.6.7",
