@@ -80,7 +80,7 @@ const ChatList = () => {
                                                 </span>
                                             </div>
                                         </h1>
-                                    
+
                                     </div>
                                 </div>
                             </div>
