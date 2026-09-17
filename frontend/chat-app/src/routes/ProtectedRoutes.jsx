@@ -4,7 +4,6 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import Loader from '../components/loader/Loader'
 import { HomeOutlined, UserAddOutlined } from '@ant-design/icons'
 import Dashboard from '../pages/dashboard/Dashboard'
-import UserProfile from "../pages/userProfile/UserProfile"
 
 
 export const routes = [
@@ -40,8 +39,7 @@ const ProtectedRoutes = () => {
                         </Route>
                     )
                 })}
-
-                <Route path='/userProfile' element={<UserProfile />}></Route>
+                
                 <Route path='*' element={<Navigate to="/dashboard" replace />}></Route>
             </Routes>
         </Suspense>
