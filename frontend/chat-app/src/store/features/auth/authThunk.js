@@ -2,6 +2,7 @@ import { message } from "antd"
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { TOKEN } from '../../../utils/constant'
 import { get, post } from "../../../utils/apiMethod"
+import { clearSelectedUser } from "../chats/chatSlice"
 
 export const handleSignup = createAsyncThunk(
     "auth/signup",
@@ -54,10 +55,11 @@ export const getProfile = createAsyncThunk(
 
 export const handleLogout = createAsyncThunk(
     "auth/logout",
-    async () => {
+    async (_, { dispatch }) => {
         try {
             const data = await post("/logoutUser")
             localStorage.removeItem(TOKEN)
+            dispatch(clearSelectedUser())
         } catch (error) {
             console.error("Error logging out", error)
         }

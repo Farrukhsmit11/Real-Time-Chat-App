@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import "./ChatWindow.css"
-import { Input, message, Upload } from 'antd';
-import { PaperClipOutlined } from '@ant-design/icons';
+import { Input, message, Spin, Upload } from 'antd';
+import { LoadingOutlined, PaperClipOutlined } from '@ant-design/icons';
 import { IoIosSend } from "react-icons/io";
 import PageHeader from "../pageHeader/PageHeader";
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,26 +19,27 @@ const ChatWindow = () => {
 
     const { messages, loading } = useSelector((state) => state.message)
 
+    const messageEndRef = useRef();
+
+    const currentMessage = messageEndRef.current?.scrollIntoView({ behavior: "smooth" })
+
     const sessionId = selectedUser?.sessionId
     const receiverId = selectedUser?.friendId?._id
 
     const dispatch = useDispatch()
 
     const onSubmit = async () => {
-
         if (!text.trim()) {
             message.error("Message cannot be empty");
             return;
         }
-
         try {
-            const result = await dispatch(handleSendMessage({
+            await dispatch(handleSendMessage({
                 text,
                 receiverId,
             })).unwrap()
 
             setText("")
-
 
         } catch (error) {
             console.log("Error Sending Message", error)
@@ -69,22 +70,32 @@ const ChatWindow = () => {
                 </div>
 
                 <div className='messages-container'>
-                    {messages.map((msg) => {
 
-                        const isSent =
-                            String(msg?.senderId) === String(loggedInUser);
 
-                        return (
-                            <div
-                                key={msg?._id}
-                                className={`message-bubble ${isSent ? 'message-bubble-sent' : 'message-bubble-received'}`}
-                            >
-                                <span className="message-text">
-                                    {msg?.text}
-                                </span>
-                            </div>
-                        );
-                    })}
+                    {loading && messages.length === 0 ? (
+                        <div className='messages-loading-page'>
+                            <Spin size='large' indicator={<LoadingOutlined spin />} />
+                        </div>
+                    ) : (
+                        messages.map((msg) => {
+
+                            const isSent =
+                                String(msg?.senderId) === String(loggedInUser);
+
+                            return (
+                                <div
+                                    key={msg?._id}
+                                    className={`message-bubble ${isSent ? 'message-bubble-sent' : 'message-bubble-received'}`}
+                                >
+                                    <span className="message-text">
+                                        {msg?.text}
+                                    </span>
+                                </div>
+                            );
+                        })
+
+                    )}
+                    <div ref={messageEndRef}></div>
                 </div>
 
                 <div className="send-message-area">
