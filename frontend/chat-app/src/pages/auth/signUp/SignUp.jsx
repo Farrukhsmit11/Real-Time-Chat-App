@@ -42,7 +42,7 @@ const SignUp = () => {
                 password
             })
             ).unwrap()
-            navigate("/login")
+            navigate("/")
         } catch (error) {
             message.error(error)
         }
