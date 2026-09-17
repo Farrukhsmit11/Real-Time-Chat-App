@@ -12,10 +12,15 @@ const app = express()
 const port = process.env.PORT || 5000
 app.use(express.json())
 
-app.use(cors({
-    origin: process.env.FRONTEND_URL,
-    credentials: true
-}))
+app.use(
+    cors({
+        origin: [
+            "http://localhost:5173",
+            " https://real-time-chat-app-production-0408.up.railway.app/"
+        ],
+        credentials: true
+    })
+);
 
 connectDB()
 
