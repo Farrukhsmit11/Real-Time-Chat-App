@@ -2,18 +2,11 @@ import React, { useState } from 'react'
 import { Formik } from "formik"
 import { Button, Checkbox, Form, Input, message } from "antd"
 import "./Login.css"
-import axios from "axios"
 import { useNavigate } from 'react-router-dom'
 import { handleLogin } from '../../../store/features/auth/authThunk'
 import { useDispatch, useSelector } from "react-redux"
-import { loginSchema } from './Validation'
 
 const Login = () => {
-
-  const initialValues = {
-    email: "",
-    password: ""
-  }
 
   const [form] = Form.useForm()
   const [email, setEmail] = useState("");
@@ -30,9 +23,6 @@ const Login = () => {
 
   const { user, loading, error } = reducer
 
-  const formSubmit = (values, { resetForm }) => {
-    resetForm()
-  }
 
   const onSubmit = async () => {
     try {
@@ -59,9 +49,6 @@ const Login = () => {
           </div>
 
           <Formik
-            initialValues={initialValues}
-            onSubmit={formSubmit}
-            validationSchema={loginSchema}
           >
             {({
               handleBlur,
@@ -74,17 +61,12 @@ const Login = () => {
               <Form form={form} layout='vertical' onFinish={handleSubmit}>
 
                 <Form.Item
-                  validateStatus={errors.email && touched.email ? "error" : ""}
-                  help={
-                    errors.email && touched.email ? (
-                      <span className='form-error'>{errors.email}</span>
-                    ) : ""
-                  }
+                
                   label="Email"
                 >
                   <Input
-                    value={values.email}
-                    onChange={handleChange}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     onBlur={handleBlur}
                     name='email'
                     className='form-input'
@@ -94,19 +76,13 @@ const Login = () => {
                 </Form.Item>
 
                 <Form.Item label="Password"
-                  validateStatus={errors.password && touched.password ? "error" : ""}
-                  help={
-                    errors.password && touched.password ? (
-                      <span className='form-error'>{errors.password}</span>
-                    ) : ""
-                  }
+                 
                 >
                   <Input.Password
-                    value={values.password}
-                    onChange={handleChange}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     name='password'
                     className='form-input'
-                    onBlur={handleBlur}
                     placeholder='Password'
                   ></Input.Password>
                 </Form.Item>
@@ -118,7 +94,6 @@ const Login = () => {
 
                 <div className="auth-login-footer">
                   <Button
-                    htmlType='submit'
                     loading={loading}
                     onClick={() => onSubmit()}
                     className='submit-btn'
