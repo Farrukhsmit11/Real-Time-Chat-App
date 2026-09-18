@@ -6,6 +6,7 @@ import axios from "axios"
 import { useNavigate } from 'react-router-dom'
 import { handleLogin } from '../../../store/features/auth/authThunk'
 import { useDispatch, useSelector } from "react-redux"
+import { loginSchema } from './Validation'
 
 const Login = () => {
 
@@ -60,24 +61,52 @@ const Login = () => {
           <Formik
             initialValues={initialValues}
             onSubmit={formSubmit}
+            validationSchema={loginSchema}
           >
             {({
               handleBlur,
               handleSubmit,
-              handleChange
+              handleChange,
+              errors,
+              touched,
+              values
             }) => (
               <Form form={form} layout='vertical' onFinish={handleSubmit}>
-                <Form.Item label="Email">
+
+                <Form.Item
+                  validateStatus={errors.email && touched.email ? "error" : ""}
+                  help={
+                    errors.email && touched.email ? (
+                      <span className='form-error'>{errors.email}</span>
+                    ) : ""
+                  }
+                  label="Email"
+                >
                   <Input
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={values.email}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    name='email'
                     className='form-input'
-                    placeholder='Email Address'></Input>
+                    placeholder='Email Address'
+                  >
+                  </Input>
                 </Form.Item>
 
-                <Form.Item label="Password">
+                <Form.Item label="Password"
+                  validateStatus={errors.password && touched.password ? "error" : ""}
+                  help={
+                    errors.password && touched.password ? (
+                      <span className='form-error'>{errors.password}</span>
+                    ) : ""
+                  }
+                >
                   <Input.Password
-                    onChange={(e) => setPassword(e.target.value)}
+                    value={values.password}
+                    onChange={handleChange}
+                    name='password'
                     className='form-input'
+                    onBlur={handleBlur}
                     placeholder='Password'
                   ></Input.Password>
                 </Form.Item>

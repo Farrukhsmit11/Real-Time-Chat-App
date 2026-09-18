@@ -1,19 +1,18 @@
-import React from 'react'
 import "./SignUp.css"
 import { Formik } from 'formik'
 import { Form as AntForm, Button, Input, message } from "antd"
 import { useNavigate } from 'react-router-dom'
-import axios from "axios"
 import { useState } from 'react'
 import "./SignUp.css"
 import { useDispatch, useSelector } from 'react-redux'
 import { handleSignup } from '../../../store/features/auth/authThunk'
+import { signUpSchema } from './Validations'
 
 const SignUp = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [name, setName] = useState("")
+    const [name, setName] = useState("");
 
     const reducer = useSelector(({ auth }) => ({
         loading: auth?.signUpLoading,
@@ -34,7 +33,11 @@ const SignUp = () => {
 
     const dispatch = useDispatch();
 
-    const handleSubmit = async () => {
+    const onSignup = async (values, { resetForm }) => {
+        resetForm()
+    }
+
+    const registerUser = async () => {
         try {
             await dispatch(handleSignup({
                 name,
@@ -57,11 +60,13 @@ const SignUp = () => {
 
                 <Formik
                     initialValues={initialValues}
+                    validationSchema={signUpSchema}
+                    onSubmit={onSignup}
                 >
                     {({
+                        handleSubmit,
                         handleBlur,
                         handleChange,
-                        handleReset,
                         errors,
                         values,
                         touched
@@ -69,23 +74,63 @@ const SignUp = () => {
                         <AntForm
                             form={form}
                             layout='vertical'
+                            onFinish={handleSubmit}
                         >
-                            <AntForm.Item label="Name">
-                                <Input className='form-input' placeholder='Enter Name' onChange={(e) => setName(e.target.value)}  ></Input>
+                            <AntForm.Item
+                                validateStatus={errors.name && touched.name ? "error" : ""}
+                                help={
+                                    errors.name && touched.name ? (
+                                        <span className='form-error'>{errors.name}</span>
+                                    ) : ""
+                                }
+                                label="Name"
+                            >
+                                <Input
+                                    className='form-input'
+                                    placeholder='Enter Name'
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    name='name'
+                                    value={values.name}
+                                >
+                                </Input>
                             </AntForm.Item>
 
-                            <AntForm.Item label="Email">
+                            <AntForm.Item
+
+                                validateStatus={errors.email && touched.email ? "error" : ""}
+                                help={
+                                    errors.name && touched.email ? (
+                                        <span className='form-error'>{errors.email}</span>
+                                    ) : ""
+                                }
+                                label="Email"
+                            >
                                 <Input
+                                    onChange={handleChange}
+                                    value={values.email}
+                                    onBlur={handleBlur}
                                     className='form-input'
                                     placeholder='Enter Email'
                                     name='email'
-                                    onChange={(e) => setEmail(e.target.value)}
+
                                 ></Input>
                             </AntForm.Item>
 
-                            <AntForm.Item label="Password">
+                            <AntForm.Item
+                                validateStatus={errors.password && touched.password ? "error" : ""}
+                                help={
+                                    errors.password && touched.password ? (
+                                        <span className='form-error'>{errors.password}</span>
+                                    ) : ""
+                                }
+                                label="Password"
+                            >
                                 <Input.Password
-                                    onChange={(e) => setPassword(e.target.value)}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.password}
+                                    name='password'
                                     className='form-input'
                                     placeholder='Enter Password'
                                 ></Input.Password>
@@ -94,10 +139,10 @@ const SignUp = () => {
 
                             <div className="auth-footer">
                                 <Button
-                                    className='submit-btn'
-                                    onClick={() => handleSubmit()}
-                                    loading={loading}
                                     htmlType='submit'
+                                    className='submit-btn'
+                                    onClick={() => registerUser()}
+                                    loading={loading}
                                 >Sign Up</Button>
                                 <Button className='submit-btn-black' onClick={() => navigate("/login")}>Login</Button>
                             </div>

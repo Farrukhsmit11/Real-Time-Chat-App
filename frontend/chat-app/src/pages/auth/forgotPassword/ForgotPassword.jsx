@@ -5,20 +5,24 @@ import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { handleForgotPassword } from '../../../store/features/auth/authThunk'
 import { FaArrowLeftLong } from "react-icons/fa6";
+import { forgotPasswordSchema } from "./forgotPasswordSchema"
 
 const ForgotPassword = () => {
 
     const [form] = AntForm.useForm()
     const [email, setEmail] = useState([])
 
-    const dispatch = useDispatch()
+    const initialValues = {
+        email: ""
+    }
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const res = useSelector(({ auth }) => ({
         loading: auth?.forgotPasswordLoading,
         error: auth?.error
     }))
-
-    const navigate = useNavigate();
 
     const { loading } = res
 
@@ -42,17 +46,41 @@ const ForgotPassword = () => {
                 </div>
 
                 <Formik
+                    validationSchema={forgotPasswordSchema}
+                    initialValues={initialValues}
+                    onSubmit={(values, action) => {
+                        onSubmit(values)
+                    }}
                 >
                     {({
+                        handleSubmit,
+                        handleBlur,
+                        handleChange,
+                        values,
+                        errors,
+                        touched
                     }) => (
-                        <AntForm form={form} layout='vertical'>
-                            <AntForm.Item label="Email">
+                        <AntForm
+                            onFinish={handleSubmit}
+                            form={form}
+                            layout='vertical'
+                        >
+                            <AntForm.Item
+                                validateStatus={errors.email && touched.email ? "error" : ""}
+                                help={
+                                    errors.email && touched.email ? (
+                                        <span className="form-error">{errors.email}</span>
+                                    ) : ""
+                                }
+                                label="Email"
+                            >
                                 <Input
-                                    onChange={(e) => setEmail(e.target.value)}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
                                     type="email"
-                                    value={email}
-                                    placeholder='Enter Email'
+                                    value={values.email}
                                     name='email'
+                                    placeholder='Enter Email'
                                     className='form-input'
                                 ></Input>
                             </AntForm.Item>

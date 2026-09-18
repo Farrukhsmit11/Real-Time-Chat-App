@@ -1,20 +1,24 @@
 import React, { useState } from 'react'
 import "./ChangePassword.css"
 import { Form as AntForm, Button, Input, message } from "antd"
+import { Formik } from "formik"
 import { useDispatch, useSelector } from "react-redux"
 import { handleChangePassword } from '../../../store/features/auth/authThunk'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { changePasswordSchema } from './ChangePasswordSchema'
 
 const ChangePassword = () => {
 
     const [form] = AntForm.useForm()
-
-    const navigate = useNavigate()
-
     const [newPassword, setNewPassword] = useState("");
-
-    const dispatch = useDispatch()
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const location = useLocation()
+
+    const initialValues = {
+        newPassword: "",
+        confirmPassword: ""
+    }
 
     const changedEmail = location.state?.email
 
@@ -25,7 +29,7 @@ const ChangePassword = () => {
 
     const { loading, error } = reducers
 
-    const handleChange = async () => {
+    const createNewPassword = async () => {
         try {
             await dispatch(handleChangePassword({ email: changedEmail, newPassword })
             ).unwrap()
@@ -43,37 +47,79 @@ const ChangePassword = () => {
                     <h1 className='auth-title'>Create New Password</h1>
                 </div>
 
-                <AntForm form={form} layout='vertical'>
-                    <AntForm.Item label={<span>New Password</span>}>
-                        <Input.Password
-                            placeholder='New Password'
-                            className='form-input'
-                            value={newPassword}
-                            onChange={(e) => setNewPassword(e.target.value)}
+                <Formik
+                    initialValues={initialValues}
+                    validationSchema={changePasswordSchema}
+                >
+                    {({
+                        handleSubmit,
+                        handleBlur,
+                        handleChange,
+                        values,
+                        errors,
+                        touched
+                    }) => (
+                        <AntForm
+                            form={form}
+                            layout='vertical'
+                            onFinish={handleSubmit}
                         >
-                        </Input.Password>
-                    </AntForm.Item>
+                            <AntForm.Item
+                                label={<span>New Password</span>}
+                                validateStatus={errors.newPassword && touched.newPassword ? "error" : ""}
+                                help={
+                                    errors.newPassword && touched.newPassword ? (
+                                        <span className='form-error'>{errors.newPassword}</span>
+                                    ) : ""
+                                }
+                            >
+                                <Input.Password
+                                    placeholder='New Password'
+                                    className='form-input'
+                                    value={values.newPassword}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    name='newPassword'
+                                >
+                                </Input.Password>
+                            </AntForm.Item>
 
-                    <AntForm.Item label={<span>Confirm Password</span>}>
-                        <Input.Password
-                            placeholder='Confirm Password'
-                            className='form-input'
-                        >
-                        </Input.Password>
-                    </AntForm.Item>
+                            <AntForm.Item
+                                label={<span>Confirm Password</span>}
+                                validateStatus={errors.confirmPassword && touched.confirmPassword ? "error" : ""}
+                                help={
+                                    errors.confirmPassword && touched.confirmPassword ? (
+                                        <span className='form-error'>{errors.confirmPassword}</span>
+                                    ) : ""
+                                }
+                            >
+                                <Input.Password
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.confirmPassword}
+                                    name='confirmPassword'
+                                    placeholder='Confirm Password'
+                                    className='form-input'
+                                >
+                                </Input.Password>
+                            </AntForm.Item>
 
-                    <div className='form-footer'>
-                        <Button
-                            loading={loading}
-                            onClick={() => {
-                                handleChange()
-                            }}
-                            className='submit-btn'
-                        >
-                            Update Password
-                        </Button>
-                    </div>
-                </AntForm>
+                            <div className='form-footer'>
+                                <Button
+                                    loading={loading}
+                                    htmlType='submit'
+                                    onClick={() => {
+                                        createNewPassword()
+                                    }}
+                                    className='submit-btn'
+                                >
+                                    Update Password
+                                </Button>
+                            </div>
+                        </AntForm>
+                    )
+                    }
+                </Formik>
             </div>
         </div>
     )

@@ -4,6 +4,8 @@ import "./OtpVerification.css"
 import { handleResendOtp, handleVerifyOtp } from "../../../store/features/auth/authThunk"
 import { useDispatch, useSelector } from "react-redux"
 import { useLocation, useNavigate } from 'react-router-dom'
+import { Formik } from "formik"
+import { otpVerificationSchema } from './Validations'
 
 const OtpVerification = () => {
 
@@ -13,9 +15,12 @@ const OtpVerification = () => {
 
     const dispatch = useDispatch()
     const location = useLocation()
-
     const navigate = useNavigate()
     const resetEmail = location.state?.email
+
+    const initialValues = {
+        otp: ""
+    }
 
     const data = useSelector(({ auth }) => ({
         loading: auth?.verifyOtpLoading,
@@ -24,7 +29,7 @@ const OtpVerification = () => {
 
     const { loading, authLoading } = data
 
-    const handleSubmit = async () => {
+    const handleVerify = async () => {
         try {
             await dispatch(handleVerifyOtp({
                 email: resetEmail,
@@ -49,6 +54,10 @@ const OtpVerification = () => {
         }
     }
 
+    const otpSubmit = async (values, { resetForm }) => {
+        resetForm();
+    }
+
     return (
         <div className='auth-container'>
             <div className="auth-card">
@@ -56,43 +65,70 @@ const OtpVerification = () => {
                     <h1 className='auth-otp-title'>Enter 6 Digit OTP</h1>
                 </div>
 
-                <AntForm form={form} layout='vertical'>
-                    <AntForm.Item>
-                        <Input.OTP
-                            separator="-"
-                            onChange={(value) => {
-                                setOtp(value)
-                            }
-                            }
-                            size='medium'
-                            length={6}
+                <Formik
+                    initialValues={initialValues}
+                    validationSchema={otpVerificationSchema}
+                    onSubmit={otpSubmit}
+                >
+                    {({
+                        handleSubmit,
+                        errors,
+                        touched,
+                        setFieldTouched,
+                        values
+                    }) => (
+                        <AntForm form={form} layout='vertical'
+                            onFinish={handleSubmit}
                         >
-                        </Input.OTP>
-                    </AntForm.Item>
+                            <AntForm.Item
+                                validateStatus={errors.otp && touched.otp ? "error" : ""}
+                                help={
+                                    errors.otp && touched.otp ? (
+                                        <span className='form-error'>{errors.otp}</span>
+                                    ) : ""
+                                }
+                            >
+                                <Input.OTP
+                                    separator="-"
+                                    onBlur={() => {
+                                        setFieldTouched("otp", true)
+                                    }}
+                                    value={values.otp}
+                                    size='medium'
+                                    length={6}
+                                >
+                                </Input.OTP>
 
-                    <div className='resend-otp-main'>
-                        <span className='resend-otp-title'>
-                            Didn't receive this code?
-                        </span>
-                    </div>
+                            </AntForm.Item>
 
-                    <div className="form-footer">
-                        <Button
-                            className='submit-btn-black'
-                            onClick={() => handleResend()}
-                            loading={authLoading}
-                        >Resend OTP
-                        </Button>
+                            <div className='resend-otp-main'>
+                                <span className='resend-otp-title'>
+                                    Didn't receive this code?
+                                </span>
+                            </div>
 
-                        <Button
-                            loading={loading}
-                            onClick={() => handleSubmit()}
-                            className='submit-btn'
-                        >
-                            Verify OTP
-                        </Button>
-                    </div>
-                </AntForm>
+                            <div className="form-footer">
+                                <Button
+                                    className='submit-btn-black'
+                                    onClick={() => handleResend()}
+                                    loading={authLoading}
+                                    htmlType='submit'
+                                >Resend OTP
+                                </Button>
+
+                                <Button
+                                    loading={loading}
+                                    onClick={() => handleVerify()}
+                                    className='submit-btn'
+                                    htmlType='submit'
+                                >
+                                    Verify OTP
+                                </Button>
+                            </div>
+                        </AntForm>
+                    )
+                    }
+                </Formik>
             </div>
         </div>
     )
